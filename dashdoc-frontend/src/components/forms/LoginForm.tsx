@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const LoginForm = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const { loginHandler, error, setError } = useLogin();
+  const { loginHandler, error } = useLogin();
   const navigate = useNavigate();
 
   return (
@@ -27,7 +27,7 @@ const LoginForm = () => {
           event.preventDefault();
           await loginHandler(email, password);
         }}
-        className='input-container'
+        className='login-container'
       >
         <input
           className='input-email'
@@ -75,7 +75,6 @@ const LoginForm = () => {
         New to DashDoc? Join Now
       </Button>
 
-      {/* <GoogleLogin onSuccess={login} onError={errorMessage} /> */}
     </div>
   );
 };

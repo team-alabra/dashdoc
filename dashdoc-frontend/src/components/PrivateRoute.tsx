@@ -10,7 +10,7 @@ const PrivateRoute: React.FC<any> = ({ children }) => {
     (async () => await isAuthenticated())();
   }, [isValidUser]);
 
-  if (isValidUser === false) {
+  if (!isValidUser) {
     return <Navigate to='/login' replace />;
   }
 

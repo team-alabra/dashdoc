@@ -160,29 +160,32 @@ public class AuthService {
 
     public ProviderDTO confirmSignUpRequest(ConfirmSignUpDTO confirmSignUpDTO) {
         try {
+            cognitoClient
+                   .confirmSignUp(new ConfirmSignUpRequest()
+                   .withUsername(confirmSignUpDTO.getEmail())
+                   .withClientId(clientId)
+                   .withConfirmationCode(confirmSignUpDTO.getOtpCode()));
 
-             cognitoClient
-                    .confirmSignUp(new ConfirmSignUpRequest()
-                            .withUsername(confirmSignUpDTO.getEmail())
-                                .withClientId(clientId)
-                                    .withConfirmationCode(confirmSignUpDTO.getOtpCode()));
+           //Get Entities from DB
+           ProviderDTO providerDTO = providerService.getByEmail(confirmSignUpDTO.getEmail());
+           SubscriptionDTO providerSubscription = providerDTO.getSubscription();
 
-            //Get Entities from DB
-            ProviderDTO providerDTO = providerService.getByEmail(confirmSignUpDTO.getEmail());
-            SubscriptionDTO providerSubscription = providerDTO.getSubscription();
+           //region create customer in Stripe & set id in database, activate subscription.
+           var customer = stripeService.createCustomer(providerDTO.getEmail());
+           var stripeSubscription = stripeService.createSubscription(customer.getId(), providerDTO.getUserType());
 
-            //region create customer in Stripe & set id in database, activate subscription
-            Customer customer = stripeService.createCustomer(providerDTO.getEmail());
-            providerSubscription.setStripeCustomerID(customer.getId());
-            providerSubscription.setStatus(SubscriptionStatus.ACTIVE);
-            // endregion
+           providerSubscription.setStripeCustomerID(customer.getId());
+           providerSubscription.setStatus(SubscriptionStatus.ACTIVE);
+           providerSubscription.setStripeSubscriptionID(stripeSubscription.getId());
+           providerSubscription.setStripePlanID(stripeSubscription.getItems().getData().get(0).getId());
+           // endregion
 
-            return providerService.update(providerDTO);
-        } catch (CodeMismatchException e) {
-            throw new BadRequestException("Invalid verification code provided, please try again.");
-        } catch (Exception e) {
-            throw new BadRequestException(e.getMessage());
-        }
+           return providerService.update(providerDTO);
+       } catch (CodeMismatchException e) {
+           throw new BadRequestException("Invalid verification code provided, please try again.");
+       } catch (Exception e) {
+           throw new BadRequestException(e.getMessage());
+       }
     };
 
     public ResendConfirmationCodeResult resendConfirmationCode(ConfirmSignUpDTO confirmSignUpDTO) {

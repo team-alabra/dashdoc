@@ -14,6 +14,7 @@ module.exports = {
     alias: {
       '@tests': path.resolve(__dirname, '/src/test/'),
       '@components': path.resolve(__dirname, '/src/components/'),
+      '@pages': path.resolve(__dirname, '/src/pages/'),
       '@constants': path.resolve(__dirname, '/src/utils/constants.ts'),
       '@typings': path.resolve(__dirname, '/src/typings/'),
       '@styles': path.resolve(__dirname, '/src/styles/'),
