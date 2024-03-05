@@ -119,7 +119,7 @@ public class AuthServiceTests {
 
         // Act & Assert
         this.mockMvc.perform(MockMvcRequestBuilders.post("/api/signup",  404))
-                .andExpect(status().is(404));
+                .andExpect(status().is(400));
     }
 
     @Test
@@ -155,7 +155,7 @@ public class AuthServiceTests {
 
         // Act & Assert
         this.mockMvc.perform(MockMvcRequestBuilders.post("/api/confirmUser",  404))
-                .andExpect(status().is(404));
+                .andExpect(status().is(400));
     }
 
 }
