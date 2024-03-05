@@ -1,6 +1,0 @@
-package com.dashdocnow.interfaces.enums;
-
-public enum ReasonSessionNotProvided {
-
-    SESSION_CANCELLED_WITH_NOTICE, SESSION_CANCELLED_WITHOUT_NOTICE, STUDENT_UNAVAILABLE, PROVIDER_UNAVAILABLE, STUDENT_ON_VACATION
-}
