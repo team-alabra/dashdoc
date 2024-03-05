@@ -9,8 +9,8 @@ import Footer from './Footer';
 
 describe('Footer', () => {
   it('renders the element and displays appropriate text', async () => {
-    render(<Footer>2023 Dash Doc Now</Footer>);
-    const footer = await screen.findByText('2023 Dash Doc Now');
+    render(<Footer>{new Date().getFullYear()} Dash Doc Now</Footer>);
+    const footer = await screen.findByText('2024 Dash Doc Now');
     expect(footer).toBeDefined();
   });
 });

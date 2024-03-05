@@ -15,7 +15,8 @@
     "jsx": "react",
     "baseUrl": "./src",
     "paths": {
-      "@components": ["components/*"],
+      "@components/*": ["components/*"],
+      "@components": ["components"],
       "@typings": ["typings"],
       "@typings/*": ["typings/*"],
       "@styles": ["styles"],
@@ -27,7 +28,9 @@
       "@hooks": ["hooks"],
       "@hooks/*": ["hooks/*"],
       "@api/*": ["api/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@pages/*": ["pages/*"],
+      "@pages": ["pages"],
     }
   },
   "include": ["src"],

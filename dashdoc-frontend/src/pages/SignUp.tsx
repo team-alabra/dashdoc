@@ -2,15 +2,10 @@ import React from 'react';
 import SignupForm from '../components/forms/SignupForm';
 import * as S from '@styles';
 
-const SignUp = () => {
-  {
-    /* // flex container (may need own div) & form (separate component) */
-  }
+export const SignUp = () => {
   return (
     <S.SignupContainer>
-      <SignupForm/>
+      <SignupForm />
     </S.SignupContainer>
   );
 };
-
-export default SignUp;

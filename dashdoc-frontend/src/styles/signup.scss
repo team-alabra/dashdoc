@@ -9,6 +9,11 @@ color: #1d44b8;
 font-weight: bold;
 }
 
+.i-am-text {
+  margin-top: 1.5rem;
+  font-size: 1rem;
+}
+
 .user-type-container {
   display: flex;
   flex-direction: row;
@@ -16,26 +21,14 @@ font-weight: bold;
   width: 100%;
   font-size: 1rem;
   margin-bottom: 1rem;
-  margin-top: 2rem;
+  margin-top: 0.3rem;
+  border: 2px solid blue;
 }
 
-.radio-input-container {
-  display: flex;
-  line-height: 1.5rem;
-  justify-content: center;
-  text-align: center;
-  flex-direction: column;
-  font-size: 15px;
-  width: 50%;
-}
-
-.radio-button-1, .radio-button-2, .radio-button3 {
-  z-index: 1;
-  color: #0043ed;
-}
-
-.radio-button-2 {
-  margin-left: 1rem;
+input[type=radio] {
+  width: 60%;
+  height: 1.4rem;
+  cursor: pointer;
 }
 
 .signup-form-container {
@@ -44,41 +37,61 @@ font-weight: bold;
   align-items: center;
 }
 
-.signup-userinfo-container {
+.usertype-container {
   margin-top: 1.5rem;
   width: 35%;
   padding: 2.5rem;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   margin-top: 3rem;
 }
 
-.input-container {
+.radio-input-container {
+  width: 100%;
+  padding: 1rem;
+  margin: auto;
+  text-align: center;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
-.fullname-text, .email-text, .password-text {
+.input-container-signup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.fullname-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  margin-top: 0.4rem;
+}
+
+
+.signup-input-label {
+  align-self: flex-start;
   font-size: 0.8rem;
   margin-top: 1rem;
   font-weight: bold;
+	text-align: left;
 }
 
-.input-fullname, .input-email-signup, .input-password-signup {
+.user-input-field, .firstName, .lastName {
   border: solid 1.5px #d3d3d3;
-  border-radius: 3px;
-  width: 90%;
+  border-radius: 4px;
+  width: 100%;
   margin-top: 0.4rem;
   height: 1.5rem;
 }
 
 .signup-continue-button {
   border: none;
-  width: 95%;
+  width: 100%;
   height: 2rem;
   border-radius: 0.8rem;
   margin-top: 2rem;
@@ -86,4 +99,28 @@ font-weight: bold;
   color: white;
   text-align: center;
   font-size: 1rem;
+  cursor: pointer;
+}
+
+.have-account-container {
+  font-size: 12px;
+  margin-top: 1.5rem;
+  color:#696969;
+  display: flex;
+  flex-direction: row;
+}
+
+.signin-text {
+  background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+}
+
+.sign-in-text {
+  color: #0a0aff;
+  font-weight: bold;
+  margin-left: 0.3rem;
 }

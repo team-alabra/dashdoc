@@ -1,5 +1,5 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import Cookie from "js-cookie";
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import Cookie from 'js-cookie';
 
 // Adds basic headers
 axios.interceptors.request.use((config: AxiosRequestConfig) => {
@@ -9,12 +9,15 @@ axios.interceptors.request.use((config: AxiosRequestConfig) => {
 // Injects token on every request
 axios.interceptors.request.use(injectToken, (error) => Promise.reject(error));
 axios.interceptors.response.use(
-  (response) => checkResponse(response),
+  (response) => response.data,
   (error) => {
-    const { response } = error;
-    console.log(">>> Response interceptor")
-    throw error;
-    // some global error handling
+    if (error.response.status >= 500) {
+      throw new Error(
+        'Internal Server Error. Please contact customer service.'
+      );
+    }
+
+    throw error.response.data;
   }
 );
 
@@ -24,7 +27,7 @@ export async function post<T, K>(
   payload: T,
   config?: any
 ): Promise<K> {
-  const response: AxiosResponse<K> = config
+  const response: any = config
     ? await axios.post(path, payload, config)
     : await axios.post(path, payload);
 
@@ -44,28 +47,14 @@ export async function put<T>(path: string, payload?: T): Promise<T> {
   return response as T;
 }
 
-function checkResponse<T>(response: AxiosResponse<T>): T {
-  if (response.status == 200) {
-    return response.data as T;
-  }
-
-  if (response.status >= 400) {
-    // global set error message
-    // setError(response.message)
-    // returns an empty object
-    return {} as T;
-  }
-}
-
 function injectToken(config: AxiosRequestConfig): AxiosRequestConfig {
   try {
-    const token = Cookie.get("access_token");
+    const token = Cookie.get('access_token');
 
     config.headers = {
-      Accept: "application/json",
-      "Content-Type": "application/json",
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     };
-
 
     if (token != null) {
       config.headers.Authorization = `Bearer ${token}`;

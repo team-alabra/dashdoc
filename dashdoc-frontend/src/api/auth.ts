@@ -1,9 +1,12 @@
-import { UserSignUpRequest, UserSignInRequest } from '@typings/auth';
+import {
+  UserSignUpRequest,
+  UserSignInRequest,
+  ConfirmSignUpRequest,
+} from '@typings/auth';
 import { post, get } from '@utils/http';
 import { User } from '@typings/user';
 import { ValidateUserType } from '@typings/auth';
 
-// with credentials -- this needs to be set, or the cookie would not be saved in your application
 export const userSignIn = async (
   userSignInRequest: UserSignInRequest
 ): Promise<User> => {
@@ -11,15 +14,25 @@ export const userSignIn = async (
 };
 
 export const validateUser = async (): Promise<ValidateUserType> => {
-  return await get('/api/auth/validateUser');
+  const { email, valid }: any = await get('/api/auth/validateUser');
+
+  return { email, valid };
 };
 
-// export const validateGoogleUser = async (idToken : any): Promise<boolean> => {
-//   return await post('/api/auth/validateGoogleUser', idToken);
-// };
+export const userSignUp = async (userSignUpRequest: UserSignUpRequest) => {
+  try {
+    const user = await post('/api/auth/signup', userSignUpRequest);
+    return user;
+  } catch (error) {
+    throw error;
+  }
+};
 
-export const userSignUp = async (
-  userSignInRequest: UserSignUpRequest
-): Promise<User> => {
-  return await post(`/api/auth/signup`, userSignInRequest);
+export const confirmSignUp = async (request: ConfirmSignUpRequest) => {
+  try {
+    const confirmedUser = await post('/api/auth/confirmUser', request);
+    return confirmedUser;
+  } catch (error) {
+    throw error;
+  }
 };

@@ -2,6 +2,7 @@
 @import url("./subscriptions.css");
 @import url("./login.scss");
 @import url("./signup.scss");
+@import url("./successConfirm.scss");
 
 :root {
   --blue: #1e90ff;

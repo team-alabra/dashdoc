@@ -26,6 +26,5 @@ export type PlanTermDetail = {
 export enum PlanTerm {
   MONTHLY,
   ANNUAL,
-  SEMI_ANNUAL,
   FREE_TRIAL
 }

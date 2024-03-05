@@ -1,107 +1,175 @@
 import React, { useState } from 'react';
+import { useSignup } from '@hooks/useSignup';
+import { useNavigate } from 'react-router-dom';
+import { Input } from '../shared/input/Input';
+import { Label } from '../shared/input/Label';
+import { UserSignUpRequest } from '@typings/auth';
+import { RadioGroup, Radio, FormControlLabel } from '@mui/material';
+import { setHTMLFor, setLabel } from '@utils/helpers/helpers';
 
 const SignupForm = () => {
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [selectedUserType, setSelectedUserType] = useState('SOLE_PROVIDER');
+  const navigate = useNavigate();
+  const [selectedUserType, setSelectedUserType] =
+    useState<string>('SOLE_PROVIDER');
+  const [isAgency, setIsAgency] = useState<boolean>(false);
+  const { signupHandler, error } = useSignup();
+  const INITIAL_STATE = {
+    email: '',
+    password: '',
+    userType: selectedUserType,
+    firstName: '',
+    lastName: '',
+    agencyCode: '',
+    agencyName: '',
+  };
+  const [userSignUpRequest, setUserSignUpRequest] =
+    useState<UserSignUpRequest>(INITIAL_STATE);
 
-  const handleChange = (e: any) => {
-    setSelectedUserType(e.target.value);
+  const handleChange = (event: any) => {
+    const { name, value } = event.target;
+    if (name == 'userType') {
+      setSelectedUserType(value);
+      setIsAgency(value !== 'SOLE_PROVIDER');
+    }
+    setUserSignUpRequest((request) => ({
+      ...request,
+      [name]: value,
+    }));
+  };
+  const submitHandler = async (e: any) => {
+    e.preventDefault();
+    await signupHandler(userSignUpRequest);
+    setUserSignUpRequest(INITIAL_STATE);
   };
 
-  const onSubmit = () => {
-    console.log('in submit handler');
-  }
-
   return (
-    <form className='signup-form-container'>
-      <div className='signup-userinfo-container'>
+    <form className='signup-form-container' onSubmit={submitHandler}>
+      <div className='usertype-container' data-testid='usertype-container'>
         <div className='signup-header-text'>
-          <div>Create your DashDoc account today.</div>
+          <div>Create your DashDoc account today</div>
         </div>
 
-        <div className='user-type-container'>
-          <div>I am a...</div>
-          <div className='radio-input-container'>
-            <label>
-              <input
-                className='radio-button-1'
-                type='radio'
-                name='radio'
-                id='soleProvider'
-                value='SOLE_PROVIDER'
-                checked={selectedUserType === 'SOLE_PROVIDER'}
-                onChange={handleChange}
-              />
-              <span>Sole Provider</span>
-            </label>
-            <label>
-              <input
-                className='radio-button-2'
-                type='radio'
-                name='radio'
-                id='agencyProvider'
-                value='AGENCY_PROVIDER'
-                checked={selectedUserType === 'AGENCY_PROVIDER'}
-                onChange={handleChange}
-              />
-              <span>Agency Provider</span>
-            </label>
-            <label>
-              <input
-                className='radio-button-3'
-                type='radio'
-                name='radio'
-                id='agencyAdmin'
-                value='AGENCY_ADMIN'
-                checked={selectedUserType === 'AGENCY_ADMIN'}
-                onChange={handleChange}
-              />
-              <span>Agency Admin</span>
-            </label>
+        {userSignUpRequest.userType === 'SOLE_PROVIDER' ? (
+          <div className='i-am-text'>I am a... </div>
+        ) : (
+          <div className='i-am-text'>I am an... </div>
+        )}
+
+        {error ? (
+          <p className='error-message' data-testid='error-message'>
+            {error}
+          </p>
+        ) : null}
+
+        <RadioGroup
+          row
+          aria-labelledby='demo-radio-buttons-group-label'
+          defaultValue='SOLE_PROVIDER'
+          name='userType'
+          className='radio-input-container'
+        >
+          <FormControlLabel
+            value='SOLE_PROVIDER'
+            control={<Radio />}
+            label='Sole Provider'
+            onChange={handleChange}
+          />
+          <FormControlLabel
+            value='AGENCY_PROVIDER'
+            control={<Radio />}
+            label='Agency Provider'
+            onChange={handleChange}
+          />
+          <FormControlLabel
+            value='AGENCY_ADMINISTRATOR'
+            control={<Radio />}
+            label='Agency Administrator'
+            onChange={handleChange}
+          />
+        </RadioGroup>
+
+        {isAgency && (
+          <div className='input-container-signup'>
+            <Label
+              className='signup-input-label'
+              htmlFor={setHTMLFor(selectedUserType)}
+              label={setLabel(setHTMLFor(selectedUserType))}
+            />
+            <Input
+              name={setHTMLFor(selectedUserType)}
+              id={setHTMLFor(selectedUserType)}
+              className='user-input-field'
+              type='text'
+              value={
+                selectedUserType === 'AGENCY_PROVIDER'
+                  ? userSignUpRequest.agencyCode
+                  : userSignUpRequest.agencyName
+              }
+              onChange={handleChange}
+              required
+            />
+          </div>
+        )}
+
+        <div className='input-container-signup'>
+          <Label
+            className='signup-input-label'
+            htmlFor='fullName'
+            label='Full Name'
+          />
+          <div className='fullname-container'>
+            <Input
+              name='firstName'
+              className='firstName'
+              data-testid='first-name'
+              type='text'
+              value={userSignUpRequest.firstName}
+              onChange={handleChange}
+              required
+              placeholder='First Name'
+            />
+            <Input
+              name='lastName'
+              className='lastName'
+              data-testid='last-name'
+              type='text'
+              value={userSignUpRequest.lastName}
+              onChange={handleChange}
+              required
+              placeholder='Last Name'
+            />
           </div>
         </div>
 
-        <div className='input-container'>
-          <div className='fullname-text'>
-            {selectedUserType === 'AGENCY_PROVIDER' || selectedUserType === "AGENCY_ADMIN"
-              ? 'Organization or Agency Name'
-              : 'Full Name'}
-          </div>
+        <div className='input-container-signup'>
+          <Label className='signup-input-label' htmlFor='email' label='Email' />
+          <Input
+            name='email'
+            className='user-input-field'
+            data-testid='email-input'
+            type='email'
+            value={userSignUpRequest.email}
+            onChange={handleChange}
+            required
+          />
         </div>
-        <input
-          className='input-fullname'
-          data-testid='full-name-input'
-          type='text'
-          value={fullName}
-          onChange={(e: any) => setFullName(e.target.value)}
-          required
-        />
 
-        <div className='input-container'>
-          <div className='email-text'>Email</div>
+        <div className='input-container-signup'>
+          <Label
+            className='signup-input-label'
+            htmlFor='password'
+            label='Password'
+          />
+          <Input
+            name='password'
+            className='user-input-field'
+            data-testid='password-input'
+            type='password'
+            value={userSignUpRequest.password}
+            onChange={handleChange}
+            required
+          />
         </div>
-        <input
-          className='input-email-signup'
-          data-testid='email-input'
-          type='text'
-          value={email}
-          onChange={(e: any) => setEmail(e.target.value)}
-          required
-        />
-
-        <div className='input-container'>
-          <div className='password-text'>Password</div>
-        </div>
-        <input
-          className='input-password-signup'
-          data-testid='password-input'
-          type='text'
-          value={password}
-          onChange={(e: any) => setPassword(e.target.value)}
-          required
-        />
 
         <button
           className='signup-continue-button'
@@ -111,6 +179,13 @@ const SignupForm = () => {
         >
           Continue
         </button>
+        <div className='have-account-container'>
+          <p>Have an account?</p>
+          <button className='signin-text' onClick={() => navigate('/login')}>
+            {' '}
+            <span className='sign-in-text'>Sign In</span>
+          </button>
+        </div>
       </div>
     </form>
   );
