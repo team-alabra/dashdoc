@@ -6,6 +6,7 @@ import com.amazonaws.services.cognitoidp.AWSCognitoIdentityProvider;
 import com.amazonaws.services.cognitoidp.AWSCognitoIdentityProviderClientBuilder;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import jakarta.annotation.PostConstruct;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -35,7 +36,8 @@ public class DashdocApiApplication {
     private String googleUsername;
     @Value("${google.auth.password}")
     private String googlePassword;
-    @Bean
+
+    @PostConstruct
     public void twilioInit(){
         Twilio.init(twilioAccountSID, twilioAuthToken);
     }
