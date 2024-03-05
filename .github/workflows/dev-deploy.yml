@@ -39,6 +39,8 @@ jobs:
           cd dashdoc-api
           mvn compile 
           mvn -B package -DskipTests --file pom.xml
+          echo "worker directory >>>>>>>>"
+          pwd
         env: 
             DATASOURCE: ${{ secrets.DATASOURCE }}
             DATASOURCE_DRIVER: ${{secrets.DATASOURCE_DRIVER}}
