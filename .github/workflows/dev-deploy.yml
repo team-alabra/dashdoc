@@ -50,7 +50,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: artifact
-          path: /home/runner/work/bookit/bookit/bookitapi/target/dashdoc-api-0.0.1-SNAPSHOT.jar
+          path: /home/runner/work/dashdoc/dashdocapi/target/dashdoc-api-0.0.1-SNAPSHOT.jar
       - name: Download Artifact
         uses: actions/download-artifact@v3
         with:
