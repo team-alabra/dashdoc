@@ -1,0 +1,68 @@
+name: Deploy DashDoc - DEV
+
+env:
+  NODE_VERSION: '18'
+  JDK_VERSION: '17'
+
+on:
+  workflow_dispatch:
+  push:
+    branches:  
+    - develop 
+
+jobs:
+  build-app-and-upload-jar:
+    runs-on: ubuntu-latest
+
+    name: Deploy Dashdoc APP
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Build react app and move it to API project
+        run: |
+          cd dashdoc-frontend
+          touch .env
+          echo REACT_APP_S3_BUCKET=${{ secrets.REACT_APP_S3_BUCKET }} >> .env
+          npm install
+          npm run build
+      - name: Setup Java ${{ env.JDK_VERSION }}
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ env.JDK_VERSION }}
+          distribution: 'temurin'
+          cache: maven
+      - name: Build API with Maven
+        run: |
+          cd bookitapi
+          mvn compile 
+          mvn -B package -DskipTests --file pom.xml
+        env: 
+            DATASOURCE: ${{ secrets.DATASOURCE }}
+            DATASOURCE_DRIVER: ${{secrets.DATASOURCE_DRIVER}}
+            DATASOURCE_URL: ${{ secrets.DATASOURCE_URL }}
+            DATASOURCE_USERNAME: ${{ secrets.DATASOURCE_USERNAME }}
+            DATASOURCE_PASSWORD: ${{ secrets.DATASOURCE_PASSWORD }}
+            REACT_APP_S3_BUCKET: ${{ secrets.REACT_APP_S3_BUCKET }}
+      - name: Upload JAR
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifact
+          path: /home/runner/work/bookit/bookit/bookitapi/target/dashdoc-api-0.0.1-SNAPSHOT.jar
+      - name: Download Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: artifact
+      - name: Deploy to EB
+        uses: einaregilsson/beanstalk-deploy@v13
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          use_existing_version_if_available: true
+          application_name: dashdoc-web
+          environment_name: dashdoc-dev
+          version_label: ${{github.SHA}}
+          region: us-east-1
+          deployment_package: dashdoc-api-0.0.1-SNAPSHOT.jar

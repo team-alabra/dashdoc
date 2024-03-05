@@ -1,0 +1,38 @@
+@import url("./layout.css");
+@import url("./subscriptions.css");
+@import url("./login.scss");
+@import url("./signup.scss");
+
+:root {
+  --blue: #1e90ff;
+  --white: #ffffff;
+  --black: #000000;
+  --orange: #ff8000;
+  --main-blue: #1d44b8;
+  --light-blue: #0080ff;
+  --bright-blue: #0a0aff;
+  --purple: #8839ff;
+  --purple-gradient: linear-gradient(#e3bdfb, #8839ff);
+  --light-blue-gradient: linear-gradient(#98c9fa, #0080ff);
+  --bright-blue-gradient: linear-gradient(#a3a3ff, #0a0aff);
+  --switch-select-color: linear-gradient(#6e6efa, #1d44b8);
+  --switch-select-color-light:linear-gradient(#678cfb,#2f5ada);
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: 'DM Sans';
+  margin: 0;
+  min-height: 100%;
+}
+
+body > iframe {
+  display: none;
+}
+
+#app, .App {
+  height: 100vh !important;
+}

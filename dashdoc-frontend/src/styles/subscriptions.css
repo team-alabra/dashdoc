@@ -1,0 +1,19 @@
+.plan-type-styles {
+  border-radius: 20px !important;
+  width: 400px !important;
+  padding: 0 !important;
+  height: fit-content;
+  background: rgb(236, 245, 255);
+}
+
+.plan-type-styles .Mui-selected {
+  border-radius: 20px !important;
+  height: fit-content;
+  background: var(--light-blue) !important;
+}
+
+.plan-type-styles .MuiToggleButton-root {
+  border: none;
+  width: 50%;
+  margin: 2px !important;
+}

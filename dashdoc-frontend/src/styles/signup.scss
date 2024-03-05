@@ -1,0 +1,89 @@
+.user-type-styles .Mui-selected {
+  height: fit-content;
+  background: var(--light-blue) !important;
+  font-size: 0.5rem !important;
+}
+
+.signup-header-text {
+color: #1d44b8;
+font-weight: bold;
+}
+
+.user-type-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+
+.radio-input-container {
+  display: flex;
+  line-height: 1.5rem;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  font-size: 15px;
+  width: 50%;
+}
+
+.radio-button-1, .radio-button-2, .radio-button3 {
+  z-index: 1;
+  color: #0043ed;
+}
+
+.radio-button-2 {
+  margin-left: 1rem;
+}
+
+.signup-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signup-userinfo-container {
+  margin-top: 1.5rem;
+  width: 35%;
+  padding: 2.5rem;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.fullname-text, .email-text, .password-text {
+  font-size: 0.8rem;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.input-fullname, .input-email-signup, .input-password-signup {
+  border: solid 1.5px #d3d3d3;
+  border-radius: 3px;
+  width: 90%;
+  margin-top: 0.4rem;
+  height: 1.5rem;
+}
+
+.signup-continue-button {
+  border: none;
+  width: 95%;
+  height: 2rem;
+  border-radius: 0.8rem;
+  margin-top: 2rem;
+  background-color: #0a0aff;
+  color: white;
+  text-align: center;
+  font-size: 1rem;
+}
