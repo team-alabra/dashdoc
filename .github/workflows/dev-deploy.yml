@@ -36,7 +36,7 @@ jobs:
           cache: maven
       - name: Build API with Maven
         run: |
-          cd bookitapi
+          cd dashdoc-api
           mvn compile 
           mvn -B package -DskipTests --file pom.xml
         env: 

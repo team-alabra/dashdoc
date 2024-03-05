@@ -9,7 +9,7 @@
     "build:dev": "webpack --watch --config=webpack.config.js",
     "start": "npm run build & webpack serve --mode production",
     "start:dev": "npm run build:dev & webpack serve --mode development",
-    "copy-build": "rsync dist/* ../bookitapi/src/main/resources/built",
+    "copy-build": "rsync dist/* ../dashdoc-api/src/main/resources/built",
     "build-and-copy": "npm run build && npm run copy-build",
     "seed": "node seed.js"
   },
