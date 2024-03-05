@@ -1,10 +1,12 @@
 package com.dashdocapi.services.vendors;
 
 import com.dashdocapi.DTO.ProviderDTO;
-import com.dashdocapi.DTO.models.CreateSubscriptionRequest;
 import com.dashdocapi.DTO.models.FetchPlanRequest;
 import com.dashdocapi.interfaces.StripeService;
+import com.dashdocapi.interfaces.enums.PlanTerm;
 import com.dashdocapi.interfaces.enums.SubscriptionStatus;
+import com.dashdocapi.interfaces.enums.SubscriptionType;
+import com.dashdocapi.interfaces.enums.UserType;
 import com.dashdocapi.services.AgencyService;
 import com.dashdocapi.services.ProviderService;
 import com.dashdocapi.utils.BadRequestException;
@@ -58,9 +60,7 @@ public class StripeServiceImpl implements StripeService {
             // endregion
 
             // region Check if Customer is In Stripe already
-            String stripeId = customer.getSubscription().getStripeCustomerID();
-
-            if (Customer.retrieve(Objects.requireNonNullElse(stripeId, "")) != null)
+            if (customerExists(customerEmail))
                 throw new BadRequestException("This customer already exists.");
             // endregion
 
@@ -76,10 +76,10 @@ public class StripeServiceImpl implements StripeService {
 
             // region Create Stripe customer
             var params = CustomerCreateParams.builder()
-                            .setName(name)
-                            .setEmail(customerEmail)
-                            .putMetadata("Agency", metadata)
-                            .build();
+                    .setName(name)
+                    .setEmail(customerEmail)
+                    .putMetadata("Agency", metadata)
+                    .build();
 
             return Customer.create(params);
             // endregion
@@ -88,22 +88,34 @@ public class StripeServiceImpl implements StripeService {
         }
     }
 
-    @Override
-    public com.stripe.model.Subscription createSubscription (String customerEmail, CreateSubscriptionRequest createSubscriptionRequest) {
+    private boolean customerExists(String email) {
         try {
-            // region Find Customer In DB
-            var customer = providerService.getByEmail(customerEmail);
-            var subscriptionId = customer.getSubscription().getStripeSubscriptionID();
-            var stripeCustomerID = customer.getSubscription().getStripeCustomerID();
+            // we search by email since customers are allowed a max of one account
+            var queryString = String.format("email:'%s'", email);
+            var customerSearchParams = CustomerSearchParams.builder()
+                    .setQuery(queryString)
+                    .build();
 
-            if (subscriptionId != null)
+            var result = Customer.search(customerSearchParams);
+
+            return result.getData().size() > 0;
+        } catch (Exception e) {
+            // TODO - Add some logging
+            return false;
+        }
+    }
+    @Override
+    public com.stripe.model.Subscription createSubscription (String stripeCustomerId, UserType userType) {
+        try {
+            // region Check if customer has a subscription
+            if (subscriptionExists(stripeCustomerId))
                 throw new BadRequestException("This customer already has an active subscription.");
             // endregion
 
             // region Fetch Stripe plan price code
             var stripeProduct = planService.getByType(new FetchPlanRequest(
-                    createSubscriptionRequest.getSubscriptionType(),
-                    createSubscriptionRequest.getTerm()
+                    userType == UserType.SOLE_PROVIDER ? SubscriptionType.INDIVIDUAL : SubscriptionType.AGENCY,
+                    PlanTerm.MONTHLY // default plan is monthly
             ));
             // endregion
 
@@ -114,22 +126,38 @@ public class StripeServiceImpl implements StripeService {
             long unixTime = trialEndDate.getTimeInMillis() / 1000L;
 
             var params = SubscriptionCreateParams.builder()
-                    .setCustomer(stripeCustomerID)
+                    .setCustomer(stripeCustomerId)
                     .setDefaultPaymentMethod(null)
                     .setTrialEnd(unixTime)
                     .addItem(
                             SubscriptionCreateParams.Item.builder()
                                     .setPrice(stripeProduct.getDefaultPrice())
                                     .setQuantity(1L)
-                                    .build()
-                    )
+                                    .build())
                     .build();
+
             return com.stripe.model.Subscription.create(params);
         } catch (Exception e) {
             throw new BadRequestException(e.getMessage());
         }
     }
 
+    private boolean subscriptionExists(String customerId) {
+        try {
+            // Subscription object has a customer field. If we can find a subscription with this customer ID, then
+            // they can't create a new one
+            var params = SubscriptionSearchParams.builder()
+                    .setQuery(String.format("customer:'%s'", customerId))
+                    .build();
+
+            var result = com.stripe.model.Subscription.search(params);
+
+            return result.getData().size() > 0;
+        } catch (Exception e) {
+            // TODO add some logging
+            return false;
+        }
+    }
     @Override
     public SubscriptionItem addAgencyProvider(String customerEmail) {
         try {
@@ -190,16 +218,16 @@ public class StripeServiceImpl implements StripeService {
             String stripeCustomerID = myProvider.getSubscription().getStripeCustomerID();
 
             var params = SessionCreateParams.builder()
-                        .setSuccessUrl(stripeSuccessURL)
-                        .setCustomer(stripeCustomerID)
-                        .addLineItem(
-                                SessionCreateParams.LineItem.builder()
-                                .setPrice(priceCode)
-                                .setQuantity(1L)
-                                .build()
-                        )
-                        .setMode(SessionCreateParams.Mode.PAYMENT)
-                        .build();
+                    .setSuccessUrl(stripeSuccessURL)
+                    .setCustomer(stripeCustomerID)
+                    .addLineItem(
+                            SessionCreateParams.LineItem.builder()
+                                    .setPrice(priceCode)
+                                    .setQuantity(1L)
+                                    .build()
+                    )
+                    .setMode(SessionCreateParams.Mode.PAYMENT)
+                    .build();
 
             Session session = Session.create(params);
 

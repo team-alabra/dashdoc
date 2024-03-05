@@ -1,6 +1,6 @@
 package com.dashdocapi.interfaces;
 
-import com.dashdocapi.DTO.models.CreateSubscriptionRequest;
+import com.dashdocapi.interfaces.enums.UserType;
 import com.dashdocapi.utils.BadRequestException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.stripe.exception.StripeException;
@@ -10,7 +10,7 @@ import com.stripe.model.SubscriptionItem;
 
 public interface StripeService {
     Customer createCustomer(String customerEmail);
-    com.stripe.model.Subscription createSubscription (String customerEmail, CreateSubscriptionRequest createSubscriptionRequest);
+    com.stripe.model.Subscription createSubscription (String stripeCustomerId, UserType userType);
     SubscriptionItem addAgencyProvider(String customerEmail) throws StripeException, JsonProcessingException;
     com.stripe.model.Subscription cancelSubscription(String customerEmail);
     com.stripe.model.Subscription setDefaultPaymentMethod(String customerEmail, String paymentMethodId) throws StripeException;

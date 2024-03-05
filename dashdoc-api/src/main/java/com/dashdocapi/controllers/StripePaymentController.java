@@ -1,6 +1,6 @@
 package com.dashdocapi.controllers;
 
-import com.dashdocapi.DTO.models.CreateSubscriptionRequest;
+import com.dashdocapi.interfaces.enums.UserType;
 import com.dashdocapi.services.vendors.StripeServiceImpl;
 import com.dashdocapi.utils.BadRequestException;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -34,22 +34,23 @@ public class StripePaymentController {
                 result,
                 HttpStatus.OK);
     }
+
     @GetMapping("/fail")
-    public ResponseEntity<String> failRoute(){
+    public ResponseEntity<String> failRoute() {
         return new ResponseEntity<>(
                 "Failure!",
                 HttpStatus.BAD_REQUEST);
     }
 
-    @PostMapping ("/cancel-subscription")
+    @PostMapping("/cancel-subscription")
     public ResponseEntity<com.stripe.model.Subscription> cancelSubscription(HttpServletRequest req) {
-       var result = stripeServiceImpl.cancelSubscription((String) req.getAttribute("username"));
-       return new ResponseEntity<>(
-            result,
-            HttpStatus.OK);
+        var result = stripeServiceImpl.cancelSubscription((String) req.getAttribute("username"));
+        return new ResponseEntity<>(
+                result,
+                HttpStatus.OK);
     }
 
-    @PostMapping ("/agency/add-employee")
+    @PostMapping("/agency/add-employee")
     public ResponseEntity<String> addAgencyEmployee(HttpServletRequest req) throws StripeException, JsonProcessingException {
         stripeServiceImpl.addAgencyProvider((String) req.getAttribute("username"));
         return new ResponseEntity<>(
@@ -57,7 +58,7 @@ public class StripePaymentController {
                 HttpStatus.OK);
     }
 
-    @PostMapping ("/create-customer")
+    @PostMapping("/create-customer")
     public ResponseEntity<String> createCustomer(HttpServletRequest req) {
         stripeServiceImpl.createCustomer((String) req.getAttribute("username"));
         return new ResponseEntity<>(
@@ -65,9 +66,9 @@ public class StripePaymentController {
                 HttpStatus.OK);
     }
 
-    @PostMapping ("/create-subscription")
-    public ResponseEntity<String> createSubscription(HttpServletRequest req, @RequestBody CreateSubscriptionRequest createSubscriptionRequest) {
-        stripeServiceImpl.createSubscription((String) req.getAttribute("username"), createSubscriptionRequest);
+    @PostMapping("/create-subscription")
+    public ResponseEntity<String> createSubscription(HttpServletRequest req, @RequestParam UserType userType) {
+        stripeServiceImpl.createSubscription((String) req.getAttribute("username"), userType);
         return new ResponseEntity<>(
                 "Successfully created subscription.",
                 HttpStatus.OK);

@@ -6,10 +6,12 @@ import com.dashdocapi.DTO.ConfirmSignUpDTO;
 import com.dashdocapi.DTO.ProviderDTO;
 import com.dashdocapi.DTO.UserSignUpRequest;
 import com.dashdocapi.entities.Provider;
+import com.dashdocapi.interfaces.enums.UserType;
 import com.dashdocapi.services.AuthService;
 import com.dashdocapi.services.ProviderService;
 import com.dashdocapi.services.vendors.StripeServiceImpl;
 import com.dashdocapi.utils.BadRequestException;
+import com.dashdocapi.utils.StripeTestData;
 import com.dashdocapi.utils.TestData;
 import com.stripe.model.Customer;
 import jakarta.servlet.http.Cookie;
@@ -70,21 +72,21 @@ public class AuthServiceTests {
         var authRes = authService.validateUserStatus(request, response);
 
         //Assert
-       Assertions.assertTrue(authRes.isValid());
+        Assertions.assertTrue(authRes.isValid());
     }
 
-        @Test
+    @Test
     public void validateUserStatus_UserDoesNotExist() {
-            // Arrange
-            String expectedMessage = "User not found";
-            Exception exception = assertThrows(BadRequestException.class, () -> authService.validateUserStatus(request, response));
-            String actualMessage = exception.getMessage();
+        // Arrange
+        String expectedMessage = "User not found";
+        Exception exception = assertThrows(BadRequestException.class, () -> authService.validateUserStatus(request, response));
+        String actualMessage = exception.getMessage();
 
-            // Act
-            when(cognitoClient.adminGetUser(any(AdminGetUserRequest.class))).thenThrow(new BadRequestException("User not found"));
+        // Act
+        when(cognitoClient.adminGetUser(any(AdminGetUserRequest.class))).thenThrow(new BadRequestException("User not found"));
 
-            // Assert
-            Assertions.assertTrue(actualMessage.contains(expectedMessage));
+        // Assert
+        Assertions.assertTrue(actualMessage.contains(expectedMessage));
     }
     @Test
     public void signUp_NewProvider () {
@@ -126,15 +128,13 @@ public class AuthServiceTests {
     public void confirmSignUp_NewProvider () {
         // Arrange
         Provider sampleProvider = TestData.getProviderDBO();
-        ConfirmSignUpDTO request = new ConfirmSignUpDTO(
-                sampleProvider.getEmail(),
-                "000"
-        );
-        Customer sampleCustomer = new Customer();
+        var request = new ConfirmSignUpDTO(sampleProvider.getEmail(), "000");
+        var sampleCustomer = new Customer();
 
         // Act
         when(providerService.getByEmail(request.getEmail())).thenReturn(sampleProvider.asDTO());
         when(stripeService.createCustomer(sampleProvider.getEmail())).thenReturn(sampleCustomer);
+        when(stripeService.createSubscription(sampleCustomer.getId(), UserType.SOLE_PROVIDER)).thenReturn(StripeTestData.getSubscription());
         when(providerService.update(any(ProviderDTO.class))).thenReturn(sampleProvider.asDTO());
 
         ProviderDTO updatedProvider = authService.confirmSignUpRequest(request);
