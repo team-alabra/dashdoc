@@ -3,6 +3,7 @@ import Logo from './Logo';
 import * as S from '../../../styles';
 import NavLinks from './NavLinks';
 import { NAVBAR_ROUTES } from '@constants';
+import { Outlet } from 'react-router-dom';
 
 const Navbar: React.FC<any> = ({ ...props }: any) => {
 
