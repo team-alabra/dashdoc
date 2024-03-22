@@ -3,9 +3,9 @@ import * as S from '../../../styles';
 
 const Logo = () => {
   return (
-    <a href='/'>
+    <S.NavLink data-testid="nav-logo" to="/">
       <S.Logo>DASHDOC LOGO</S.Logo>
-    </a>
+    </S.NavLink>
   );
 };
 
