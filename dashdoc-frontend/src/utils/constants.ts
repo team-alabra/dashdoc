@@ -1,3 +1,4 @@
+import { GridColDef } from '@mui/x-data-grid';
 import { PriceDetails } from '@typings/pricing';
 
 // NAVIGATION
@@ -82,3 +83,16 @@ export const userMessage: { [userType: string]: string } = {
   AGENCY_ADMINISTRATOR: 'Organization or Agency Name',
 };
 
+export const CLIENT_TABLE_FIELDS: GridColDef[] = [
+  { field: 'firstName', headerName: 'First name', width: 130, headerClassName: "table-header" },
+  { field: 'lastName', headerName: 'Last name', width: 130, headerClassName: "table-header" },
+  {
+    field: 'age',
+    headerName: 'Age',
+    type: 'number',
+    width: 130,
+    headerClassName: "table-header"
+  },
+  { field: 'email', headerName: 'Email', width: 130, headerClassName: "table-header" },
+  { field: 'mobile', headerName: 'Phone Number', width: 130, headerClassName: "table-header" },
+];

@@ -1,4 +1,4 @@
-import { ClientTable } from '@components/shared/tables/ClientTable'
+import { ClientTable } from '@components/shared/tables/DataTable'
 import React from 'react'
 
 const AllClients = () => {
