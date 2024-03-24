@@ -4,7 +4,7 @@ import * as S from '@styles';
 const Logo = () => {
   return (
     <S.NavLink data-testid="nav-logo" to="/">
-      {"DashDoc"}
+      <S.Logo>DASHDOC LOGO</S.Logo>
     </S.NavLink>
   );
 };
