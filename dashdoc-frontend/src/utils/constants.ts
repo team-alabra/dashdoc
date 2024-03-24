@@ -86,6 +86,7 @@ export const userMessage: { [userType: string]: string } = {
 export const CLIENT_TABLE_FIELDS: GridColDef[] = [
   { field: 'firstName', headerName: 'First name', width: 130, headerClassName: "table-header" },
   { field: 'lastName', headerName: 'Last name', width: 130, headerClassName: "table-header" },
+  { field: 'ageGroup', headerName: 'Age Group', width: 130, headerClassName: "table-header" },
   {
     field: 'age',
     headerName: 'Age',
@@ -94,5 +95,5 @@ export const CLIENT_TABLE_FIELDS: GridColDef[] = [
     headerClassName: "table-header"
   },
   { field: 'email', headerName: 'Email', width: 130, headerClassName: "table-header" },
-  { field: 'mobile', headerName: 'Phone Number', width: 130, headerClassName: "table-header" },
+  { field: 'phoneNUmber', headerName: 'Phone Number', width: 130, headerClassName: "table-header" }
 ];
