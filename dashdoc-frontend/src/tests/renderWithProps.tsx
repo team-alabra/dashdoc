@@ -1,19 +1,26 @@
 import React, { PropsWithChildren } from "react";
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import { render } from "@testing-library/react";
-import userSlice from "@services/slices/userSlice";
-import authSlice from "@services/slices/authSlice";
-import planSlice from "@services/slices/planSlice";
+import userReducer from "@services/slices/userSlice";
+import authReducer from "@services/slices/authSlice";
+import planReducer from "@services/slices/planSlice";
+import clientReducers from "@services/slices/clientSlice";
 import { BrowserRouter } from "react-router-dom";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
-const store = configureStore({
-  reducer: {
-    user: userSlice,
-    auth: authSlice,
-    plan: planSlice,
-  },
+export const reducers = {
+  user: userReducer,
+  auth: authReducer,
+  plan: planReducer,
+  client: clientReducers.singleClient,
+  clients: clientReducers.clientsList
+};
+
+export const rootState = combineReducers(reducers);
+
+export const mockStore = configureStore({
+  reducer: reducers,
 });
 
 type Options = {
@@ -22,7 +29,7 @@ type Options = {
 
 export const wrapper: React.FC<PropsWithChildren> = (props) => {
   return (
-    <Provider store={store}>
+    <Provider store={mockStore}>
       <GoogleOAuthProvider clientId='123abc'>
         <BrowserRouter>{props.children}</BrowserRouter>
       </GoogleOAuthProvider>

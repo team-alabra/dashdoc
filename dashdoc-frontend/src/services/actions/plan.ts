@@ -10,5 +10,6 @@ export const savePlanAction: CaseReducer = (
     ...state,
     ...action.payload,
   };
+  
   return plan;
 };

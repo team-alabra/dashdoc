@@ -1,3 +1,4 @@
+import { AgeGroup, Client, Gender } from "@typings/client";
 import { Plan, PlanTerm, PlanTypes } from "@typings/plan";
 import { UserType } from "@typings/user";
 
@@ -112,3 +113,33 @@ export const mockPlansResponse: PlanTypes = {
     } as Plan
   }
 };
+
+export const mockClientResponse: Client = {
+  id: 1,
+  firstName: 'Testy',
+  lastName: 'Testerson',
+  ageGroup: AgeGroup.SCHOOL_AGED,
+  age: 10,
+  dob: new Date(2014, 1, 1),
+  phoneNUmber: '(777)555-9999',
+  email: "testy.testerson@gmail.com",
+  gender: Gender.FEMALE,
+  address: '1 Hacker Way',
+  city: 'Hackerville',
+  state: 'CA',
+  zipCode: '55555',
+  preferredLanguage: 'English'
+};
+
+export const mockClientsResponse: Client[] = [
+  {...mockClientResponse},
+  {...mockClientResponse, id: 2},
+  {...mockClientResponse, id: 3},
+  {...mockClientResponse, id: 4},
+  {...mockClientResponse, id: 5},
+  {...mockClientResponse, id: 6},
+  {...mockClientResponse, id: 7},
+  {...mockClientResponse, id: 8},
+  {...mockClientResponse, id: 9},
+  {...mockClientResponse, id: 10},
+]

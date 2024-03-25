@@ -1,9 +1,10 @@
 import { createSlice, Slice } from '@reduxjs/toolkit';
-import { saveClientAction, saveClientsAction } from '@services/actions/client';
+import { setClientAction, setClientsAction } from '@services/actions/client';
+import { RootState } from '@services/store';
 import { Client } from '@typings/client';
 
-export const initialState: Client = {
-  id: 1,
+export const initialClientState: Client = {
+  id: 0,
   firstName: '',
   lastName: '',
   ageGroup: null,
@@ -19,15 +20,33 @@ export const initialState: Client = {
   preferredLanguage: ''
 };
 
-export const clientSlice: Slice = createSlice({
+const clientSlice: Slice = createSlice({
   name: 'client',
-  initialState,
+  initialState: initialClientState,
   reducers: {
-    setClient: saveClientAction,
-    setClients: saveClientsAction
+    setClient: setClientAction,
   },
 });
 
-export const { setClient, setClients } = clientSlice.actions;
+const clientsSlice: Slice = createSlice({
+  name: 'clients',
+  initialState: [] as Client[],
+  reducers: {
+    setClients: setClientsAction,
+  },
+});
 
-export default clientSlice.reducer;
+const { setClient } = clientSlice.actions;
+const { setClients } = clientsSlice.actions;
+
+export const clientActions = {
+  getOne: (state: RootState) => state.client,
+  getMany: (state: RootState) => state.clients,
+  setOne: setClient,
+  setMany: setClients
+}
+
+export default {
+  singleClient: clientSlice.reducer,
+  clientsList: clientsSlice.reducer
+}
