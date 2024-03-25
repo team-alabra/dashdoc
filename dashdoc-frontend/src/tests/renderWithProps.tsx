@@ -9,7 +9,7 @@ import clientReducers from "@services/slices/clientSlice";
 import { BrowserRouter } from "react-router-dom";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
-export const mockStore = configureStore({
+const store = configureStore({
   reducer: {
     user: userReducer,
     auth: authReducer,
@@ -25,7 +25,7 @@ type Options = {
 
 export const wrapper: React.FC<PropsWithChildren> = (props) => {
   return (
-    <Provider store={mockStore}>
+    <Provider store={store}>
       <GoogleOAuthProvider clientId='123abc'>
         <BrowserRouter>{props.children}</BrowserRouter>
       </GoogleOAuthProvider>
