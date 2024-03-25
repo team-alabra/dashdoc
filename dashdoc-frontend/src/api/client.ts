@@ -1,10 +1,18 @@
 import { Client } from "@typings/client";
-import { get } from "@utils/http"
+import { get, post, put } from "@utils/http";
 
-export const getAllClients = async (): Promise<Client[]> => {
+export const getAll = async (): Promise<Client[]> => {
   return await get("/api/user/clients");
-}
+};
 
-export const getSingleClient = async (id: number): Promise<Client> => {
+export const getById = async (id: number): Promise<Client> => {
   return await get(`/api/client/${id}`);
-}
+};
+
+export const update = async (client: Client): Promise<Client> => {
+  return await put(`/api/client/update`, client);
+};
+
+export const addNew = async (client: Client): Promise<Client> => {
+  return await post(`/api/client/update`, client);
+};

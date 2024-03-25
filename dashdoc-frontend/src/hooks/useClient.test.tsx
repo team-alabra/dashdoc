@@ -28,8 +28,10 @@ describe("useClient hook", () => {
     // Assert
     expect(result.current.clients).toBeDefined();
     expect(result.current.singleClient).toBeDefined();
-    expect(result.current.fetchSingleClient).toBeDefined();
+    expect(result.current.fetchClient).toBeDefined();
     expect(result.current.isLoading).toBeDefined();
+    expect(result.current.updateClient).toBeDefined();
+    expect(result.current.addClient).toBeDefined();
   });
 
   it("fetchProviderClients - Should fetch a list of clients on render", async () => {
@@ -68,7 +70,7 @@ describe("useClient hook", () => {
     // Act
     const { result } = renderHook(() => useClient(), { wrapper });
     
-    await waitFor(() => result.current.fetchSingleClient(1));
+    await waitFor(() => result.current.fetchClient(1));
 
     // Assert
     expect(result.current.singleClient).toBeDefined();
@@ -85,7 +87,7 @@ describe("useClient hook", () => {
     // Act
     const { result } = renderHook(() => useClient(), { wrapper });
 
-    await waitFor(() => result.current.fetchSingleClient(1));
+    await waitFor(() => result.current.fetchClient(1));
 
     // Assert
     expect(console.error).toHaveBeenCalledTimes(1);

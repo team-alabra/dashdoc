@@ -11,3 +11,8 @@ export const setClientsAction: CaseReducer = (
   state: RootState,
   action: PayloadAction<Client[]>
 ) => action.payload;
+
+export const addClientAction: CaseReducer = (
+  state: RootState,
+  action: PayloadAction<Client>
+) => [...state.clients, action.payload];

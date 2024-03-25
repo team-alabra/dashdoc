@@ -1,5 +1,5 @@
 import { createSlice, Slice } from '@reduxjs/toolkit';
-import { setClientAction, setClientsAction } from '@services/actions/client';
+import { addClientAction, setClientAction, setClientsAction } from '@services/actions/client';
 import { RootState } from '@services/store';
 import { Client } from '@typings/client';
 
@@ -33,17 +33,19 @@ const clientsSlice: Slice = createSlice({
   initialState: [] as Client[],
   reducers: {
     setClients: setClientsAction,
+    addClient: addClientAction
   },
 });
 
 const { setClient } = clientSlice.actions;
-const { setClients } = clientsSlice.actions;
+const { setClients, addClient } = clientsSlice.actions;
 
 export const clientActions = {
   getOne: (state: RootState) => state.client,
   getMany: (state: RootState) => state.clients,
   setOne: setClient,
-  setMany: setClients
+  setMany: setClients,
+  addOne: addClient
 }
 
 export default {

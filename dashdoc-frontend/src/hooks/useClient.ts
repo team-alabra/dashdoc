@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAllClients, getSingleClient } from "@api/client";
+import * as clientApi from "@api/client";
 import { clientActions } from "@services/slices/clientSlice";
 import { useDispatch, useSelector } from "./hooks";
 import { Client } from "@typings/client";
@@ -10,10 +10,10 @@ export const useClient = () => {
   const singleClient: Client = useSelector(clientActions.getOne);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  async function fetchProviderClients() {
+  async function fetchAllClients() {
     try {
       setIsLoading(true);
-      const result = await getAllClients();
+      const result = await clientApi.getAll();
       dispatch(clientActions.setMany(result));
       setIsLoading(false);
 
@@ -23,10 +23,36 @@ export const useClient = () => {
     }
   };
 
-  async function fetchSingleClient (id: number) {
+  async function fetchClient (id: number) {
     try {
       setIsLoading(true);
-      const result = await getSingleClient(id);
+      const result = await clientApi.getById(id);
+      dispatch(clientActions.setOne(result));
+      setIsLoading(false);
+
+    } catch (error) {
+      console.error(error);
+      setIsLoading(false);
+    }
+  };
+
+  async function updateClient (client: Client) {
+    try {
+      setIsLoading(true);
+      const result = await clientApi.update(client);
+      dispatch(clientActions.setOne(result));
+      setIsLoading(false);
+
+    } catch (error) {
+      console.error(error);
+      setIsLoading(false);
+    }
+  };
+
+  async function addClient (client: Client) {
+    try {
+      setIsLoading(true);
+      const result = await clientApi.addNew(client);
       dispatch(clientActions.setOne(result));
       setIsLoading(false);
 
@@ -37,13 +63,15 @@ export const useClient = () => {
   };
 
   useEffect(() => {
-    fetchProviderClients();
+    fetchAllClients();
   }, []);
 
   return {
     clients,
     singleClient,
-    fetchSingleClient,
+    fetchClient,
     isLoading,
+    updateClient,
+    addClient
   };
 };
