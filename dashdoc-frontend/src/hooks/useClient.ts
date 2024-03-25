@@ -6,8 +6,8 @@ import { Client } from "@typings/client";
 
 export const useClient = () => {
   const dispatch = useDispatch();
-  const clients: Client[] = useSelector((state) => state.clients);
-  const singleClient: Client = useSelector((state) => state.clients);
+  const clients: Client[] = useSelector(clientActions.getMany);
+  const singleClient: Client = useSelector(clientActions.getOne);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   async function fetchProviderClients() {

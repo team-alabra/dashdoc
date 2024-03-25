@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from "react";
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import { render } from "@testing-library/react";
 import userReducer from "@services/slices/userSlice";
@@ -9,18 +9,14 @@ import clientReducers from "@services/slices/clientSlice";
 import { BrowserRouter } from "react-router-dom";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
-export const reducers = {
-  user: userReducer,
-  auth: authReducer,
-  plan: planReducer,
-  client: clientReducers.singleClient,
-  clients: clientReducers.clientsList
-};
-
-export const rootState = combineReducers(reducers);
-
 export const mockStore = configureStore({
-  reducer: reducers,
+  reducer: {
+    user: userReducer,
+    auth: authReducer,
+    plan: planReducer,
+    client: clientReducers.singleClient,
+    clients: clientReducers.clientsList
+  },
 });
 
 type Options = {

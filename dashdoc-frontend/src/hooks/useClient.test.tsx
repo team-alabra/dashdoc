@@ -16,6 +16,8 @@ afterEach(() => {
 });
 
 describe("useClient hook", () => {
+  console.error = jest.fn();
+
   it("Should render hook and return elements", () => {
     // Arrange
     axiosMock.onGet("/api/user/clients").reply(200, mockClientsResponse);
@@ -44,7 +46,7 @@ describe("useClient hook", () => {
     
   });
 
-  it("fetchProviderClients - Fails to fetch a list of clients on render", async () => {
+  it("fetchProviderClients - Fails to fetch clients and throws error", async () => {
     // Arrange
     axiosMock.onGet("/api/user/clients").reply(400, () => {
       throw Error("Error occurred fetching provider clients");
@@ -52,14 +54,13 @@ describe("useClient hook", () => {
 
     // Act
     const { result } = renderHook(() => useClient(), { wrapper });
+    await waitFor(() => result.current.clients);
 
     // Assert
-    await waitFor(() =>
-      expect(result.current.clients.length).toEqual(0)
-    );
+    expect(console.error).toHaveBeenCalledTimes(1);
   });
 
-  it("Should return method that can handle loading a single client", async () => {
+  it("fetchSingleClient - Should return method that can handle loading a single client", async () => {
     // Arrange
     axiosMock.onGet("/api/user/clients").reply(200, mockClientsResponse);
     axiosMock.onGet(`/api/client/${1}`).reply(200, mockClientResponse);
@@ -67,14 +68,14 @@ describe("useClient hook", () => {
     // Act
     const { result } = renderHook(() => useClient(), { wrapper });
     
-    await waitFor(() => result.current.fetchSingleClient(1))
+    await waitFor(() => result.current.fetchSingleClient(1));
 
     // Assert
     expect(result.current.singleClient).toBeDefined();
     expect(result.current.singleClient.id).toEqual(1);
   });
 
-  it("Fails to load single client", async () => {
+  it("fetchSingleClient - Fails to load single client and throws", async () => {
     // Arrange
     axiosMock.onGet("/api/user/clients").reply(200, mockClientsResponse);
     axiosMock.onGet(`/api/client/${1}`).reply(() => {
@@ -87,6 +88,6 @@ describe("useClient hook", () => {
     await waitFor(() => result.current.fetchSingleClient(1));
 
     // Assert
-    expect(result.current.singleClient.id).toEqual(0);
+    expect(console.error).toHaveBeenCalledTimes(1);
   });
 });
