@@ -10,9 +10,9 @@ export const getById = async (id: number): Promise<Client> => {
 };
 
 export const update = async (client: Client): Promise<Client> => {
-  return await put(`/api/client/update`, client);
+  return await put("/api/client/update", client);
 };
 
 export const addNew = async (client: Client): Promise<Client> => {
-  return await post(`/api/client/update`, client);
+  return await post("/api/client/save", client);
 };

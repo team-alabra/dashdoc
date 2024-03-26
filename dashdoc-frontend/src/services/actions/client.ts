@@ -1,18 +1,18 @@
-import { CaseReducer, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../store';
-import { Client } from '@typings/client';
+import { CaseReducer, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../store";
+import { Client } from "@typings/client";
 
 export const setClientAction: CaseReducer = (
-  state: RootState,
+  state,
   action: PayloadAction<Client>
 ) => action.payload;
 
 export const setClientsAction: CaseReducer = (
-  state: RootState,
+  state,
   action: PayloadAction<Client[]>
 ) => action.payload;
 
 export const addClientAction: CaseReducer = (
-  state: RootState,
+  state,
   action: PayloadAction<Client>
-) => [...state.clients, action.payload];
+) => [...state, action.payload]

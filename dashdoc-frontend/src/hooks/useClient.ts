@@ -53,7 +53,7 @@ export const useClient = () => {
     try {
       setIsLoading(true);
       const result = await clientApi.addNew(client);
-      dispatch(clientActions.setOne(result));
+      dispatch(clientActions.addOne(result));
       setIsLoading(false);
 
     } catch (error) {
