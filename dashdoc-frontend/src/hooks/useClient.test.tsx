@@ -60,7 +60,7 @@ describe("useClient hook", () => {
     expect(console.error).toHaveBeenCalledTimes(1);
   });
 
-  it("fetchClient - Should return method that can handle loading a single client", async () => {
+  it("fetchClient - Gets client from API and adds it to store.", async () => {
     // Arrange
     axiosMock.onGet("/api/user/clients").reply(200, mockClientsResponse);
     axiosMock.onGet(`/api/client/${1}`).reply(200, mockClientResponse);
@@ -91,7 +91,7 @@ describe("useClient hook", () => {
     expect(console.error).toHaveBeenCalledTimes(1);
   });
 
-  it("updateClient - Should return method that can handle loading a single client", async () => {
+  it("updateClient - Updates client and updates redux store", async () => {
     // Arrange
     const clientToUpdate: Client = {
       ...mockClientResponse,
@@ -110,7 +110,7 @@ describe("useClient hook", () => {
     expect(result.current.singleClient.phoneNUmber).toEqual("(111)222-3333");
   });
 
-  it("updateClient - Fails to load single client and throws", async () => {
+  it("updateClient - Failed call. Client is not updated in redux.", async () => {
     // Arrange
     const clientToUpdate: Client = {
       ...mockClientResponse,
@@ -130,7 +130,7 @@ describe("useClient hook", () => {
     expect(console.error).toHaveBeenCalledTimes(1);
   });
 
-  it("addClient - Should return method that can handle loading a single client", async () => {
+  it("addClient - Adds a new provider client and updates client list in redux", async () => {
     // Arrange
     const clientToAdd: Client = { ...mockClientResponse, id: 20 };
     axiosMock.onGet("/api/user/clients").reply(200, mockClientsResponse);
@@ -145,7 +145,7 @@ describe("useClient hook", () => {
     expect(result.current.clients.length).toEqual(11);
   });
 
-  it("addClient - Fails to load single client and throws", async () => {
+  it("addClient - Failed API call. Client list is not updated.", async () => {
     // Arrange
     const clientToAdd: Client = { ...mockClientResponse, id: 20 };
     axiosMock.onGet("/api/user/clients").reply(200, mockClientsResponse);
