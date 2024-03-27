@@ -24,7 +24,7 @@ export const DataTable: React.FC<TableProps> = (props) => {
         pageSizeOptions={[5, 10, 20]}
         checkboxSelection = { useCheckbox }
         sx={{
-          fontSize:"14px"
+          fontSize:"13px"
         }}
       />
     </div>
