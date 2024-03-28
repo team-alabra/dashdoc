@@ -81,4 +81,3 @@ export const userMessage: { [userType: string]: string } = {
   AGENCY_PROVIDER: 'One Time Passcode',
   AGENCY_ADMINISTRATOR: 'Organization or Agency Name',
 };
-
