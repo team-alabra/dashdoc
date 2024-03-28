@@ -7,7 +7,7 @@ const AllClients = () => {
     <>
       <div>My Clients</div>
       <ClientSearch />
-      <DataTable columns={CLIENT_TABLE_FIELDS} rows={[]} />
+      <DataTable columns={CLIENT_TABLE_FIELDS} rows={[]} noRowsLabel="No Clients" />
     </>
   );
 };

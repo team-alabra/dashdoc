@@ -20,6 +20,7 @@
       "@typings": ["typings"],
       "@typings/*": ["typings/*"],
       "@styles": ["styles"],
+      "@styles/*": ["styles/*"],
       "@constants": ["utils/constants.ts"],
       "@tests/*": ["tests/*"],
       "@shared/*": ["components/shared/*"],
