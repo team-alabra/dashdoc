@@ -100,5 +100,6 @@ export const CLIENT_TABLE_FIELDS: GridColDef[] = [
     type: "number",
   },
   { field: "email", headerName: "Email" },
-  { field: "phoneNUmber", headerName: "Phone Number" },
+  { field: "phoneNumber", headerName: "Phone Number" },
+  { field: "address", headerName: "Address" },
 ];
