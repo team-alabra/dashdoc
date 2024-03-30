@@ -2,6 +2,7 @@ import React from "react";
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { defaultTableProps } from "@constants";
 import { CustomNoRowsOverlay } from "@styles/dataTable";
+import * as S from '@styles';
 
 type TableProps = {
   columns: GridColDef[],
@@ -14,7 +15,7 @@ export const DataTable: React.FC<TableProps> = (props) => {
   const { rows, columns, useCheckbox = false, noRowsLabel } = props;
 
   return (
-    <div style={{ height: 400, width: '100%' }}>
+    <S.TableContainer>
       <DataGrid
         rows={rows}
         columns={columns.map((col) => ({...defaultTableProps, ...col}), [])}
@@ -28,10 +29,11 @@ export const DataTable: React.FC<TableProps> = (props) => {
         }}
         pageSizeOptions={[5, 10, 20]}
         checkboxSelection = { useCheckbox }
+        isRowSelectable={() => useCheckbox}
         sx={{
-          fontSize:"13px"
+          fontSize:"13px",
         }}
       />
-    </div>
+    </S.TableContainer>
   )
 }

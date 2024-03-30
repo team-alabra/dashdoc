@@ -1,13 +1,13 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import { styled } from "@mui/material/styles";
-
+import { styled as muiStyled } from "@mui/material/styles";
+import styled from 'styled-components';
 /*
 *** Source ***
 https://mui.com/x/react-data-grid/components/#no-rows-overlay
 */
 
-const StyledGridOverlay = styled("div")(({ theme }) => ({
+const StyledGridOverlay = muiStyled("div")(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
@@ -77,4 +77,12 @@ export function CustomNoRowsOverlay(label: string) {
     </StyledGridOverlay>
   );
 }
- 
+
+export const TableContainer = styled.div`
+  height: 400;
+  width: 100%;
+
+  & .MuiDataGrid-footerContainer * {
+    font-size: 12px;
+  }
+`
