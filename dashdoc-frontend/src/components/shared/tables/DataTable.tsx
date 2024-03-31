@@ -1,5 +1,6 @@
 import React from "react";
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { DataGridPro } from '@mui/x-data-grid-pro';
 import { defaultTableProps } from "@constants";
 import { CustomNoRowsOverlay } from "@styles/dataTable";
 import * as S from '@styles';
@@ -29,7 +30,7 @@ export const DataTable: React.FC<TableProps> = (props) => {
         }}
         pageSizeOptions={[5, 10, 20]}
         checkboxSelection = { useCheckbox }
-        isRowSelectable={() => useCheckbox}
+        disableRowSelectionOnClick
         sx={{
           fontSize:"13px",
         }}

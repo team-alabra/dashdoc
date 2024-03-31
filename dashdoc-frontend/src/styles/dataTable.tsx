@@ -85,4 +85,14 @@ export const TableContainer = styled.div`
   & .MuiDataGrid-footerContainer * {
     font-size: 12px;
   }
+
+  & .MuiDataGrid-menuIcon svg {
+    font-size: 21px;
+    color: white;
+  }
+
+  & .MuiButtonBase-root svg {
+    color: white;
+    font-size: 18px;
+  }
 `

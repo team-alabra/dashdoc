@@ -88,12 +88,15 @@ export const defaultTableProps: Partial<GridColDef> = {
   headerClassName: "table-header",
   flex: 1,
   headerAlign: "center",
+  align: "center",
+  disableColumnMenu: true,
+  sortable: false
 };
 
 export const CLIENT_TABLE_FIELDS: GridColDef[] = [
-  { field: "firstName", headerName: "First name" },
-  { field: "lastName", headerName: "Last name" },
-  { field: "ageGroup", headerName: "Age Group" },
+  { field: "firstName", headerName: "First name", sortable: true },
+  { field: "lastName", headerName: "Last name", disableColumnMenu: false, sortable: true },
+  { field: "ageGroup", headerName: "Age Group", disableColumnMenu: false, sortable: true },
   {
     field: "age",
     headerName: "Age",
