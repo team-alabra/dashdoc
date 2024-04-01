@@ -1,16 +1,21 @@
 import React from "react";
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { DataGridPro } from '@mui/x-data-grid-pro';
+import {
+  DataGrid,
+  GridColDef,
+  GridToolbarFilterButton,
+} from "@mui/x-data-grid";
+
 import { defaultTableProps } from "@constants";
 import { CustomNoRowsOverlay } from "@styles/dataTable";
-import * as S from '@styles';
+import * as S from "@styles";
+import { ClientsPageToolbar } from "./CustomToolbars";
 
 type TableProps = {
-  columns: GridColDef[],
-  rows: any,
-  useCheckbox?: boolean
-  noRowsLabel?: string
-}
+  columns: GridColDef[];
+  rows: any;
+  useCheckbox?: boolean;
+  noRowsLabel?: string;
+};
 
 export const DataTable: React.FC<TableProps> = (props) => {
   const { rows, columns, useCheckbox = false, noRowsLabel } = props;
@@ -19,9 +24,20 @@ export const DataTable: React.FC<TableProps> = (props) => {
     <S.TableContainer>
       <DataGrid
         rows={rows}
-        columns={columns.map((col) => ({...defaultTableProps, ...col}), [])}
+        columns={columns.map((col) => ({ ...defaultTableProps, ...col }), [])}
         slots={{
-          noRowsOverlay: () => CustomNoRowsOverlay(noRowsLabel)
+          noRowsOverlay: () => CustomNoRowsOverlay(noRowsLabel),
+          toolbar: ClientsPageToolbar,
+        }}
+        slotProps={{
+          toolbar: {
+            showQuickFilter: true,
+          },
+        }}
+        filterModel={{
+          items: [
+            { field: "lastName", operator: "contains" },
+          ],
         }}
         initialState={{
           pagination: {
@@ -29,12 +45,12 @@ export const DataTable: React.FC<TableProps> = (props) => {
           },
         }}
         pageSizeOptions={[5, 10, 20]}
-        checkboxSelection = { useCheckbox }
+        checkboxSelection={useCheckbox}
         disableRowSelectionOnClick
         sx={{
-          fontSize:"13px",
+          fontSize: "13px",
         }}
       />
     </S.TableContainer>
-  )
-}
+  );
+};

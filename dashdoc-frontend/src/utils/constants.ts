@@ -90,7 +90,8 @@ export const defaultTableProps: Partial<GridColDef> = {
   headerAlign: "center",
   align: "center",
   disableColumnMenu: true,
-  sortable: false
+  sortable: false,
+  filterable: true
 };
 
 export const CLIENT_TABLE_FIELDS: GridColDef[] = [

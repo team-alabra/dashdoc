@@ -5,7 +5,7 @@ import MaterialButton from '@mui/material/Button';
 export const StyledButton = styled(MaterialButton)<{
   customColor?: string;
 }>`
-  backgroundColor: ${({ customColor }) => customColor};
+  backgroundColor: ${({ customColor }) => customColor} !important;
   color: white;
   border-radius: 10px;
   cursor: pointer;
