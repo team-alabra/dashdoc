@@ -79,6 +79,7 @@ export function CustomNoRowsOverlay(label: string) {
 }
 
 export const TableContainer = styled.div`
+  margin-top: 1rem;
   height: 400;
   width: 100%;
   border: none !important;
