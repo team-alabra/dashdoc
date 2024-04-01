@@ -9,9 +9,9 @@ import Button from "@components/shared/buttons/Button";
 export const ClientsPageToolbar = () => {
   return (
     <StyledToolbar className="plain-toolbar flex-row-between">
-      <div>
+      <div className="flex-row align-center">
         <GridToolbarQuickFilter className="quick-filter"/>
-        <GridToolbarFilterButton />
+        <GridToolbarFilterButton className="filter-button"/>
       </div>
       <Button
         className="add-client-button"
@@ -37,10 +37,6 @@ export const StyledToolbar = styled.div`
     color: black;
   }
 
-  & #text {
-    font-size: 18px;
-  }
-
   & .add-client-button * {
     color: white;
   }
@@ -54,6 +50,19 @@ export const StyledToolbar = styled.div`
   }
 
   & .quick-filter svg {
-    font-size: 18px;
+    font-size: 21px;
+  }
+
+  & .filter-button {
+    font-size: 14px;
+    color: black;
+  }
+
+  & .filter-button svg {
+    font-size: 21px;
+    color: black;
+    margin: 0;
+    padding: 0;
+    margin-left: 0.5rem;
   }
 `;
