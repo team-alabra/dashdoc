@@ -11,7 +11,13 @@ export const ClientsPageToolbar = () => {
 };
 
 export const StyledToolbar = styled.div`
-  height: 100px !important;
+  height: 50px !important;
   width: 100%;
-  background-color: lightgrey;
+  background: none;
+  border: none !important;
+
+  & * {
+    font-size: 14px;
+    color: black;
+  }
 `;

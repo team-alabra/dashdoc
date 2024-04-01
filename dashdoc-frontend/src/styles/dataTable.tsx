@@ -81,6 +81,20 @@ export function CustomNoRowsOverlay(label: string) {
 export const TableContainer = styled.div`
   height: 400;
   width: 100%;
+  border: none !important;
+
+  & > div {
+    border: none;
+  }
+
+  & .MuiDataGrid-main  {
+    border: 1px solid rgba(224, 224, 224, 1);
+  }
+
+  & .MuiDataGrid-footerContainer {
+    border: 1px solid rgba(224, 224, 224, 1);
+    border-top: none;
+  }
 
   & .MuiDataGrid-footerContainer * {
     font-size: 12px;

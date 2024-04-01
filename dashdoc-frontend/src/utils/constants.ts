@@ -90,7 +90,7 @@ export const defaultTableProps: Partial<GridColDef> = {
   headerAlign: "center",
   align: "center",
   disableColumnMenu: true,
-  sortable: false,
+  // sortable: false,
   filterable: true
 };
 
