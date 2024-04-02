@@ -6,16 +6,14 @@ import { useClient } from "@hooks/useClient";
 const AllClients = () => {
   const {
     clients,
-    fetchClient,
     isLoading,
-    updateClient,
-    addClient
   } = useClient();
 
   if (isLoading) 
   {
     return (
       <>
+        {/* LOADER PLACEHOLDER */}
         ...loading
       </>
     )

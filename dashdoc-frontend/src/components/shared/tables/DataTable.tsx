@@ -2,7 +2,6 @@ import React from "react";
 import {
   DataGrid,
   GridColDef,
-  GridToolbarFilterButton,
 } from "@mui/x-data-grid";
 
 import { defaultTableProps } from "@constants";
@@ -15,10 +14,11 @@ type TableProps = {
   rows: any;
   useCheckbox?: boolean;
   noRowsLabel?: string;
+  showToolbar?: boolean;
 };
 
 export const DataTable: React.FC<TableProps> = (props) => {
-  const { rows, columns, useCheckbox = false, noRowsLabel } = props;
+  const { rows, columns, useCheckbox = false, noRowsLabel, showToolbar = false } = props;
 
   return (
     <S.TableContainer>
@@ -27,7 +27,7 @@ export const DataTable: React.FC<TableProps> = (props) => {
         columns={columns.map((col) => ({ ...defaultTableProps, ...col }), [])}
         slots={{
           noRowsOverlay: () => CustomNoRowsOverlay(noRowsLabel),
-          toolbar: ClientsPageToolbar,
+          toolbar: showToolbar && ClientsPageToolbar,
         }}
         slotProps={{
           toolbar: {

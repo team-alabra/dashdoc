@@ -8,7 +8,7 @@ import Button from "@components/shared/buttons/Button";
 
 export const ClientsPageToolbar = () => {
   return (
-    <StyledToolbar className="plain-toolbar flex-row-between">
+    <StyledToolbar data-testid="client-action-toolbar" className="client-action-toolbar flex-row-between">
       <div className="flex-row align-center">
         <GridToolbarQuickFilter className="quick-filter"/>
         <GridToolbarFilterButton className="filter-button"/>
