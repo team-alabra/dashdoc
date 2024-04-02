@@ -7,7 +7,6 @@ import {
 import { defaultTableProps } from "@constants";
 import { CustomNoRowsOverlay } from "@styles/dataTable";
 import * as S from "@styles";
-import { ClientsPageToolbar } from "../../ui/CustomToolbars";
 
 type TableProps = {
   columns: GridColDef[];
