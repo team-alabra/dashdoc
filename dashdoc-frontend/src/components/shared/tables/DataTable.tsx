@@ -14,20 +14,20 @@ type TableProps = {
   rows: any;
   useCheckbox?: boolean;
   noRowsLabel?: string;
-  showToolbar?: boolean;
+  toolbar?: React.FC | null;
 };
 
 export const DataTable: React.FC<TableProps> = (props) => {
-  const { rows, columns, useCheckbox = false, noRowsLabel, showToolbar = false } = props;
+  const { rows, columns, useCheckbox = false, noRowsLabel, toolbar = null } = props;
 
   return (
-    <S.TableContainer>
+    <S.TableContainer data-testid="base-table">
       <DataGrid
         rows={rows}
         columns={columns.map((col) => ({ ...defaultTableProps, ...col }), [])}
         slots={{
           noRowsOverlay: () => CustomNoRowsOverlay(noRowsLabel),
-          toolbar: showToolbar && ClientsPageToolbar,
+          toolbar: toolbar,
         }}
         slotProps={{
           toolbar: {

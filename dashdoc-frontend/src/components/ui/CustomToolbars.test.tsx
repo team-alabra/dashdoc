@@ -1,7 +1,7 @@
 import React from "react";
 import { ClientsPageToolbar } from ".";
 import { render, waitFor, screen } from "@testing-library/react";
-import '@testing-library/jest-dom'
+
 import { DataGrid } from "@mui/x-data-grid";
 
 describe("CustomToolbars", () => {
