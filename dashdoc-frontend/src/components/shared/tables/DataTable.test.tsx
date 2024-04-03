@@ -1,6 +1,6 @@
 import React from "react";
 import { ClientsPageToolbar } from "../../ui";
-import { render, waitFor, screen, queryByTestId } from "@testing-library/react";
+import { render, waitFor, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { DataTable } from "./DataTable";
 import { mockClientsResponse } from "@tests/mocks/mockData";
