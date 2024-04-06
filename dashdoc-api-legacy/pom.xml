@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.dashdoc</groupId>
-    <artifactId>dashdoc-api</artifactId>
+    <artifactId>dashdoc-api-legacy</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>dashdoc-api</name>
-    <description>dashdoc-api</description>
+    <name>dashdoc-api-legacy</name>
+    <description>dashdoc-api-legacy</description>
     <properties>
         <java.version>17</java.version>
     </properties>
