@@ -8,6 +8,7 @@ const PageContainer = styled.div`
   background-color: #fafafa;
   margin: 2rem;
   overflow: auto;
+  height: 100%;
 `;
 
 export const Layout: React.FC<any> = ({ ...props }: any) => {

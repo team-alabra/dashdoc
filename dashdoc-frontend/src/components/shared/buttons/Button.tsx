@@ -1,33 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
+import MaterialButton from '@mui/material/Button';
 
-export const StyledButton = styled.button<{
-  color?: string;
+export const StyledButton = styled(MaterialButton)<{
+  customColor?: string;
 }>`
-  background: ${({ color }) => getColor(color)};
-  color: white;
-  font-size: 0.9em;
-  margin: 1em;
-  padding: 0.25em 0.75em;
-  width: 150px;
-  height: 50px;
-  border: none;
+  background-color: ${({ customColor }) => customColor} !important;
   border-radius: 10px;
   cursor: pointer;
+  font-size: 0.9em;
   font-family: 'DM Sans';
   width: fit-content;
+  font-size: 13px !important;
 `;
 
-const getColor = (choice: string) => {
-  switch(choice){
-    case 'primary':
-      return "#fd7702";
-    case 'secondary':
-      return '#1D44B8';
-    default:
-      return choice;
-  }
-}
 const Button: React.FC<any> = ({ ...props }: any) => {
   return <StyledButton {...props}>{props.children}</StyledButton>;
 };

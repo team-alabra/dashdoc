@@ -50,7 +50,8 @@ const LoginForm = () => {
 
         <Button
           id='login-button'
-          color={LoginTheme.bright_blue}
+          variant="contained"
+          customColor={LoginTheme.bright_blue}
           data-testid='login-button'
           type='submit'
         >
@@ -65,7 +66,8 @@ const LoginForm = () => {
 
       <Button
         id='sign-up-button'
-        color={LoginTheme.bright_orange}
+        variant="contained"
+        customColor={LoginTheme.bright_orange}
         data-testid='sign-up-button'
         type='button'
         onClick={() => {
