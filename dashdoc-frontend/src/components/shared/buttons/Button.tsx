@@ -8,6 +8,7 @@ export const StyledButton = styled(MaterialButton)<{
   background-color: ${({ customColor }) => customColor} !important;
   border-radius: 10px;
   cursor: pointer;
+  font-size: 0.9em;
   font-family: 'DM Sans';
   width: fit-content;
   font-size: 13px !important;
