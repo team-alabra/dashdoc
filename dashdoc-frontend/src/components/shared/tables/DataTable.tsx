@@ -47,7 +47,7 @@ export const DataTable: React.FC<TableProps> = (props) => {
         checkboxSelection={useCheckbox}
         disableRowSelectionOnClick
         sx={{
-          fontSize: "13px",
+          fontSize: "13px"
         }}
       />
     </S.TableContainer>

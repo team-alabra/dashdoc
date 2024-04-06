@@ -80,12 +80,17 @@ export function CustomNoRowsOverlay(label: string) {
 
 export const TableContainer = styled.div`
   margin-top: 1rem;
-  height: 400;
+  height: 50%;
   width: 100%;
   border: none !important;
 
   & > div {
     border: none;
+    height: auto;
+  }
+
+  & .MuiDataGrid-virtualScroller {
+    min-height: 200px;
   }
 
   & .MuiDataGrid-main  {
