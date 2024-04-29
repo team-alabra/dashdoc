@@ -17,11 +17,13 @@ const Analytics = ({ userType }: any) => {
 
       <div className='analytics-container'>
         <Metric
+          data-testid='earnings-metric'
           title={'Earnings'}
           data={formatCurrency(mockUserAnalytics.earnings)}
         />
 
         <Metric
+          data-testid='completed-notes-metric'
           title={
             userType === 'AGENCY_ADMINISTRATOR'
               ? 'New Clients'
@@ -31,6 +33,7 @@ const Analytics = ({ userType }: any) => {
         />
 
         <Metric
+          data-testid='appointments-metric'
           title={
             userType === 'AGENCY_ADMINISTRATOR'
               ? 'Submitted Notes'

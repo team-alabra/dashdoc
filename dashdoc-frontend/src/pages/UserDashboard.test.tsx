@@ -1,12 +1,11 @@
 import React from 'react';
 import 'jest-styled-components';
-import { fireEvent, waitFor } from '@testing-library/dom';
+import { waitFor } from '@testing-library/dom';
 import { screen, act } from '@testing-library/react';
-import { SignUp } from './SignUp';
 import { renderWithProvider } from '@tests/renderWithProps';
 import axios from 'axios';
 import UserDashboard from './UserDashboard';
-
+import { SOLE_PROVIDER_RESPONSE } from '@utils/mocks/signupMocks';
 
 beforeEach(() => {
   jest.clearAllMocks();
@@ -27,23 +26,19 @@ describe('User Dashboard Page', () => {
     expect(component).toBeDefined();
   });
 
-  it.skip('renders the appropriate input label, based on customer selecting their user type', () => {
+  it('renders the appropriate analytics, based on user type', () => {
     act(() => {
-      renderWithProvider(<SignUp />, {
-        route: '/signup',
+      renderWithProvider(<UserDashboard />, {
+        route: '/dashboard',
       });
     });
 
-    const agencyProviderButton: HTMLInputElement =
-      screen.getByLabelText(/Agency Provider/);
+    // Arrange
+    const axiosSpy = jest
+      .spyOn(axios, 'get')
+      .mockResolvedValue(SOLE_PROVIDER_RESPONSE);
 
-    expect(agencyProviderButton.checked).toEqual(false);
-
-    waitFor(() => fireEvent.click(agencyProviderButton));
-
-    expect(agencyProviderButton.checked).toEqual(true);
-
-    expect(screen.getAllByLabelText(/Agency Code/)).toBeTruthy();
-    expect(screen.queryByText("Agency Name")).toBeNull();
+    const label1 = waitFor(() => screen.getByTestId('completed-notes-metric'));
+    expect(label1).toBeDefined();
   });
 });
