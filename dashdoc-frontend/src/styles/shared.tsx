@@ -1,6 +1,6 @@
-import { ToggleButton, ToggleButtonGroup } from "@mui/material";
-import styled from "styled-components";
-import React from "react";
+import { ToggleButton, ToggleButtonGroup } from '@mui/material';
+import styled from 'styled-components';
+import React from 'react';
 
 export const StyledToggleGroup = styled(ToggleButtonGroup)`
   margin: auto;
@@ -21,7 +21,7 @@ export const StyledToggleGroup = styled(ToggleButtonGroup)`
   }
 `;
 
-export const StyledToggleButton = styled(ToggleButton)<{ themecolor?: string;}>`
+export const StyledToggleButton = styled(ToggleButton)<{ themecolor?: string }>`
   text-transform: none !important;
   font-size: medium !important;
 
@@ -39,9 +39,8 @@ export const StyledToggleButton = styled(ToggleButton)<{ themecolor?: string;}>`
 export const StyledSwitchTitle = styled.div`
   margin: auto;
   margin-bottom: 10px;
-  margin-top: 2%
+  margin-top: 2%;
 `;
-
 
 export const StyledContainer = styled(
   ({ customWidth, customHeight, children, ...props }: any) => (
@@ -53,13 +52,18 @@ export const StyledContainer = styled(
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 `;
 
-
 export const StyledHeader = styled(
-  ({ fontSize, fontColor, title, children, ...props }: any) => (
-    <p {...props}>{children}</p>
-  )
+  ({
+    fontSize,
+    fontColor,
+    margin,
+    fontWeight,
+    children,
+    ...props
+  }: any) => <p {...props}>{children}</p>
 )`
   font-size: ${({ fontSize }) => fontSize}px;
   color: ${({ fontColor }) => fontColor};
-  title: ${({ children }) => children};
+  margin: ${({ margin }) => margin}px;
+  font-weight: ${({ fontWeight }) => fontWeight};
 `;
