@@ -16,7 +16,7 @@ export const MOCK_AGENCY_PROVIDER_REQUEST = {
 };
 
 export const MOCK_AGENCY_ADMINISTRATOR_REQUEST = {
-  userType: 'AGENCY_ADMININSTRATOR',
+  userType: 'AGENCY_ADMINISTRATOR',
   agencyName: 'Alabra Agency',
   email: 'speechadmin@email.com',
   password: 'Hello123@',

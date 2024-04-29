@@ -14,8 +14,7 @@ const Metric = ({ title, data }: Analytics) => {
         <S.StyledHeader fontSize='14' fontColor='black'>
           {title}
         </S.StyledHeader>
-
-        <Stat />
+        <Stat data={data}/>
       </div>
 
       <hr className='vline'></hr>
