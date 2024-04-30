@@ -3,7 +3,6 @@ import * as S from '@styles';
 import Metric from '@components/analytics/Metric';
 import { formatCurrency } from '@utils/formatter';
 import { mockUserAnalytics } from '@utils/mocks/analyticsMocks';
-import { monthNames } from '@constants';
 import { useAnalytics } from '@hooks/useAnalytics';
 
 const Analytics = ({ userType }: any) => {
@@ -12,7 +11,7 @@ const Analytics = ({ userType }: any) => {
   return (
     <div>
       <S.StyledHeader fontSize='18' fontColor='black' fontWeight='bold'>
-        {monthNames[mockUserAnalytics.lastUpdated.getMonth()]} Analytics
+        {new Date().toLocaleString('default', { month: 'long' })} Analytics
       </S.StyledHeader>
 
       <div className='analytics-container'>
