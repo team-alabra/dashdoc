@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 
 const PageContainer = styled.div`
-  background-color: #fafafa;
+  background-color: white;
   margin: 2rem;
   overflow: auto;
   height: 100%;

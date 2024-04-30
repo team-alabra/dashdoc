@@ -4,6 +4,7 @@
 @import url("./signup.scss");
 @import url("./successConfirm.scss");
 @import url("./clients.scss");
+@import url("./analytics.scss");
 
 :root {
   --blue: #1e90ff;

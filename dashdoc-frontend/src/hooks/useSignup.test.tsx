@@ -2,12 +2,10 @@ import 'jest-styled-components';
 import { act, renderHook, waitFor } from '@testing-library/react';
 import { wrapper } from '@tests/renderWithProps';
 import { useSignup } from './useSignup';
-import axios from 'axios';
 import {
   SOLE_PROVIDER_RESPONSE,
   MOCK_SOLE_PROVIDER_REQUEST,
 } from '@utils/mocks/signupMocks';
-import * as useSignupHook from '@hooks/useSignup';
 
 jest.mock('axios');
 
