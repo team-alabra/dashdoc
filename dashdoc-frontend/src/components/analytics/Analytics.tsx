@@ -18,7 +18,7 @@ const Analytics = ({ userType }: any) => {
         <Metric
           data-testid='earnings-metric'
           title={'Earnings'}
-          data={formatCurrency(mockUserAnalytics.earnings)}
+          data={formatCurrency(analytics.earnings)}
         />
 
         <Metric
@@ -28,7 +28,7 @@ const Analytics = ({ userType }: any) => {
               ? 'New Clients'
               : 'Completed Notes'
           }
-          data={mockUserAnalytics.numOfNotes.submitted}
+          data={analytics.num_of_notes.submitted}
         />
 
         <Metric
@@ -38,7 +38,7 @@ const Analytics = ({ userType }: any) => {
               ? 'Submitted Provider Notes'
               : 'Appointments'
           }
-          data={mockUserAnalytics.numOfAppointments}
+          data={analytics.num_of_appointments.attended}
         />
       </div>
     </div>

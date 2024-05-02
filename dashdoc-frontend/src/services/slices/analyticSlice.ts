@@ -6,8 +6,8 @@ export const analyticSlice: Slice = createSlice({
   name: 'analytics',
   initialState: {
     earnings: 0,
-    numOfNotes: { submitted: 0, incomplete: 0 },
-    numOfAppointments: { attended: 0, noShow: 0, cancelled: 0 },
+    num_of_notes: { submitted: 0, incomplete: 0 },
+    num_of_appointments: { attended: 0, noShow: 0, cancelled: 0 },
     lastUpdated: new Date(),
   },
   reducers: {
