@@ -7,7 +7,7 @@ import { useAnalytics } from '@hooks/useAnalytics';
 
 const Analytics = ({ userType }: any) => {
   // this will be used once server is hooked up and will replace mockUserAnalytics
-  const { user_analytics } = useAnalytics();
+  const { analytics } = useAnalytics();
   return (
     <div>
       <S.StyledHeader fontSize='18' fontColor='black' fontWeight='bold'>
@@ -28,17 +28,17 @@ const Analytics = ({ userType }: any) => {
               ? 'New Clients'
               : 'Completed Notes'
           }
-          data={mockUserAnalytics.num_of_notes.submitted}
+          data={mockUserAnalytics.numOfNotes.submitted}
         />
 
         <Metric
           data-testid='appointments-metric'
           title={
             userType === 'AGENCY_ADMINISTRATOR'
-              ? 'Submitted Notes'
+              ? 'Submitted Provider Notes'
               : 'Appointments'
           }
-          data={mockUserAnalytics.num_of_appointments.attended}
+          data={mockUserAnalytics.numOfAppointments}
         />
       </div>
     </div>

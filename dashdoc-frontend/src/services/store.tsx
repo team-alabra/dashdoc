@@ -3,6 +3,7 @@ import userReducer from '@services/slices/userSlice';
 import authReducer from '@services/slices/authSlice';
 import planReducer from '@services/slices/planSlice';
 import clientReducers from '@services/slices/clientSlice';
+import analyticsReducer from '@services/slices/analyticSlice';
 
 // only has 1 key called reducer
 // gets passed in as an object
@@ -12,7 +13,8 @@ const store = configureStore({
     auth: authReducer,
     plan: planReducer,
     client: clientReducers.singleClient,
-    clients: clientReducers.clientsList
+    clients: clientReducers.clientsList,
+    analytics: analyticsReducer,
     // documents --> single document
     // settings
     // appointments --> single appt

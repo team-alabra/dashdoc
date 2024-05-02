@@ -17,7 +17,7 @@ beforeEach(() => {
 describe('useAnalytics hook', () => {
   it('should return analyticsHandler function', () => {
     const { result } = renderHook(() => useAnalytics(), { wrapper });
-    expect(result.current.analyticsHandler).toBeDefined();
+    expect(result.current.analytics).toBeDefined();
   });
 
   it('should return user`s appropriate analytics', async () => {
@@ -26,8 +26,8 @@ describe('useAnalytics hook', () => {
       .mockResolvedValue(mockUserAnalytics);
     const { result } = renderHook(() => useAnalytics(), { wrapper });
 
-    await act(() => result.current.analyticsHandler());
+    await act(() => result.current.analytics());
 
-    expect(result.current.user_analytics).toBe(mockUserAnalytics);
+    expect(result.current.analytics).toBe(mockUserAnalytics);
   });
 });
