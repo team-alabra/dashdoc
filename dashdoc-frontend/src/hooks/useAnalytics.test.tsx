@@ -21,13 +21,15 @@ describe('useAnalytics hook', () => {
   });
 
   it('should return user`s appropriate analytics', async () => {
-    const axiosSpy = jest
+    jest
       .spyOn(axios, 'get')
       .mockResolvedValue(mockUserAnalytics);
     const { result } = renderHook(() => useAnalytics(), { wrapper });
 
-    await act(() => result.current.analytics());
+    // this is mocking analytics from state*
+    await act(() => result.current.analytics);
 
-    expect(result.current.analytics).toBe(mockUserAnalytics);
+    expect(result.current.analytics.earnings).toBe(1153);
+    expect(result.current.analytics.num_of_notes.submitted).toBe(10);
   });
 });

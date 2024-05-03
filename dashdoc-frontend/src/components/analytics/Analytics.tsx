@@ -2,11 +2,10 @@ import React from 'react';
 import * as S from '@styles';
 import Metric from '@components/analytics/Metric';
 import { formatCurrency } from '@utils/formatter';
-import { mockUserAnalytics } from '@utils/mocks/analyticsMocks';
 import { useAnalytics } from '@hooks/useAnalytics';
 
 const Analytics = ({ userType }: any) => {
-  // this will be used once server is hooked up and will replace mockUserAnalytics
+
   const { analytics } = useAnalytics();
   return (
     <div>

@@ -36,7 +36,7 @@ const App: React.FC = () => {
             </PrivateRoute>
           }
         >
-          <Route path="/" element={<UserDashboard />} />
+          <Route path="/dashboard" element={<UserDashboard />} />
           <Route path="clients" element={<AllClients />} />
           <Route path="clients/:clientId" element={<SingleClient />} />
           <Route path="documents" element={<AllDocuments />} />
