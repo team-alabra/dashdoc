@@ -10,8 +10,6 @@ export const useAuth = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const isValid = useSelector(getAuth);
 
-  console.log('from state', isValid);
-
   const isAuthenticated = async (): Promise<ValidateUserType> => {
     try {
       const result = await validateUser();
