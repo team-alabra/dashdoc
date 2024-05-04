@@ -25,11 +25,11 @@ describe('useAuth hook', () => {
       .mockResolvedValue({ email: 'test@email.com', valid: true });
     const { result } = renderHook(() => useAuth(), { wrapper });
 
-    await act(() => result.current.isAuthenticated());
+    await act(() => result.current.authenticateUser());
 
     expect(axiosSpy).toBeCalled();
 
-    expect(result.current.isValid.isAuthenticated).toBe(true);
+    expect(result.current.isAuthenticated).toBe(true);
   });
 
   it('should invalidate a user with invalid/expired credentials', async () => {
@@ -40,9 +40,9 @@ describe('useAuth hook', () => {
 
     const { result } = renderHook(() => useAuth(), { wrapper });
 
-    await act(() => result.current.isAuthenticated());
+    await act(() => result.current.authenticateUser());
 
-    expect(result.current.isValid.isAuthenticated).toBe(false);
+    expect(result.current.isAuthenticated).toBe(false); // { isAuthentciated: false }
   });
 
   it('should invalidate a user who has not signed in', async () => {
@@ -51,9 +51,9 @@ describe('useAuth hook', () => {
       .mockRejectedValue({ status: 400, data: { email: null, valid: null } });
 
     const { result } = renderHook(() => useAuth(), { wrapper });
-    await act(() => result.current.isAuthenticated());
+    await act(() => result.current.authenticateUser());
 
     expect(axiosSpy).toBeCalled();
-    expect(result.current.isValid.isAuthenticated).toBe(false);
+    expect(result.current.isAuthenticated).toBe(false);
   });
 });

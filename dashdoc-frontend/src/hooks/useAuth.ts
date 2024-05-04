@@ -8,25 +8,24 @@ import { ValidateUserType } from '@typings/auth';
 export const useAuth = () => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const isValid = useSelector(getAuth);
+  const { isAuthenticated } = useSelector(getAuth);
 
-  const isAuthenticated = async (): Promise<ValidateUserType> => {
-    let result;
+  const authenticateUser = async (): Promise<ValidateUserType> => {
     try {
-      result = await validateUser();
+      let result = await validateUser();
       dispatch(setAuth({ isAuthenticated: result.valid }));
       setIsLoading(false);
+      return result;
     } catch (error) {
       console.error(error);
       dispatch(setAuth({ isAuthenticated: false }));
       setIsLoading(false);
     }
-    return result;
   };
 
   return {
+    authenticateUser,
     isAuthenticated,
-    isValid,
     setIsLoading,
   };
 };
