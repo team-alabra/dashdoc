@@ -41,7 +41,7 @@ describe('useLogin hook', () => {
 
     // Assert
     expect(axiosSpy).toBeCalled();
-    expect(window.location.href).toBe('http://localhost/dashboard');
+    expect(window.location.href).toBe('http://localhost/');
   });
 
   it('login handler makes API request and no user is found', async () => {

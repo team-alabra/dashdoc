@@ -29,7 +29,7 @@ describe('useAuth hook', () => {
 
     expect(axiosSpy).toBeCalled();
 
-    expect(result.current.isValidUser).toBe(true);
+    expect(result.current.isValid).toBe(true);
   });
 
   it('should invalidate a user with invalid/expired credentials', async () => {
@@ -42,7 +42,7 @@ describe('useAuth hook', () => {
     await act(() => result.current.isAuthenticated());
 
     expect(axiosSpy).toBeCalled();
-    expect(result.current.isValidUser).toBe(false);
+    expect(result.current.isValid).toBe(false);
   });
 
   it('should invalidate a user who has not signed in', async () => {
@@ -54,6 +54,6 @@ describe('useAuth hook', () => {
     await act(() => result.current.isAuthenticated());
 
     expect(axiosSpy).toBeCalled();
-    expect(result.current.isValidUser).toBe(false);
+    expect(result.current.isValid).toBe(false);
   });
 });
