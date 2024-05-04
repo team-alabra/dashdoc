@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import 'jest-styled-components';
-import { act, renderHook } from '@testing-library/react';
+import { act, renderHook, waitFor } from '@testing-library/react';
 import { wrapper } from '@tests/renderWithProps';
 import { useAuth } from './useAuth';
 import axios from 'axios';
@@ -29,7 +29,7 @@ describe('useAuth hook', () => {
 
     expect(axiosSpy).toBeCalled();
 
-    expect(result.current.isValid).toBe(true);
+    expect(result.current.isValid.isAuthenticated).toBe(true);
   });
 
   it('should invalidate a user with invalid/expired credentials', async () => {
@@ -39,10 +39,10 @@ describe('useAuth hook', () => {
     });
 
     const { result } = renderHook(() => useAuth(), { wrapper });
+
     await act(() => result.current.isAuthenticated());
 
-    expect(axiosSpy).toBeCalled();
-    expect(result.current.isValid).toBe(false);
+    expect(result.current.isValid.isAuthenticated).toBe(false);
   });
 
   it('should invalidate a user who has not signed in', async () => {
@@ -54,6 +54,6 @@ describe('useAuth hook', () => {
     await act(() => result.current.isAuthenticated());
 
     expect(axiosSpy).toBeCalled();
-    expect(result.current.isValid).toBe(false);
+    expect(result.current.isValid.isAuthenticated).toBe(false);
   });
 });

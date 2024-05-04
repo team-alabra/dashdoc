@@ -5,7 +5,6 @@ import { formatCurrency } from '@utils/formatter';
 import { useAnalytics } from '@hooks/useAnalytics';
 
 const Analytics = ({ userType }: any) => {
-
   const { analytics } = useAnalytics();
   return (
     <div>

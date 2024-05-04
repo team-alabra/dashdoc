@@ -21,9 +21,7 @@ describe('useAnalytics hook', () => {
   });
 
   it('should return user`s appropriate analytics', async () => {
-    jest
-      .spyOn(axios, 'get')
-      .mockResolvedValue(mockUserAnalytics);
+    jest.spyOn(axios, 'get').mockResolvedValue(mockUserAnalytics);
     const { result } = renderHook(() => useAnalytics(), { wrapper });
 
     // this is mocking analytics from state*
