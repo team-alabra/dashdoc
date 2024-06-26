@@ -1,0 +1,65 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <InvariantGlobalization>true</InvariantGlobalization>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.1"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Dashdoc.API.Server.Tests\**" />
+      <Compile Remove="Dashdoc.API.Infrastructure\**" />
+      <Compile Remove="Dashdoc.API.Domain\**" />
+      <Compile Remove="Dashdoc.API.Domain.Tests\**" />
+      <Compile Remove="Dashdoc.API.Insfrastructure.Tests\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Dashdoc.API.Server.Tests\**" />
+      <EmbeddedResource Remove="Dashdoc.API.Infrastructure\**" />
+      <EmbeddedResource Remove="Dashdoc.API.Domain\**" />
+      <EmbeddedResource Remove="Dashdoc.API.Domain.Tests\**" />
+      <EmbeddedResource Remove="Dashdoc.API.Insfrastructure.Tests\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="Dashdoc.API.Server.Tests\**" />
+      <Content Remove="Dashdoc.API.Infrastructure\**" />
+      <Content Remove="Dashdoc.API.Domain\**" />
+      <Content Remove="Dashdoc.API.Domain.Tests\**" />
+      <Content Remove="Dashdoc.API.Insfrastructure.Tests\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Dashdoc.API.Server.Tests\**" />
+      <None Remove="Dashdoc.API.Infrastructure\**" />
+      <None Remove="Dashdoc.API.Domain\**" />
+      <None Remove="Dashdoc.API.Domain.Tests\**" />
+      <None Remove="Dashdoc.API.Insfrastructure.Tests\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Dashdoc.API.Server.Tests\obj\Dashdoc.API.Server.Tests.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="Dashdoc.API.Server.Tests\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="Dashdoc.API.Server.Tests\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="Dashdoc.API.Infrastructure\obj\Dashdoc.API.Infrastructure.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="Dashdoc.API.Infrastructure\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="Dashdoc.API.Infrastructure\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="Dashdoc.API.Domain\obj\Dashdoc.API.Domain.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="Dashdoc.API.Domain\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="Dashdoc.API.Domain\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="Dashdoc.API.Domain.Tests\obj\Dashdoc.API.Domain.Tests.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="Dashdoc.API.Domain.Tests\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="Dashdoc.API.Domain.Tests\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="Dashdoc.API.Insfrastructure.Tests\obj\Dashdoc.API.Insfrastructure.Tests.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="Dashdoc.API.Insfrastructure.Tests\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="Dashdoc.API.Insfrastructure.Tests\obj\project.packagespec.json" />
+    </ItemGroup>
+
+</Project>
