@@ -22,4 +22,8 @@
         </PackageReference>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Dashdoc.API.Infrastructure\Dashdoc.API.Infrastructure.csproj" />
+    </ItemGroup>
+
 </Project>

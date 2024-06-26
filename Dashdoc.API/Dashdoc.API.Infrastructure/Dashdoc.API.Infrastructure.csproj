@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Dashdoc.API.Domain\Dashdoc.API.Domain.csproj" />
+    </ItemGroup>
+
 </Project>
