@@ -1,6 +1,6 @@
 using Dashdoc.API.Domain.Abstract;
 
-namespace Dashdoc.API.Domain.Services;
+namespace Dashdoc.API.Infrastructure.Services;
 
 public class ProviderService: IProviderService
 {
