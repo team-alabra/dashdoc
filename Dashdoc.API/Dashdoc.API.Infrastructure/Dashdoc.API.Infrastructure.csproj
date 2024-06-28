@@ -10,4 +10,11 @@
       <ProjectReference Include="..\Dashdoc.API.Domain\Dashdoc.API.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Amazon.AspNetCore.Identity.Cognito" Version="3.0.2" />
+      <PackageReference Include="Amazon.Extensions.CognitoAuthentication" Version="2.5.4" />
+      <PackageReference Include="Stripe.net" Version="45.2.0-beta.1" />
+      <PackageReference Include="Twilio" Version="7.2.1" />
+    </ItemGroup>
+
 </Project>
