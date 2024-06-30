@@ -1,7 +1,9 @@
+using Amazon;
 using Amazon.SecretsManager.Extensions.Caching;
 using Dashdoc.API.Domain.Settings;
 using Dashdoc.API.Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using Twilio.Rest.Content.V1;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Dashdoc.API.Server.StartupConfigurations;
@@ -13,7 +15,9 @@ public static class DatabaseConfiguration
         var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
         var dbUrl = Environment.GetEnvironmentVariable("DB_URI");
         var dbName = Environment.GetEnvironmentVariable("DB_NAME");
-
+        var region = Environment.GetEnvironmentVariable("AWS_REGION");
+        var iamToken = Amazon.RDS.Util.RDSAuthTokenGenerator.GenerateAuthToken(RegionEndpoint.GetBySystemName(region), dbUrl, 5432, "jane_doe");
+        
         Console.WriteLine(env);
         Console.WriteLine(dbUrl);
         Console.WriteLine(dbName);

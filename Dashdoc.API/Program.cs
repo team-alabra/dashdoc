@@ -1,7 +1,12 @@
+using Dashdoc.API.Domain.Settings;
 using Dashdoc.API.Server.StartupConfigurations;
+using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration.AddSecretsManagerConfig();
+
+# region Register App Services
 builder.Services.AddMemoryCache();
 builder.Services.AddControllers();
 
@@ -10,6 +15,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// AppConfig Setup
+builder.Services.Configure<RdsAppSettings>(builder.Configuration);
+
 // DB Config
 builder.Services.RegisterDashdocDatabase();
 
@@ -17,6 +25,7 @@ builder.Services.RegisterDashdocDatabase();
 
 // Stripe Config
 // builder.Services.RegisterStripeClient();
+#endregion
 
 var app = builder.Build();
 
