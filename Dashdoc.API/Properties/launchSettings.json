@@ -14,22 +14,14 @@
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "http://localhost:5050",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "DB_CONNECTION_STRING": "postgresql://localhost:5432/dashdoc?stringtype=unspecified"
-      }
+      "applicationUrl": "http://localhost:5050"
     },
     "dev": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:7070;http://localhost:5050",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "DB_CONNECTION_STRING": "dd-rds-dev.c6wkucdx6he1.us-east-1.rds.amazonaws.com"
-      }
+      "applicationUrl": "https://localhost:7070;http://localhost:5050"
     },
     "IIS Express": {
       "commandName": "IISExpress",

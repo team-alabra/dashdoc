@@ -13,7 +13,7 @@ builder.Services.AddSwaggerGen();
 // DB Config
 builder.Services.RegisterDashdocDatabase();
 
-// Twilio Config
+// Cognito config
 
 // Stripe Config
 // builder.Services.RegisterStripeClient();
