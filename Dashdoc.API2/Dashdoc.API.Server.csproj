@@ -80,4 +80,20 @@
       <ProjectReference Include="Dashdoc.API.Infrastructure\Dashdoc.API.Infrastructure.csproj" />
     </ItemGroup>
 
+    <Target Name="DebugCreateReactBuild" BeforeTargets="CopyReactBuild" Condition=" '$(Configuration)' == 'Debug' ">
+        <!-- As part of local testing, ensure the JS resources are freshly built in production mode -->
+        <Exec WorkingDirectory="..\SFS.SM.CA.CreditAnalysisClient\" Command="npm install" />
+        <Exec WorkingDirectory="..\SFS.SM.CA.CreditAnalysisClient\" Command="npm run build" />
+    </Target>
+
+    <Target Name="CopyReactBuild" BeforeTargets="Build" Condition=" '$(Configuration)' != 'SkipReactBuild' ">
+        <ItemGroup>
+            <ReactDistFiles Include="..\SFS.SM.CA.CreditAnalysisClient\build\**\*.*" />
+        </ItemGroup>
+
+        <!-- Include the newly-built files in the publish output -->
+        <RemoveDir Directories="$(MSBuildProjectDirectory)\wwwroot" />
+        <Copy SourceFiles="@(ReactDistFiles)" DestinationFolder="$(MSBuildProjectDirectory)\wwwroot\%(RecursiveDir)" />
+    </Target>
+
 </Project>
