@@ -5,10 +5,16 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <InvariantGlobalization>true</InvariantGlobalization>
+        <SpaRoot>..\..\dashdoc-frontend</SpaRoot>
+        <SpaProxyLaunchCommand>npm run start:dev</SpaProxyLaunchCommand>
+        <SpaProxyServerUrl>https://localhost:3000</SpaProxyServerUrl>
     </PropertyGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\dashdoc-frontend\dashdoc-frontend.esproj">
+            <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+        </ProjectReference>
+        <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="8.0.6" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
     </ItemGroup>
-
 </Project>
