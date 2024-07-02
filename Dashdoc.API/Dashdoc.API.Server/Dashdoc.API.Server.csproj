@@ -8,6 +8,7 @@
         <SpaRoot>..\..\dashdoc-frontend</SpaRoot>
         <SpaProxyLaunchCommand>npm run start:dev</SpaProxyLaunchCommand>
         <SpaProxyServerUrl>https://localhost:3000</SpaProxyServerUrl>
+        <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
     </PropertyGroup>
 
     <ItemGroup>

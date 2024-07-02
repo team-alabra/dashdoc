@@ -1,4 +1,4 @@
-name: Deploy DashDoc - DEV - Java Server
+name: DEPRECATED DEPLOY ACTION
 
 env:
   NODE_VERSION: '18'
@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
   push:
     branches:  
-    - develop 
+    - deprecated 
 
 jobs:
   build-app-and-upload-jar:
