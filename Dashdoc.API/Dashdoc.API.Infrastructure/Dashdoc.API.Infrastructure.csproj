@@ -10,10 +10,4 @@
       <ProjectReference Include="..\Dashdoc.API.Domain\Dashdoc.API.Domain.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="AppServices\" />
-      <Folder Include="Utils\" />
-      <Folder Include="VendorServices\" />
-    </ItemGroup>
-
 </Project>
