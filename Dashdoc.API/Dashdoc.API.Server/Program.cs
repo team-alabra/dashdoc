@@ -3,8 +3,6 @@ using Dashdoc.API.Server.StartupConfigurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// builder.Configuration.AddSecretsManagerConfig();
-
 # region Register App Services
 builder.Services.AddMemoryCache();
 builder.Services.AddCors();
@@ -15,7 +13,7 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 
     // ignore omitted parameters on models to enable optional params (e.g. User update)
     x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
-});;
+});
 
 // Swagger Support
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -28,11 +26,6 @@ builder.Services.AddSwaggerGen();
 // DB Config
 builder.Services.RegisterDashdocDatabase();
 
-// Cognito config
-
-// Stripe Config
-// builder.Services.RegisterStripeClient();
-
 // Local Services Configuration
 builder.Services.RegisterAppServices();
 
@@ -41,16 +34,17 @@ builder.Services.RegisterAppServices();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsEnvironment("Local"))
+if (!app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
+app.MapControllers();
 app.UseHttpsRedirection();
 app.UseAuthorization();
-app.MapControllers();
 
+// Defers app routing to the React App
 app.MapFallbackToFile("/index.html");
 
 app.Run();
