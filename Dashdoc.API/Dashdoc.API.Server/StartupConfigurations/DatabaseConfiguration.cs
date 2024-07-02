@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Dashdoc.API.Server.StartupConfigurations;
 
+// Alternate configuration using AWS Secrets Manager can be found here: https://aws.amazon.com/blogs/modernizing-with-aws/how-to-load-net-configuration-from-aws-secrets-manager/
+// final implementation TBD
 public static class DatabaseConfiguration
 {
     public static IServiceCollection RegisterDashdocDatabase(this IServiceCollection services)
@@ -37,7 +39,7 @@ public static class DatabaseConfiguration
         {
             options.UseNpgsql(connectionString);
         });
-
+        
         return services;
     }
 }
