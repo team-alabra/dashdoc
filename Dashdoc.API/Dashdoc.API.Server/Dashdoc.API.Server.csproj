@@ -14,7 +14,21 @@
         <ProjectReference Include="..\..\dashdoc-frontend\dashdoc-frontend.esproj">
             <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
         </ProjectReference>
+        <PackageReference Include="AWSSDK.RDS" Version="3.7.313.20" />
         <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="8.0.6" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.6">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+        <ProjectReference Include="..\Dashdoc.API.Data\Dashdoc.API.Data.csproj" />
+        <ProjectReference Include="..\Dashdoc.API.Domain\Dashdoc.API.Domain.csproj" />
+        <ProjectReference Include="..\Dashdoc.API.Infrastructure\Dashdoc.API.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Validators\" />
+      <Folder Include="ViewModels\" />
     </ItemGroup>
 </Project>

@@ -8,6 +8,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dashdoc.API.Domain", "Dashd
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dashdoc.API.Infrastructure", "Dashdoc.API.Infrastructure\Dashdoc.API.Infrastructure.csproj", "{398CAA29-D74D-4D74-96EA-AD91C4509EEA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dashdoc.API.Server.Tests", "Dashdoc.API.Server.Tests\Dashdoc.API.Server.Tests.csproj", "{24CD8CEE-5360-45AC-BF01-518E8B66B3BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dashdoc.API.Infrastructure.Tests", "Dashdoc.API.Infrastructure.Tests\Dashdoc.API.Infrastructure.Tests.csproj", "{E6833779-EC7C-4D51-9612-75F54EEB7982}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dashdoc.API.Data.Tests", "Dashdoc.API.Data.Tests\Dashdoc.API.Data.Tests.csproj", "{9F4CF41D-BBDD-44EA-BB7F-640545362A9A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dashdoc.API.Data", "Dashdoc.API.Data\Dashdoc.API.Data.csproj", "{A9220C78-753C-4700-AFF2-472D04B4AFBD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,5 +34,26 @@ Global
 		{398CAA29-D74D-4D74-96EA-AD91C4509EEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{398CAA29-D74D-4D74-96EA-AD91C4509EEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{398CAA29-D74D-4D74-96EA-AD91C4509EEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24CD8CEE-5360-45AC-BF01-518E8B66B3BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24CD8CEE-5360-45AC-BF01-518E8B66B3BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24CD8CEE-5360-45AC-BF01-518E8B66B3BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24CD8CEE-5360-45AC-BF01-518E8B66B3BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6833779-EC7C-4D51-9612-75F54EEB7982}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6833779-EC7C-4D51-9612-75F54EEB7982}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6833779-EC7C-4D51-9612-75F54EEB7982}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6833779-EC7C-4D51-9612-75F54EEB7982}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F4CF41D-BBDD-44EA-BB7F-640545362A9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F4CF41D-BBDD-44EA-BB7F-640545362A9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F4CF41D-BBDD-44EA-BB7F-640545362A9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F4CF41D-BBDD-44EA-BB7F-640545362A9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9220C78-753C-4700-AFF2-472D04B4AFBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9220C78-753C-4700-AFF2-472D04B4AFBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9220C78-753C-4700-AFF2-472D04B4AFBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9220C78-753C-4700-AFF2-472D04B4AFBD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{24CD8CEE-5360-45AC-BF01-518E8B66B3BD} = {0EE96A55-F2AB-47A8-A5C0-EBBB6295EB39}
+		{E6833779-EC7C-4D51-9612-75F54EEB7982} = {0EE96A55-F2AB-47A8-A5C0-EBBB6295EB39}
+		{9F4CF41D-BBDD-44EA-BB7F-640545362A9A} = {0EE96A55-F2AB-47A8-A5C0-EBBB6295EB39}
 	EndGlobalSection
 EndGlobal
