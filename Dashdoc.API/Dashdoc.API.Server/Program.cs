@@ -20,9 +20,6 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// AppConfig Setup
-// builder.Services.Configure<RdsAppSettings>(builder.Configuration);
-
 // DB Config
 builder.Services.RegisterDashdocDatabase();
 
