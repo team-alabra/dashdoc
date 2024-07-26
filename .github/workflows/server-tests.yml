@@ -1,0 +1,35 @@
+name: Dashdoc API Unit Tests
+
+env:
+  DOTNET_VERSION: '8.x'
+
+on:
+  push:
+    branches: [ "develop", "release/**", "main" ]
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  build-and-test-api:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Dashdoc.API
+
+    name: Build and Test
+    steps:
+    - uses: actions/checkout@v4
+    - name: setup .NET Core
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+        cache: true
+    - name: Install Nuget Packages
+      run: |
+        dotnet restore --locked-mode
+    - name: Build Project
+      run: |
+        dotnet build
+    - name: Run Unit Tests
+      run: |
+        dotnet test

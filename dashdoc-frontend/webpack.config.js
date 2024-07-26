@@ -30,6 +30,7 @@ module.exports = {
     }
   },
   devServer: {
+    server: 'https',
     static: {
       directory: path.join(__dirname, 'public'),
     },
@@ -37,7 +38,7 @@ module.exports = {
     port: 3000,
     proxy: {
       '/api': {
-        target: 'http://localhost:8082',
+        target: 'https://localhost:8080',
         secure: false,
       },
     },

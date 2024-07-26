@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### .NET ###
+appsettings.Local.json
+appsettings.Development.json

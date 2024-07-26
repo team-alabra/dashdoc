@@ -1,24 +1,18 @@
-#amplify-do-not-edit-begin
-amplify/\#current-cloud-backend
-amplify/.config/local-*
-amplify/logs
-amplify/mock-data
-amplify/backend/amplify-meta.json
-amplify/backend/.temp
+### General ###
+*.swp
+*.*~
+project.lock.json
+.DS_Store
+*.pyc
+nupkg/
+
+### React and JS ###
 build/
 dist/
 node_modules/
 
-aws-exports.js
-awsconfiguration.json
-amplifyconfiguration.json
-amplifyconfiguration.dart
-amplify-build-config.json
-amplify-gradle-config.json
-amplifytools.xcconfig
 .secret-*
 **.sample
-.DS_Store
 
 HELP.md
 target/
@@ -36,7 +30,7 @@ target/
 .springBeans
 .sts4-cache
 
-### IntelliJ IDEA ###
+### IntelliJ IDEA and Rider ###
 .idea
 *.iws
 *.iml
@@ -70,3 +64,31 @@ bundle.js.map
 bundle.js.LICENSE.txt
 .DS_Store
 .env
+
+### .NET ###
+appsettings.Local.json
+
+### Visual Studio ###
+.vs/
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+msbuild.log
+msbuild.err
+msbuild.wrn
