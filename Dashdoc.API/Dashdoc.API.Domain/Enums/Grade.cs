@@ -4,7 +4,7 @@ public enum Grade
 {
     NotApplicable,
     PreK,
-    KinderGarden,
+    KinderGarten,
     First,
     Second,
     Third,

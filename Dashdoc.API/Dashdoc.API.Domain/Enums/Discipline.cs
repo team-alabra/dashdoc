@@ -12,14 +12,16 @@ public enum Discipline
     PhysicalTherapy,
     [Description("Counseling")]
     Counseling,
-    [Description("Psychology")]
-    Psychology,
-    [Description("TBD")]
-    Hes,
-    [Description("TBD")]
-    Vt,
-    [Description("TBD")]
-    At,
-    [Description("TBD")]
-    Setss
+    [Description("Psych Ed.")]
+    PsychEd,
+    [Description("Hearing")]
+    Hearing,
+    [Description("Vision")]
+    Vision,
+    [Description("Assistive Tech")]
+    AssistiveTech,
+    [Description("Special Ed. Support")]
+    SpecialEdSupport,
+    [Description("Applied Behavioral Analysis")]
+    ABA
 }
