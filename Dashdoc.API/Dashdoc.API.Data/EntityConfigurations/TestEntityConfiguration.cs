@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Dashdoc.API.Data.EntityConfigurations;
 
-public class TestEntityConfiguration: IEntityTypeConfiguration<TestEntity>
+public class TestEntityConfiguration: IEntityTypeConfiguration<Provider>
 {
-    public void Configure(EntityTypeBuilder<TestEntity> builder)
+    public void Configure(EntityTypeBuilder<Provider> builder)
     {
         builder.HasKey(e => e.Id);
         builder.Property(e => e.Name).IsRequired();

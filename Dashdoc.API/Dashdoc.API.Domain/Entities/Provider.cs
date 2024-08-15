@@ -2,9 +2,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dashdoc.API.Domain.Entities;
 
-[Table("test_table")]
-public class TestEntity
+[Table("provider")]
+public class Provider
 {
+    // DB specific facing fields for Provider, including respective column names
     [Column("id")]
     public long Id { get; init; }
     [Column("name")]
