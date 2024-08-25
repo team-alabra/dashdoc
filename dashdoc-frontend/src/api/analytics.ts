@@ -1,4 +1,3 @@
-import { Analytics } from '@typings/analytics';
 import { get } from '@utils/http';
 
 // gather user analytics from token

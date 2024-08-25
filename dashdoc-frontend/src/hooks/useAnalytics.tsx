@@ -1,23 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { userAnalytics } from '@api/analytics';
+import { useDispatch, useSelector } from './hooks';
+import { setAnalytics } from '@services/slices/analyticSlice';
+import { getAnalytics } from '@services/slices/analyticSlice';
 
 export const useAnalytics = () => {
-  const [user_analytics, setUserAnalytics] = useState();
   const [error, setError] = useState<string>('');
+  const analytics = useSelector(getAnalytics);
+  const dispatch = useDispatch();
 
-  const analyticsHandler = async () => {
+  const fetchUserAnalytics = async () => {
     try {
-      const analytics = await userAnalytics();
-      setUserAnalytics(analytics);
+      const data = await userAnalytics();
+      dispatch(setAnalytics(data));
     } catch (error) {
       setError(error.message);
     }
   };
 
+  useEffect(() => {
+    fetchUserAnalytics();
+  }, []);
+
   return {
-    analyticsHandler,
     error,
     setError,
-    user_analytics
-  }
+    analytics,
+  };
 };

@@ -6,6 +6,8 @@ import userReducer from "@services/slices/userSlice";
 import authReducer from "@services/slices/authSlice";
 import planReducer from "@services/slices/planSlice";
 import clientReducers from "@services/slices/clientSlice";
+import analyticsReducer from "@services/slices/analyticSlice";
+
 import { BrowserRouter } from "react-router-dom";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
@@ -15,7 +17,8 @@ const store = configureStore({
     auth: authReducer,
     plan: planReducer,
     client: clientReducers.singleClient,
-    clients: clientReducers.clientsList
+    clients: clientReducers.clientsList,
+    analytics: analyticsReducer
   },
 });
 

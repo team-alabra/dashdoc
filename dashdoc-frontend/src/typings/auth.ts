@@ -7,8 +7,8 @@ export interface UserSignUpRequest {
   email: string;
   password: string;
   userType: string;
-  firstName: string,
-  lastName: string,
+  firstName: string;
+  lastName: string;
   agencyName?: string;
   agencyCode?: string;
 }

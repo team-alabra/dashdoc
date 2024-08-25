@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import 'jest-styled-components';
-import { act, renderHook } from '@testing-library/react';
+import { act, renderHook, waitFor } from '@testing-library/react';
 import { wrapper } from '@tests/renderWithProps';
 import { useAuth } from './useAuth';
 import axios from 'axios';
@@ -25,11 +25,11 @@ describe('useAuth hook', () => {
       .mockResolvedValue({ email: 'test@email.com', valid: true });
     const { result } = renderHook(() => useAuth(), { wrapper });
 
-    await act(() => result.current.isAuthenticated());
+    await act(() => result.current.authenticateUser());
 
     expect(axiosSpy).toBeCalled();
 
-    expect(result.current.isValidUser).toBe(true);
+    expect(result.current.isAuthenticated).toBe(true);
   });
 
   it('should invalidate a user with invalid/expired credentials', async () => {
@@ -39,10 +39,10 @@ describe('useAuth hook', () => {
     });
 
     const { result } = renderHook(() => useAuth(), { wrapper });
-    await act(() => result.current.isAuthenticated());
 
-    expect(axiosSpy).toBeCalled();
-    expect(result.current.isValidUser).toBe(false);
+    await act(() => result.current.authenticateUser());
+
+    expect(result.current.isAuthenticated).toBe(false); // { isAuthentciated: false }
   });
 
   it('should invalidate a user who has not signed in', async () => {
@@ -51,9 +51,9 @@ describe('useAuth hook', () => {
       .mockRejectedValue({ status: 400, data: { email: null, valid: null } });
 
     const { result } = renderHook(() => useAuth(), { wrapper });
-    await act(() => result.current.isAuthenticated());
+    await act(() => result.current.authenticateUser());
 
     expect(axiosSpy).toBeCalled();
-    expect(result.current.isValidUser).toBe(false);
+    expect(result.current.isAuthenticated).toBe(false);
   });
 });

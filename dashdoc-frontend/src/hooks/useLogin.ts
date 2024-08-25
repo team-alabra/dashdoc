@@ -15,7 +15,7 @@ export const useLogin = () => {
       const authenticatedUser = await userSignIn({ email, password });
       dispatch(saveUser(authenticatedUser));
       dispatch(setAuth({ isAuthenticated: true }));
-      navigate('/dashboard');
+      navigate('/');
     } catch (error) {
       console.error(error);
       setError('Oops! Invalid email or password. Please try again!');

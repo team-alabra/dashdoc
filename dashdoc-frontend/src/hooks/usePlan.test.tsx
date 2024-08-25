@@ -12,19 +12,19 @@ beforeEach(() => {
   jest.clearAllMocks();
 });
 
-describe('usePlam hook', () => {
+describe('usePlan hook', () => {
   const axiosMock = new MockAdapter(axios);
 
   it('allows us to update current term', () => {
     // Arrange
     axiosMock.onGet('/api/plan/all-plans').reply(200, mockPlansResponse);
     let term = 'monthly';
-    
+
     // Act
     const { result } = renderHook(() => usePlan(), { wrapper });
     act(() => result.current.setCurrentTerm('yearly'));
     act(() => term = result.current.currentTerm);
-    
+
     // Assert
     expect(term).toBe('yearly');
   });

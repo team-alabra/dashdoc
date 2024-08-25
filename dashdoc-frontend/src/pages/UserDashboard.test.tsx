@@ -15,7 +15,7 @@ describe('User Dashboard Page', () => {
   it('should render the page', () => {
     act(() => {
       renderWithProvider(<UserDashboard />, {
-        route: '/dashboard',
+        route: '/',
       });
     });
 
@@ -29,7 +29,7 @@ describe('User Dashboard Page', () => {
   it('renders the appropriate analytics, based on user type', () => {
     act(() => {
       renderWithProvider(<UserDashboard />, {
-        route: '/dashboard',
+        route: '/',
       });
     });
 

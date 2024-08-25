@@ -3,17 +3,16 @@ import { Navigate } from 'react-router-dom';
 import { useAuth } from '@hooks';
 
 const PrivateRoute: React.FC<any> = ({ children }) => {
-  // const { isAuthenticated, setIsLoading, isValidUser } = useAuth();
+  const { isAuthenticated, setIsLoading, authenticateUser } = useAuth();
 
-  // useEffect(() => {
-  //   setIsLoading(true);
-  //   (async () => await isAuthenticated())();
-  // }, [isValidUser]);
+  useEffect(() => {
+    setIsLoading(true);
+    (async () => await authenticateUser())();
+  }, [isAuthenticated]);
 
-  // if (!isValidUser) {
-  //   return <Navigate to='/login' replace />;
-  // }
-
+  if (!isAuthenticated) {
+    return <Navigate to='/login' replace />;
+  }
   return children;
 };
 

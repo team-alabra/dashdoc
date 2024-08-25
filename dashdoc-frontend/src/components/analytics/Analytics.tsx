@@ -2,24 +2,21 @@ import React from 'react';
 import * as S from '@styles';
 import Metric from '@components/analytics/Metric';
 import { formatCurrency } from '@utils/formatter';
-import { mockUserAnalytics } from '@utils/mocks/analyticsMocks';
-import { monthNames } from '@constants';
 import { useAnalytics } from '@hooks/useAnalytics';
 
 const Analytics = ({ userType }: any) => {
-  // this will be used once server is hooked up and will replace mockUserAnalytics
-  const { user_analytics } = useAnalytics();
+  const { analytics } = useAnalytics();
   return (
     <div>
       <S.StyledHeader fontSize='18' fontColor='black' fontWeight='bold'>
-        {monthNames[mockUserAnalytics.lastUpdated.getMonth()]} Analytics
+        {new Date().toLocaleString('default', { month: 'long' })} Analytics
       </S.StyledHeader>
 
       <div className='analytics-container'>
         <Metric
           data-testid='earnings-metric'
           title={'Earnings'}
-          data={formatCurrency(mockUserAnalytics.earnings)}
+          data={formatCurrency(analytics.earnings)}
         />
 
         <Metric
@@ -29,17 +26,17 @@ const Analytics = ({ userType }: any) => {
               ? 'New Clients'
               : 'Completed Notes'
           }
-          data={mockUserAnalytics.num_of_notes.submitted}
+          data={analytics.num_of_notes.submitted}
         />
 
         <Metric
           data-testid='appointments-metric'
           title={
             userType === 'AGENCY_ADMINISTRATOR'
-              ? 'Submitted Notes'
+              ? 'Submitted Provider Notes'
               : 'Appointments'
           }
-          data={mockUserAnalytics.num_of_appointments.attended}
+          data={analytics.num_of_appointments.attended}
         />
       </div>
     </div>

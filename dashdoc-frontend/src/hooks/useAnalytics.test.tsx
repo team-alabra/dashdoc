@@ -17,17 +17,17 @@ beforeEach(() => {
 describe('useAnalytics hook', () => {
   it('should return analyticsHandler function', () => {
     const { result } = renderHook(() => useAnalytics(), { wrapper });
-    expect(result.current.analyticsHandler).toBeDefined();
+    expect(result.current.analytics).toBeDefined();
   });
 
   it('should return user`s appropriate analytics', async () => {
-    const axiosSpy = jest
-      .spyOn(axios, 'get')
-      .mockResolvedValue(mockUserAnalytics);
+    jest.spyOn(axios, 'get').mockResolvedValue(mockUserAnalytics);
     const { result } = renderHook(() => useAnalytics(), { wrapper });
 
-    await act(() => result.current.analyticsHandler());
+    // this is mocking analytics from state*
+    await act(() => result.current.analytics);
 
-    expect(result.current.user_analytics).toBe(mockUserAnalytics);
+    expect(result.current.analytics.earnings).toBe(1153);
+    expect(result.current.analytics.num_of_notes.submitted).toBe(10);
   });
 });

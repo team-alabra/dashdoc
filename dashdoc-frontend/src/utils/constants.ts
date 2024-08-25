@@ -117,18 +117,3 @@ export const CLIENT_TABLE_FIELDS: GridColDef[] = [
   { field: 'phoneNumber', headerName: 'Phone Number' },
   { field: 'address', headerName: 'Address' },
 ];
-
-export const monthNames = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];

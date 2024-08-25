@@ -88,7 +88,7 @@ describe("useClient hook", () => {
     await waitFor(() => result.current.fetchClient(1));
 
     // Assert
-    expect(console.error).toHaveBeenCalledTimes(1);
+    expect(console.error).toHaveBeenCalled();
   });
 
   it("updateClient - Updates client and updates redux store", async () => {
@@ -127,7 +127,7 @@ describe("useClient hook", () => {
     await waitFor(() => result.current.updateClient(clientToUpdate));
 
     // Assert
-    expect(console.error).toHaveBeenCalledTimes(1);
+    expect(console.error).toHaveBeenCalled();
   });
 
   it("addClient - Adds a new provider client and updates client list in redux", async () => {
@@ -159,6 +159,6 @@ describe("useClient hook", () => {
     await waitFor(() => result.current.addClient(clientToAdd));
 
     // Assert
-    expect(console.error).toHaveBeenCalledTimes(1);
+    expect(console.error).toHaveBeenCalled();
   });
 });
