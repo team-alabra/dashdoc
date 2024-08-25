@@ -4,5 +4,5 @@ namespace Dashdoc.API.Domain.Abstract;
 
 public interface ITestRepository
 {
-    Task<List<TestEntity>> GetAll();
+    Task<List<Provider>> GetAll();
 }
