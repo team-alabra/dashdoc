@@ -1,6 +1,6 @@
 namespace Dashdoc.API.Domain.Abstract;
 
-public abstract class Party
+public abstract class BaseParty
 {
     public long Id { get; set; }
     public string? Email { get; set; }
