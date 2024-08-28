@@ -1,5 +1,6 @@
 using Dashdoc.API.Domain.Abstract;
 using Dashdoc.API.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Dashdoc.API.Data.Repositories;
 
@@ -11,24 +12,45 @@ public class AgencyRepository: IAgencyRepository
     {
         _dbContext = dbContext;
     }
+
+    public async Task<Agency?> GetByIdAsync(long agencyId) => await _dbContext.Agency.FirstOrDefaultAsync(e => e.Id == agencyId);
     
-    public Task<Agency> GetById(long agencyId)
+    public async Task<Agency> CreateAsync(Agency entityToCreate)
     {
-        throw new NotImplementedException();
+        ArgumentNullException.ThrowIfNull(entityToCreate);
+
+        entityToCreate.CreatedOn = DateTime.UtcNow;
+        entityToCreate.LastUpdated = null;
+        
+        var addResult = await _dbContext.Agency.AddAsync(entityToCreate);
+
+        await _dbContext.SaveChangesAsync();
+
+        return addResult.Entity;
     }
 
-    public Task Create(Agency entityToCreate)
+    public async Task<Agency> UpdateAsync(Agency entityToUpdate)
     {
-        throw new NotImplementedException();
+        ArgumentNullException.ThrowIfNull(entityToUpdate);
+
+        entityToUpdate.LastUpdated = DateTime.UtcNow;
+
+        var updateResult = _dbContext.Agency.Update(entityToUpdate);
+        await _dbContext.SaveChangesAsync();
+
+        return updateResult.Entity;
     }
 
-    public Task Update(Agency entityToUpdate)
+    public async Task<bool> DeleteAsync(long agencyId)
     {
-        throw new NotImplementedException();
-    }
+        var entityToDelete = await _dbContext.Agency.FirstOrDefaultAsync(e => e.Id == agencyId);
 
-    public Task Delete(Agency entityToDelete)
-    {
-        throw new NotImplementedException();
+        if (entityToDelete == null) return false;
+        
+        _dbContext.Agency.Remove(entityToDelete);
+        await _dbContext.SaveChangesAsync();
+            
+        return true;
+
     }
 }

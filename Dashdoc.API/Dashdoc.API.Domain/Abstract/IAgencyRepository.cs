@@ -4,8 +4,8 @@ namespace Dashdoc.API.Domain.Abstract;
 
 public interface IAgencyRepository
 {
-    Task<Agency> GetById(long agencyId);
-    Task Create(Agency entityToCreate);
-    Task Update(Agency entityToUpdate);
-    Task Delete(Agency entityToDelete);
+    Task<Agency?> GetByIdAsync(long agencyId);
+    Task<Agency> CreateAsync(Agency entityToCreate);
+    Task<Agency> UpdateAsync(Agency entityToUpdate);
+    Task<bool> DeleteAsync(long agencyId);
 }
