@@ -14,6 +14,8 @@ public class Provider : BaseEntity
     public long AgencyId { get; init; }
     [Column("subscription_id")]
     public long SubscriptionId { get; init; }
+    [Column("npi")]
+    public long Npi { get; init; }
     [Column("first_name")]
     public string? FirstName { get; init; }
     [Column("last_name")]
