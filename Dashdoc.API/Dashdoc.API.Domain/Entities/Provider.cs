@@ -23,13 +23,13 @@ public class Provider : BaseEntity
     [Column("avatar_url")]
     public string? AvatarUrl { get; init; }
     [Column("gender")]
-    public string? Gender { get; init; }
+    public Gender? Gender { get; init; }
     [Column("street_address")]
     public string? StreetAddress { get; init; }
     [Column("city")]
     public string? City { get; init; }
     [Column("state")]
-    public string? State { get; init; }
+    public State? State { get; init; }
     [Column("zip_code")]
     public string? ZipCode { get; init; }
     [Column("home_number")]
@@ -39,7 +39,7 @@ public class Provider : BaseEntity
     [Column("mobile_number")]
     public string? MobileNumber { get; init; }
     [Column("birth_date")]
-    public string? BirthDate { get; init; }
+    public DateTime? BirthDate { get; init; }
     [Column("discipline")]
     public Discipline? Discipline { get; init; }
 }
