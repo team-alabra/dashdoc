@@ -12,5 +12,7 @@ public class AgencyConfiguration: IEntityTypeConfiguration<Agency>
         
         builder.Property(e => e.Name).IsRequired();
         builder.Property(e => e.Email).IsRequired();
+
+        builder.HasMany(e => e.Providers);
     }
 }
