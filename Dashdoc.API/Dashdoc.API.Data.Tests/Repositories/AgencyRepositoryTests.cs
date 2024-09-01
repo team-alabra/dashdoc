@@ -12,7 +12,7 @@ public class AgencyRepositoryTests
     public async Task GetById_ReturnsEntity()
     {
         // Arrange
-        var factory = new TestDBContextFactory<DashdocDbContext>();
+        var factory = new TestDBContextFactory();
         var context = factory.CreateContext();
         
         var agencyRepository = new AgencyRepository(context); 

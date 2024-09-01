@@ -1,17 +1,18 @@
 using System.Data.Common;
+using Dashdoc.API.Data;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
 namespace Dashdoc.Tests.Common;
 
-public sealed class TestDBContextFactory<T> : IDisposable where T : DbContext
+public sealed class TestDBContextFactory : IDisposable
 {
     private DbConnection? _connection;
 
-    public T CreateContext()
+    public DashdocDbContext CreateContext()
     {
         CreateConnection();
-        var context = Activator.CreateInstance(typeof(T), CreateOptions()) as T ?? throw new Exception("Failed to activate test DBContext");
+        var context = Activator.CreateInstance(typeof(DashdocDbContext), CreateOptions()) as DashdocDbContext  ?? throw new Exception("Failed to activate test DBContext");
         context.Database.EnsureCreated();
         return context;
     }
@@ -25,9 +26,9 @@ public sealed class TestDBContextFactory<T> : IDisposable where T : DbContext
         }
     }
 
-    private DbContextOptions<T> CreateOptions()
+    private DbContextOptions<DashdocDbContext> CreateOptions()
     {
-        return new DbContextOptionsBuilder<T>()
+        return new DbContextOptionsBuilder<DashdocDbContext>()
             .UseSqlite(_connection)
             .EnableSensitiveDataLogging()
             .Options;
