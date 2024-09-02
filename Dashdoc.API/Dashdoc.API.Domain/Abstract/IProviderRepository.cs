@@ -4,7 +4,7 @@ namespace Dashdoc.API.Domain.Abstract;
 
 public interface IProviderRepository
 {
-    Task<Provider?> GetIdByAsync(long providerId); 
+    Task<Provider?> GetByIdAsync(long providerId); 
     Task<Provider?> GetByEmailAsync(string providerEmail);
     Task<Provider?> CreateAsync(Provider entityToCreate);
     Task<Provider?> UpdateAsync(Provider entityToUpdate);
