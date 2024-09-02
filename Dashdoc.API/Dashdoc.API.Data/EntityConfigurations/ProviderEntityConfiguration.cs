@@ -10,5 +10,6 @@ public class ProviderEntityConfiguration: IEntityTypeConfiguration<Provider>
     {
         builder.HasKey(e => e.Id);
         builder.Property(e => e.Email).IsRequired();
+        builder.Property(e => e.GetType()).IsRequired();
     }
 }
