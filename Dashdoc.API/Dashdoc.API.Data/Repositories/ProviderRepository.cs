@@ -16,10 +16,8 @@ public class ProviderRepository : IProviderRepository
     public async Task<Provider?> GetByIdAsync(long providerId) =>
         await _dbContext.Provider.FirstOrDefaultAsync(e => e.Id == providerId);
 
-    public Task<Provider?> GetByEmailAsync(string providerEmail)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task<Provider?> GetByEmailAsync(string providerEmail) =>
+        await _dbContext.Provider.FirstOrDefaultAsync(e => e.Email == providerEmail);
 
     public async Task<Provider?> CreateAsync(Provider entityToCreate)
     {
@@ -59,8 +57,6 @@ public class ProviderRepository : IProviderRepository
         return true;
     }
 
-    public Task<IEnumerable<Provider>> GetAllByAdminIdAsync(long agencyAdminId)
-    {
-        throw new NotImplementedException();
-    }
+    public IEnumerable<Provider> GetAllAgencyProvidersAsync(long agencyId) => 
+         _dbContext.Provider.Where(e => e.AgencyId == agencyId);
 }
