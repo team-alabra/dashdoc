@@ -14,6 +14,6 @@ public class TestRepository: ITestRepository
     }
     
     // TODO - replace this test call with proper CRUD operations
-    public async Task<List<Provider>> GetAll() => await _dbContext.TestEntity.ToListAsync();
+    public async Task<List<Provider>> GetAll() => await _dbContext.Provider.ToListAsync();
 
 }

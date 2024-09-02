@@ -17,7 +17,11 @@ public static class ServicesConfiguration
     private static void RegisterDataRepositories(IServiceCollection services)
     {
         services.AddScoped<ITestRepository, TestRepository>();
+
         services.AddScoped<IProviderRepository, ProviderRepository>();
+
+        services.AddScoped<IAgencyRepository, AgencyRepository>();
+
     }
     
     private static void RegisterLocalServices(IServiceCollection services)
