@@ -26,4 +26,6 @@ public class Agency: BaseEntity
     public string? State { get; set; }
     [Column("zip_code")]
     public string? ZipCode { get; set; }
+    
+    public virtual List<Provider>? Providers { get; init; }
 }
