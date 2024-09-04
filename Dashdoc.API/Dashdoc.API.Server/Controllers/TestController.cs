@@ -1,5 +1,8 @@
 using Dashdoc.API.Domain.Abstract;
+using Dashdoc.API.Domain.Enums;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Extensions;
 
 namespace Dashdoc.API.Server.Controllers;
 
@@ -7,22 +10,20 @@ namespace Dashdoc.API.Server.Controllers;
 [Route("/api/test")]
 public class TestController: ControllerBase
 {
-    private readonly ITestRepository _repo;
+    private readonly IConfiguration _config;
 
-    public TestController(ITestRepository repo)
+    public TestController(IConfiguration config)
     {
-        _repo = repo;
+        _config = config;
     }
 
     // TODO - replace with real Provider routes
     [HttpGet("all")]
-    public async Task<ActionResult> Get()
+    public ActionResult Get()
     {
         try
         {
-            var result = await _repo.GetAll();
-
-            return Ok(result);
+            return Ok();
         }
         catch (Exception ex)
         {
