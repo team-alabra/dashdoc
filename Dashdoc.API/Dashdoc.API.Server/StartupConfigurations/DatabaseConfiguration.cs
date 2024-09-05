@@ -8,7 +8,7 @@ namespace Dashdoc.API.Server.StartupConfigurations;
 // final implementation TBD
 public static class DatabaseConfiguration
 {
-    public static IServiceCollection RegisterDashdocDatabase(this IServiceCollection services, IConfiguration configuration)
+    public static void RegisterDashdocDatabase(this IServiceCollection services, IConfiguration configuration)
     {
         var dbConnectionString = configuration["Database:DB_CONNECTION_STRING"];
         
@@ -16,7 +16,5 @@ public static class DatabaseConfiguration
         {
             options.UseNpgsql(dbConnectionString);
         });
-        
-        return services;
     }
 }

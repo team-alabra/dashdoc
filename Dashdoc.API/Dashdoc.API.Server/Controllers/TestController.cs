@@ -1,8 +1,6 @@
-using Dashdoc.API.Domain.Abstract;
-using Dashdoc.API.Domain.Enums;
+using Dashdoc.API.Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.OpenApi.Extensions;
 
 namespace Dashdoc.API.Server.Controllers;
 
@@ -10,20 +8,16 @@ namespace Dashdoc.API.Server.Controllers;
 [Route("/api/test")]
 public class TestController: ControllerBase
 {
-    private readonly IConfiguration _config;
-
-    public TestController(IConfiguration config)
-    {
-        _config = config;
-    }
+    public TestController() { }
 
     // TODO - replace with real Provider routes
-    [HttpGet("all")]
+    [HttpGet]
+    [Authorize(Roles = UserRoles.AgencyAdministrator)]
     public ActionResult Get()
     {
         try
         {
-            return Ok();
+            return Ok("Success");
         }
         catch (Exception ex)
         {

@@ -1,7 +1,5 @@
 using System.Text.Json.Serialization;
 using Dashdoc.API.Server.StartupConfigurations;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,29 +31,27 @@ builder.Services.RegisterDashdocDatabase(builder.Configuration);
 builder.Services.RegisterAppServices();
 
 // Auth
-if (builder.Environment.IsEnvironment("Development"))
-{
-    builder.Services.AddAuthorization();
-    builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-        .AddJwtBearer();
-    builder.Services.ConfigureOptions<JwtBearerConfiguration>();
-}
+builder.Services.ConfigureDashdocAuthorization(builder.Configuration);
 
 #endregion
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsEnvironment("Development"))
+if (app.Environment.IsEnvironment("Local"))
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-    app.UseAuthorization();
-    app.UseAuthentication();
+    app.MapControllers().AllowAnonymous();
+}
+else
+{
+    app.MapControllers();
 }
 
-app.MapControllers();
-app.UseHttpsRedirection();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 // Defers app routing to the React App
 app.MapFallbackToFile("/index.html");

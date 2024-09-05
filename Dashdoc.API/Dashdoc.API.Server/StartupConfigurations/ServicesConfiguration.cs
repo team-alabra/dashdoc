@@ -1,17 +1,16 @@
 using Dashdoc.API.Data.Repositories;
 using Dashdoc.API.Domain.Abstract;
 using Dashdoc.API.Infrastructure.AppServices;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Dashdoc.API.Server.StartupConfigurations;
 
 public static class ServicesConfiguration
 {
-    public static IServiceCollection RegisterAppServices(this IServiceCollection services)
+    public static void RegisterAppServices(this IServiceCollection services)
     {
         RegisterDataRepositories(services);
         RegisterLocalServices(services);
-        
-        return services;
     }
 
     private static void RegisterDataRepositories(IServiceCollection services)
