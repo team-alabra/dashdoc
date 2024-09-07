@@ -17,7 +17,6 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 
 // Automapper
 builder.Services.AddAutoMapper(typeof(Program));
-builder.Configuration.AddUserSecrets<Program>();
 
 // Swagger Support
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
