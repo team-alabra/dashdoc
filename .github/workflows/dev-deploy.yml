@@ -1,4 +1,4 @@
-name: Develop Deployment
+name: Dev Deployment
 
 on:
   push:
@@ -8,8 +8,6 @@ env:
   NODE_VERSION: '18'
   DOTNET_VERSION: '8.x'
   PROJECT_LOCATION: Dashdoc.API/Dashdoc.API.Server.csproj
-  ELASTIC_BEANSTALK_NAME: dotnet-linux
-  ELASTIC_BEANSTALK_ENV_NAME: Dotnet-linux-env
 
 jobs:
   build:
@@ -21,7 +19,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: $DOTNET_VERSION
+        dotnet-version: ${{ env.DOTNET_VERSION }}
     - name: Restore dependencies
       run: dotnet restore $PROJECT_LOCATION
     - name: Build
@@ -46,6 +44,16 @@ jobs:
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
-        aws-region: us-east-1
+        aws-region: ${{ secrets.AWS_REGION }}
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    - name: Deploy to EB
+      uses: einaregilsson/beanstalk-deploy@v22
+      with:
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        application_name: ${{ secrets.ELASTIC_BEANSTALK_NAME }}
+        environment_name: ${{ secrets.ELASTIC_BEANSTALK_ENV_NAME }}
+        version_label: ${{github.SHA}}
+        region: ${{ secrets.AWS_REGION }}
+        deployment_package: ${{github.run_id}}.zip
