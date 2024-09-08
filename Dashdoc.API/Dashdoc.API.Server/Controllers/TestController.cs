@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using Dashdoc.API.Domain.Abstract;
 using Dashdoc.API.Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,15 +11,21 @@ namespace Dashdoc.API.Server.Controllers;
 [Authorize]
 public class TestController: ControllerBase
 {
-    public TestController() { }
+    private readonly IAgencyRepository _agencyRepository;
+    
+    public TestController(IAgencyRepository agencyRepository)
+    {
+        _agencyRepository = agencyRepository;
+    }
 
     // TODO - replace with real Provider routes
     [HttpGet]
-    public ActionResult GetV1()
+    public async Task<ActionResult> GetV1()
     {
         try
         {
-            return Ok("Success");
+            var res = await _agencyRepository.GetByIdAsync(1);
+            return Ok(res);
         }
         catch (Exception ex)
         {
