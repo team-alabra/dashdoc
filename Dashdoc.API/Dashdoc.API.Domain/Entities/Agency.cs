@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Dashdoc.API.Domain.Abstract;
+using Dashdoc.API.Domain.Enums;
 
 namespace Dashdoc.API.Domain.Entities;
 
@@ -23,7 +24,7 @@ public class Agency: BaseEntity
     [Column("city")]
     public string? City { get; set; }
     [Column("state")]
-    public string? State { get; set; }
+    public State State { get; set; }
     [Column("zip_code")]
     public string? ZipCode { get; set; }
     

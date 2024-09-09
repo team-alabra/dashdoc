@@ -15,8 +15,6 @@
       "applicationUrl": "https://localhost:8080;http://localhost:5010",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Local",
-        "DB_URI": "localhost:5432",
-        "DB_NAME": "dashdoc",
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
       }
     },
@@ -26,11 +24,6 @@
       "applicationUrl": "https://localhost:8080;http://localhost:5010",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "AWS_REGION": "us-east-1",
-        "RDS_APP_CONFIG": "dashdoc-rds-dev",
-        "RDS_USERNAME": "dashdoc-admin",
-        "DB_URI": "dd-rds-dev.c6wkucdx6he1.us-east-1.rds.amazonaws.com",
-        "DB_NAME": "dashdoc",
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
       }
     },
