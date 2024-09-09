@@ -2,7 +2,7 @@ name: Dev Deployment
 
 on:
   push:
-    branches: [ "test" ]
+    branches: [ "test-eb" ]
 
 env:
   NODE_VERSION: '18'
