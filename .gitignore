@@ -68,7 +68,7 @@ bundle.js.LICENSE.txt
 ### .NET ###
 appsettings.Local.json
 appsettings.Development.json
-
+publish/
 ### Visual Studio ###
 .vs/
 
