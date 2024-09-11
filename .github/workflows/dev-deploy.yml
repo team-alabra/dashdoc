@@ -6,11 +6,15 @@ on:
 
 env:
   DOTNET_VERSION: '8.x'
-  PROJECT_ROOT: './Dashdoc.API'
+  PROJECT_ROOT: './Dashdoc.API.Server'
+
 jobs:
   build:
 
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Dashdoc.API
 
     steps:
     - uses: actions/checkout@v4
@@ -19,11 +23,11 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
     - name: Restore dependencies
-      run: dotnet restore ${{ env.DOTNET_VERSION }}
+      run: dotnet restore .
     - name: Build 
       run: dotnet build ${{ env.PROJECT_ROOT }}/Dashdoc.API.Server.csproj --configuration Release
     - name: Pack
-      run: dotnet publish '${{ env.PROJECT_ROOT }}/Dashdoc.API.Server.csproj' -c Release -o ${{ env.PROJECT_ROOT }}/publish
+      run: dotnet publish ${{ env.PROJECT_ROOT }}/Dashdoc.API.Server.csproj -c Release -o ${{ env.PROJECT_ROOT }}/publish
     - name: Generate deployment package
       run: zip -r ${{github.run_id}}.zip ${{ env.PROJECT_ROOT }}/publish -x '*.git*'
     
