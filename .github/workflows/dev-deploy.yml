@@ -5,14 +5,15 @@ on:
     branches: [ "test-eb" ]
 
 env:
-  NODE_VERSION: '18'
   DOTNET_VERSION: '8.x'
-  PROJECT_LOCATION: Dashdoc.API/Dashdoc.API.Server.csproj
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Dashdoc.API
 
     steps:
     - uses: actions/checkout@v4
@@ -21,12 +22,12 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
     - name: Restore dependencies
-      run: dotnet restore $PROJECT_LOCATION
+      run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore $PROJECT_LOCATION
+      run: dotnet build --no-restore
     - name: Pack
       run: |
-        dotnet publish $PROJECT_LOCATION -c Release --output "${{ github.workspace }}/${{github.run_id}}"
+        dotnet publish -c Release --output "${{ github.workspace }}/${{github.run_id}}"
         cd ${{github.run_id}}
         zip -r ../${{github.run_id}}.zip .
     - name: Upload Artifacts
