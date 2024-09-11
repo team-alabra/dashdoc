@@ -19,7 +19,7 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore ${{ env.DOTNET_VERSION }}
     - name: Build 
       run: dotnet build ${{ env.PROJECT_ROOT }}/Dashdoc.API.Server.csproj --configuration Release
     - name: Pack
