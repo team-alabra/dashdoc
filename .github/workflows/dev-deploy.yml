@@ -6,7 +6,7 @@ on:
 
 env:
   DOTNET_VERSION: '8.x'
-  PROJECT_ROOT: './Dashdoc.API.Server'
+  PROJECT_ROOT: 'Dashdoc.API.Server'
 
 jobs:
   build:
@@ -29,13 +29,13 @@ jobs:
     - name: Pack
       run: dotnet publish ${{ env.PROJECT_ROOT }}/Dashdoc.API.Server.csproj -c Release -o ${{ env.PROJECT_ROOT }}/publish
     - name: Generate deployment package
-      run: zip -r ${{github.run_id}}.zip ${{ env.PROJECT_ROOT }}/publish -x '*.git*'
+      run: zip -r ${{ env.PROJECT_ROOT }}/${{github.run_id}}.zip ${{ env.PROJECT_ROOT }}/publish -x '*.git*'
     
     - name: Upload .NET to artifact
       uses: actions/upload-artifact@v4
       with:
         name: project-zip
-        path: ${{ env.PROJECT_ROOT }}/publish
+        path: ${{ env.PROJECT_ROOT }}/${{github.run_id}}.zip
     
   deploy:
 
@@ -47,6 +47,7 @@ jobs:
       uses: actions/download-artifact@v4.1.7
       with:
           name: project-zip
+
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
