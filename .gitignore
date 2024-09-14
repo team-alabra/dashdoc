@@ -69,6 +69,8 @@ bundle.js.LICENSE.txt
 appsettings.Local.json
 appsettings.Development.json
 publish/
+deploy.zip
+
 ### Visual Studio ###
 .vs/
 
