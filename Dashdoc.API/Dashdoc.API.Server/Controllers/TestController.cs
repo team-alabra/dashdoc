@@ -8,7 +8,7 @@ namespace Dashdoc.API.Server.Controllers;
 public class TestController: ControllerBase
 {
     private readonly ITestRepository _repo;
-
+    private readonly ILogger _logger;
     public TestController(ITestRepository repo)
     {
         _repo = repo;

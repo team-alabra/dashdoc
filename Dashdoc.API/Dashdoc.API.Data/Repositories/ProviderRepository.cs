@@ -57,6 +57,6 @@ public class ProviderRepository : IProviderRepository
         return true;
     }
 
-    public IEnumerable<Provider> GetAllAgencyProvidersAsync(long agencyId) => 
-         _dbContext.Provider.Where(e => e.AgencyId == agencyId);
+    public List<Provider> GetAllAgencyProvidersAsync(long agencyId) => 
+         _dbContext.Provider.Where(e => e.AgencyId == agencyId).ToList();
 }
