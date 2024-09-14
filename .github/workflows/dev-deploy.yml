@@ -29,7 +29,7 @@ jobs:
     - name: Pack
       run: dotnet publish ${{ env.PROJECT_ROOT }}/Dashdoc.API.Server.csproj -c Release -o ${{ env.PROJECT_ROOT }}/publish
     - name: Generate deployment package
-      run: zip -r project.zip ${{ env.PROJECT_ROOT }}/publish -x '*.git*'
+      run: zip -r ${{ github.run_id }}.zip ${{ env.PROJECT_ROOT }}/publish -x '*.git*'
     
     - name: Upload .NET to artifact
       uses: actions/upload-artifact@v4
@@ -64,4 +64,4 @@ jobs:
         environment_name: ${{ secrets.ELASTIC_BEANSTALK_ENV_NAME }}
         version_label: ${{ github.SHA }}
         region: ${{ secrets.AWS_REGION }}
-        deployment_package: project.zip
+        deployment_package: ${{ github.run_id }}.zip
