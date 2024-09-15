@@ -30,9 +30,9 @@ jobs:
       run: dotnet publish ${{ env.PROJECT_ROOT }}/Dashdoc.API.Server.csproj -c Release -o ${{ env.PROJECT_ROOT }}/publish
     - name: Generate deployment package
       run: |
-        cd ${{ env.PROJECT_ROOT }}
-        zip -r ../${{ github.run_id }}.zip ./publish -x '*.git*'
-        cd ..
+        cd ${{ env.PROJECT_ROOT }}/publish
+        zip -r ../../${{ github.run_id }}.zip . -x '*.git*'
+        cd ../../
     
     - name: Upload .NET to artifact
       uses: actions/upload-artifact@v4
