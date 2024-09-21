@@ -9,7 +9,7 @@
     "build:dev": "webpack --watch --config=webpack.config.js",
     "start": "npm run build & webpack serve --mode production",
     "start:dev": "npm run build:dev & webpack serve --mode development",
-    "copy-build": "mkdir -p ../Dashdoc.API/Dashdoc.API.Server/wwwroot && cp -r dist/* ../Dashdoc.API/Dashdoc.API.Server/wwwroot",
+    "copy-build": "rsync -v dist/* ../Dashdoc.API/Dashdoc.API.Server/wwwroot",
     "build": "npm run build:prod && npm run copy-build",
     "seed": "node seed.js"
   },
