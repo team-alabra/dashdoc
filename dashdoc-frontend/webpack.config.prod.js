@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
@@ -29,6 +30,10 @@ module.exports = {
     // fix "process is not defined" error:
     new webpack.ProvidePlugin({
       process: 'process/browser',
+    }),
+    new HtmlWebpackPlugin({
+      title: "Dashdoc",
+      template: "public/index.html",
     }),
     new Dotenv()
   ],
