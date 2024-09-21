@@ -161,4 +161,8 @@
       <_ContentIncludedByDefault Remove="wwwroot\utils\mocks\analyticsMocks.d.ts" />
       <_ContentIncludedByDefault Remove="wwwroot\utils\mocks\signupMocks.d.ts" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Content Update="appsettings.*.json" CopyToPublishDirectory="Never" />
+    </ItemGroup>
 </Project>
