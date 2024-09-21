@@ -39,7 +39,7 @@ jobs:
     - name: Generate deployment package
       run: |
         cd ${{ env.PROJECT_ROOT }}/publish
-        zip -r ../../${{ github.run_id }}.zip . -x '*.git*'
+        zip -r ../../${{ github.run_id }}.zip .
         cd ../../
     
     - name: Upload .NET to artifact
