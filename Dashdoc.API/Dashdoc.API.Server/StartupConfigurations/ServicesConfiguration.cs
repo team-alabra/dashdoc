@@ -1,7 +1,6 @@
 using Dashdoc.API.Data.Repositories;
 using Dashdoc.API.Domain.Abstract;
 using Dashdoc.API.Infrastructure.AppServices;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Dashdoc.API.Server.StartupConfigurations;
 

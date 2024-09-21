@@ -48,9 +48,9 @@ else
     app.MapControllers();
 }
 
-
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseStaticFiles();
 
 // Defers app routing to the React App
 app.MapFallbackToFile("/index.html");

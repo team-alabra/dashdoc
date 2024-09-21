@@ -1,3 +1,4 @@
+using Amazon.RDS.Model;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
@@ -10,15 +11,15 @@ public static class AuthTokenConfiguration
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
-                options.MetadataAddress = configuration["JwtBearer:MetadataAddress"] ?? throw new InvalidOperationException();
-                options.Authority = configuration["JwtBearer:Authority"] ?? throw new InvalidOperationException();
+                options.Authority = configuration.GetSection("JwtBearer").GetValue<string>("Authority") ?? throw new Exception("Fake exception");
+                options.MetadataAddress = configuration.GetSection("JwtBearer").GetValue<string>("MetadataAddress") ?? throw new InvalidOperationException();
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
                     ValidateIssuerSigningKey = true,
                     ValidateAudience = false,
-                    ValidIssuer = configuration["JwtBearer:Authority"],
-                    RoleClaimType = "cognito:groups"
+                    ValidIssuer = configuration.GetSection("JwtBearer").GetValue<string>("Authority"),
+                    RoleClaimType = configuration.GetSection("JwtBearer").GetValue<string>("AuthClaim")
                 };
             });
     }

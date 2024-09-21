@@ -22,6 +22,14 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
+    - name: Build react app and copy files to server
+      run: |
+        cd ..
+        cd dashdoc-frontend
+        npm install
+        npm run build
+        cd ..
+        cd Dashdoc.API
     - name: Restore dependencies
       run: dotnet restore .
     - name: Build 
