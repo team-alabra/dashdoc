@@ -5,13 +5,15 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <InvariantGlobalization>true</InvariantGlobalization>
+        <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
+    </PropertyGroup>
+    
+    <PropertyGroup Condition="'$(EnvironmentName)' == 'Local'">
         <SpaRoot>..\..\dashdoc-frontend</SpaRoot>
         <SpaProxyLaunchCommand>npm run start:dev</SpaProxyLaunchCommand>
         <SpaProxyServerUrl>https://localhost:3000</SpaProxyServerUrl>
-        <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
-      <UserSecretsId>7cea0856-34a9-4091-a6e7-d0a02d8f8b1a</UserSecretsId>
-  </PropertyGroup>
-
+    </PropertyGroup>
+    
     <ItemGroup>
         <PackageReference Include="Amazon.AspNetCore.Identity.Cognito" Version="3.0.2" />
         <PackageReference Include="Amazon.Extensions.CognitoAuthentication" Version="2.5.4" />
@@ -33,5 +35,147 @@
         <ProjectReference Include="..\Dashdoc.API.Data\Dashdoc.API.Data.csproj" />
         <ProjectReference Include="..\Dashdoc.API.Domain\Dashdoc.API.Domain.csproj" />
         <ProjectReference Include="..\Dashdoc.API.Infrastructure\Dashdoc.API.Infrastructure.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="publish\web.config" />
+      <_ContentIncludedByDefault Remove="publish\appsettings.json" />
+      <_ContentIncludedByDefault Remove="publish\appsettings.Local.json" />
+      <_ContentIncludedByDefault Remove="publish\Dashdoc.API.Server.deps.json" />
+      <_ContentIncludedByDefault Remove="publish\Dashdoc.API.Server.runtimeconfig.json" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <None Include="wwwroot\api\analytics.d.ts" />
+      <None Include="wwwroot\api\auth.d.ts" />
+      <None Include="wwwroot\api\client.d.ts" />
+      <None Include="wwwroot\api\plan.d.ts" />
+      <None Include="wwwroot\api\user.d.ts" />
+      <None Include="wwwroot\App.d.ts" />
+      <None Include="wwwroot\AppRoutes.d.ts" />
+      <None Include="wwwroot\bundle.js" />
+      <None Include="wwwroot\bundle.js.LICENSE.txt" />
+      <None Include="wwwroot\bundle.js.map" />
+      <None Include="wwwroot\components\analytics\Analytics.d.ts" />
+      <None Include="wwwroot\components\analytics\Metric.d.ts" />
+      <None Include="wwwroot\components\analytics\Stat.d.ts" />
+      <None Include="wwwroot\components\forms\LoginForm.d.ts" />
+      <None Include="wwwroot\components\forms\SignupForm.d.ts" />
+      <None Include="wwwroot\components\layout\Footer.d.ts" />
+      <None Include="wwwroot\components\layout\Footer.test.d.ts" />
+      <None Include="wwwroot\components\layout\Footer\Footer.d.ts" />
+      <None Include="wwwroot\components\layout\Footer\Footer.test.d.ts" />
+      <None Include="wwwroot\components\layout\Header.d.ts" />
+      <None Include="wwwroot\components\layout\Header\Header.d.ts" />
+      <None Include="wwwroot\components\layout\Layout.d.ts" />
+      <None Include="wwwroot\components\layout\navigation\Logo.d.ts" />
+      <None Include="wwwroot\components\layout\navigation\Navbar.d.ts" />
+      <None Include="wwwroot\components\layout\navigation\Navbar.test.d.ts" />
+      <None Include="wwwroot\components\layout\navigation\NavLinks.d.ts" />
+      <None Include="wwwroot\components\layout\navigation\Sidebar.d.ts" />
+      <None Include="wwwroot\components\layout\SocialList.d.ts" />
+      <None Include="wwwroot\components\layout\Success.d.ts" />
+      <None Include="wwwroot\components\PrivateRoute.d.ts" />
+      <None Include="wwwroot\components\shared\buttons\Button.d.ts" />
+      <None Include="wwwroot\components\shared\buttons\Button.test.d.ts" />
+      <None Include="wwwroot\components\shared\buttons\SwitchSlider.d.ts" />
+      <None Include="wwwroot\components\shared\containers\PricingCard.d.ts" />
+      <None Include="wwwroot\components\shared\forms\TherapySessionForm\TherapySession.d.ts" />
+      <None Include="wwwroot\components\shared\input\Input.d.ts" />
+      <None Include="wwwroot\components\shared\input\Label.d.ts" />
+      <None Include="wwwroot\components\shared\loaders\Loader.d.ts" />
+      <None Include="wwwroot\components\shared\modals\SampleModal.d.ts" />
+      <None Include="wwwroot\components\shared\tables\ClientTable.d.ts" />
+      <None Include="wwwroot\components\shared\tables\ClientTable.test.d.ts" />
+      <None Include="wwwroot\components\shared\tables\CustomToolbars.d.ts" />
+      <None Include="wwwroot\components\shared\tables\DataTable.d.ts" />
+      <None Include="wwwroot\components\shared\tables\DataTable.test.d.ts" />
+      <None Include="wwwroot\components\shared\tables\SampleTable.d.ts" />
+      <None Include="wwwroot\components\ui\clients\ClientSearch.d.ts" />
+      <None Include="wwwroot\components\ui\clients\ClientSearch.test.d.ts" />
+      <None Include="wwwroot\components\ui\CustomToolbars.d.ts" />
+      <None Include="wwwroot\components\ui\CustomToolbars.test.d.ts" />
+      <None Include="wwwroot\components\ui\index.d.ts" />
+      <None Include="wwwroot\hooks\hooks.d.ts" />
+      <None Include="wwwroot\hooks\index.d.ts" />
+      <None Include="wwwroot\hooks\useAnalytics.d.ts" />
+      <None Include="wwwroot\hooks\useAnalytics.test.d.ts" />
+      <None Include="wwwroot\hooks\useAuth.d.ts" />
+      <None Include="wwwroot\hooks\useAuth.test.d.ts" />
+      <None Include="wwwroot\hooks\useClient.d.ts" />
+      <None Include="wwwroot\hooks\useClient.test.d.ts" />
+      <None Include="wwwroot\hooks\useClients.d.ts" />
+      <None Include="wwwroot\hooks\useClients.test.d.ts" />
+      <None Include="wwwroot\hooks\useLogin.d.ts" />
+      <None Include="wwwroot\hooks\useLogin.test.d.ts" />
+      <None Include="wwwroot\hooks\usePlan.d.ts" />
+      <None Include="wwwroot\hooks\usePlan.test.d.ts" />
+      <None Include="wwwroot\hooks\useSignup.d.ts" />
+      <None Include="wwwroot\hooks\useSignup.test.d.ts" />
+      <None Include="wwwroot\index.d.ts" />
+      <None Include="wwwroot\index.html" />
+      <None Include="wwwroot\pages\AboutUs.d.ts" />
+      <None Include="wwwroot\pages\AllClients.d.ts" />
+      <None Include="wwwroot\pages\AllClients.test.d.ts" />
+      <None Include="wwwroot\pages\AllDocuments.d.ts" />
+      <None Include="wwwroot\pages\ClientContactInfo.d.ts" />
+      <None Include="wwwroot\pages\ContactUs.d.ts" />
+      <None Include="wwwroot\pages\EmailVerify.d.ts" />
+      <None Include="wwwroot\pages\FreeTrial.d.ts" />
+      <None Include="wwwroot\pages\LandingPage.d.ts" />
+      <None Include="wwwroot\pages\Login.d.ts" />
+      <None Include="wwwroot\pages\Login.test.d.ts" />
+      <None Include="wwwroot\pages\MyAccount.d.ts" />
+      <None Include="wwwroot\pages\NotFound.d.ts" />
+      <None Include="wwwroot\pages\payment\Billing.d.ts" />
+      <None Include="wwwroot\pages\payment\PricingCheckout.d.ts" />
+      <None Include="wwwroot\pages\Redirect.d.ts" />
+      <None Include="wwwroot\pages\SignUp.d.ts" />
+      <None Include="wwwroot\pages\SignUp.test.d.ts" />
+      <None Include="wwwroot\pages\SingleAppointment.d.ts" />
+      <None Include="wwwroot\pages\SingleClient.d.ts" />
+      <None Include="wwwroot\pages\SingleDocument.d.ts" />
+      <None Include="wwwroot\pages\SubscriptionPlans.d.ts" />
+      <None Include="wwwroot\pages\SubscriptionPlans.test.d.ts" />
+      <None Include="wwwroot\pages\UserAppointments.d.ts" />
+      <None Include="wwwroot\pages\UserCalendar.d.ts" />
+      <None Include="wwwroot\pages\UserDashboard.d.ts" />
+      <None Include="wwwroot\pages\UserDashboard.test.d.ts" />
+      <None Include="wwwroot\pages\UserProfile.d.ts" />
+      <None Include="wwwroot\services\actions\auth.d.ts" />
+      <None Include="wwwroot\services\actions\client.d.ts" />
+      <None Include="wwwroot\services\actions\plan.d.ts" />
+      <None Include="wwwroot\services\actions\user.d.ts" />
+      <None Include="wwwroot\services\slices\authSlice.d.ts" />
+      <None Include="wwwroot\services\slices\clientSlice.d.ts" />
+      <None Include="wwwroot\services\slices\planSlice.d.ts" />
+      <None Include="wwwroot\services\slices\userSlice.d.ts" />
+      <None Include="wwwroot\services\store.d.ts" />
+      <None Include="wwwroot\styles\dataTable.d.ts" />
+      <None Include="wwwroot\styles\index.d.ts" />
+      <None Include="wwwroot\styles\logo.d.ts" />
+      <None Include="wwwroot\styles\muiThemeStyles.d.ts" />
+      <None Include="wwwroot\styles\navbar.d.ts" />
+      <None Include="wwwroot\styles\pricing.d.ts" />
+      <None Include="wwwroot\styles\shared.d.ts" />
+      <None Include="wwwroot\styles\signup.d.ts" />
+      <None Include="wwwroot\tests\login.test.d.ts" />
+      <None Include="wwwroot\tests\mocks\mockData.d.ts" />
+      <None Include="wwwroot\tests\renderWithProps.d.ts" />
+      <None Include="wwwroot\typings\analytics.d.ts" />
+      <None Include="wwwroot\typings\auth.d.ts" />
+      <None Include="wwwroot\typings\client.d.ts" />
+      <None Include="wwwroot\typings\document.d.ts" />
+      <None Include="wwwroot\typings\input.d.ts" />
+      <None Include="wwwroot\typings\navbarData.d.ts" />
+      <None Include="wwwroot\typings\plan.d.ts" />
+      <None Include="wwwroot\typings\pricing.d.ts" />
+      <None Include="wwwroot\typings\user.d.ts" />
+      <None Include="wwwroot\utils\constants.d.ts" />
+      <None Include="wwwroot\utils\formatter.d.ts" />
+      <None Include="wwwroot\utils\helpers\helpers.d.ts" />
+      <None Include="wwwroot\utils\http\index.d.ts" />
+      <None Include="wwwroot\utils\mocks\analyticsMocks.d.ts" />
+      <None Include="wwwroot\utils\mocks\signupMocks.d.ts" />
     </ItemGroup>
 </Project>

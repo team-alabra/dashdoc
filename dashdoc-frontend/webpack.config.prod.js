@@ -6,7 +6,6 @@ module.exports = {
   mode: 'production',
   entry: path.resolve(__dirname, 'src', 'index.tsx'),
   output: {
-    path: path.resolve(__dirname, '../dashdoc-api/src/main/resources/static/built/'),
     filename: 'bundle.js',
   },
   resolve: {
