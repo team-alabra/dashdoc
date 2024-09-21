@@ -68,7 +68,9 @@ bundle.js.LICENSE.txt
 ### .NET ###
 appsettings.Local.json
 appsettings.Development.json
-
+publish
+wwwroot
+deploy.zip
 ### Visual Studio ###
 .vs/
 
