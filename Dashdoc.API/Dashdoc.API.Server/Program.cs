@@ -30,6 +30,7 @@ builder.Services.RegisterDashdocDatabase(builder.Configuration);
 builder.Services.RegisterAppServices();
 
 // Auth
+builder.Services.AddCognitoIdentity();
 builder.Services.ConfigureDashdocAuthorization(builder.Configuration);
 
 #endregion
@@ -48,7 +49,7 @@ else
     app.MapControllers();
 }
 
-
+app.UseDashdocMiddleware();
 app.UseAuthentication();
 app.UseAuthorization();
 

@@ -29,7 +29,7 @@ public class TestController: ControllerBase
     
     [HttpGet("admin")]
     [Authorize(Roles = UserRoles.Admin)]
-    public ActionResult GetV2([FromHeader(Name = "x-user-id")] long userId)
+    public ActionResult GetV2([FromHeader(Name = "userId")] long userId)
     {
         try
         {
