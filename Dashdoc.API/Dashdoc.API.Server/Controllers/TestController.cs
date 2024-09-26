@@ -11,21 +11,13 @@ namespace Dashdoc.API.Server.Controllers;
 [Authorize]
 public class TestController: ControllerBase
 {
-    private readonly ITestRepository _repo;
-    private readonly ILogger _logger;
-    public TestController(ITestRepository repo)
-    {
-        _agencyRepository = agencyRepository;
-    }
-
     // TODO - replace with real Provider routes
     [HttpGet]
-    public async Task<ActionResult> GetV1()
+    public ActionResult GetV1()
     {
         try
         {
-            var res = await _agencyRepository.GetByIdAsync(1);
-            return Ok(res);
+            return Ok("ok");
         }
         catch (Exception ex)
         {
