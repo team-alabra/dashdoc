@@ -29,11 +29,11 @@ public class TestController: ControllerBase
     
     [HttpGet("admin")]
     [Authorize(Roles = UserRoles.Admin)]
-    public ActionResult GetV2([FromHeader(Name = "userId")] long userId)
+    public ActionResult GetV2([FromHeader(Name = "userEmail")] string? userEmail)
     {
         try
         {
-            return Ok($"UserId is {userId}");
+            return Ok($"UserId is {userEmail}");
         }
         catch (Exception ex)
         {
