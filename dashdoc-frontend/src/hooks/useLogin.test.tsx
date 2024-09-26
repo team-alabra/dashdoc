@@ -1,23 +1,22 @@
-import { renderHook, act } from '@testing-library/react';
+import { renderHook, act, cleanup } from '@testing-library/react';
 import { useLogin } from './useLogin';
 import axios from 'axios';
 import { wrapper } from '@tests/renderWithProps';
 import { mockUserResponse } from '@tests/mocks/mockData';
 import { User } from '@typings/user';
 import MockAdapter from 'axios-mock-adapter';
+const mockAxios = new MockAdapter(axios);
 
 beforeEach(() => {
   jest.clearAllMocks();
 });
 
-describe('useLogin hook', () => {
-  const mockAxios = new MockAdapter(axios);
-  const mockResponseNoUser = {
-    data: null as User,
-    status: 404,
-    statusText: 'Not Found',
-  };
+afterEach(() => {
+  cleanup();
+  mockAxios.reset();
+});
 
+describe('useLogin hook', () => {
   it('should return on-submit handler', () => {
     const { result } = renderHook(() => useLogin(), { wrapper });
     expect(result.current.loginHandler).toBeDefined();

@@ -1,16 +1,22 @@
 import 'jest-styled-components';
-import { act, renderHook, waitFor } from '@testing-library/react';
+import { act, renderHook, cleanup, waitFor } from '@testing-library/react';
 import { wrapper } from '@tests/renderWithProps';
 import { useAuth } from './useAuth';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
+const mockAxios = new MockAdapter(axios);
 
 beforeEach(() => {
   jest.clearAllMocks();
 });
 
+afterEach(() => {
+  cleanup();
+  mockAxios.reset();
+});
+
 describe('useAuth hook', () => {
-  const mockAxios = new MockAdapter(axios);
+  
 
   it('should return isAuthenticated function', () => {
     const { result } = renderHook(() => useAuth(), { wrapper });

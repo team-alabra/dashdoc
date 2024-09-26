@@ -2,19 +2,24 @@
  * @jest-environment jsdom
 */
 import 'jest-styled-components';
-import { act, renderHook, waitFor } from '@testing-library/react';
+import { act, cleanup, renderHook, waitFor } from '@testing-library/react';
 import { wrapper } from '@tests/renderWithProps';
 import { useAnalytics } from './useAnalytics';
 import axios from 'axios';
 import { mockUserAnalytics } from '@utils/mocks/analyticsMocks';
 import MockAdapter from 'axios-mock-adapter';
+const mockAxios = new MockAdapter(axios);
 
 beforeEach(() => {
   jest.clearAllMocks();
 });
 
+afterEach(() => {
+  cleanup();
+  mockAxios.reset();
+});
+
 describe('useAnalytics hook', () => {
-  const mockAxios = new MockAdapter(axios);
   const data = {...mockUserAnalytics, lastUpdated: new Date().toString()} 
 
   it('should return analyticsHandler function', () => {
