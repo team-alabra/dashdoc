@@ -24,24 +24,33 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // DB Config
-builder.Services.RegisterDashdocDatabase();
+builder.Services.RegisterDashdocDatabase(builder.Configuration);
 
 // Local Services Configuration
 builder.Services.RegisterAppServices();
+
+// Auth
+builder.Services.AddCognitoIdentity();
+builder.Services.ConfigureDashdocAuthorization(builder.Configuration);
 
 #endregion
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsProduction())
+if (app.Environment.IsEnvironment("Local"))
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.MapControllers().AllowAnonymous();
+}
+else
+{
+    app.MapControllers();
 }
 
-app.MapControllers();
-app.UseHttpsRedirection();
+app.UseDashdocMiddleware();
+app.UseAuthentication();
 app.UseAuthorization();
 
 // Defers app routing to the React App
