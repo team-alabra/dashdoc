@@ -1,4 +1,3 @@
-using Amazon.RDS.Model;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
