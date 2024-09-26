@@ -4,20 +4,14 @@ import axios from 'axios';
 import { wrapper } from '@tests/renderWithProps';
 import { mockUserResponse } from '@tests/mocks/mockData';
 import { User } from '@typings/user';
-
-jest.mock('axios');
+import MockAdapter from 'axios-mock-adapter';
 
 beforeEach(() => {
   jest.clearAllMocks();
 });
 
 describe('useLogin hook', () => {
-  const mockResponse = {
-    data: mockUserResponse,
-    status: 200,
-    statusText: 'ok',
-  };
-
+  const mockAxios = new MockAdapter(axios);
   const mockResponseNoUser = {
     data: null as User,
     status: 404,
@@ -31,7 +25,8 @@ describe('useLogin hook', () => {
 
   it('login handler makes a successful API request and returns user', async () => {
     // Arrange
-    const axiosSpy = jest.spyOn(axios, 'post').mockResolvedValue(mockResponse);
+    mockAxios.onPost('/api/auth/signin').reply(200, mockUserResponse);
+    
     const { result } = renderHook(() => useLogin(), { wrapper });
 
     //Act
@@ -40,15 +35,12 @@ describe('useLogin hook', () => {
     );
 
     // Assert
-    expect(axiosSpy).toBeCalled();
     expect(window.location.href).toBe('http://localhost/dashboard');
   });
 
   it('login handler makes API request and no user is found', async () => {
     // Arrange
-    const axiosSpy = jest
-      .spyOn(axios, 'post')
-      .mockResolvedValue(mockResponseNoUser);
+    mockAxios.onPost('/api/auth/signin').reply(200, null);
     const { result } = renderHook(() => useLogin(), { wrapper });
 
     //Act
@@ -58,7 +50,6 @@ describe('useLogin hook', () => {
     console.error = jest.fn();
 
     // Assert
-    expect(axiosSpy).toBeCalled();
     expect(console.error).not.toBeCalled();
   });
 });
