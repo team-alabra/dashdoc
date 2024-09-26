@@ -5,13 +5,14 @@ import { renderWithProvider } from "@tests/renderWithProps";
 import AllClients from "./AllClients";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
+import { mockClientResponse } from "@tests/mocks/mockData";
 
 describe("AllClients Page", () => {
   const axiosMock = new MockAdapter(axios);
 
   it("Should render page", async () => {
     // Arrange
-    axiosMock.onGet("/api/user/clients").reply(200, []);
+    axiosMock.onGet("/api/user/clients").reply(200, [mockClientResponse]);
 
     // Act
     renderWithProvider(<AllClients />, { route: '/clients' });
