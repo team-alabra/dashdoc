@@ -9,5 +9,5 @@ public interface IProviderRepository
     Task<Provider?> CreateAsync(Provider entityToCreate);
     Task<Provider?> UpdateAsync(Provider entityToUpdate);
     Task<bool> DeleteAsync(long providerId);
-    IEnumerable<Provider> GetAllAgencyProvidersAsync (long agencyId);
+    List<Provider> GetAllAgencyProvidersAsync(long agencyId);
 }

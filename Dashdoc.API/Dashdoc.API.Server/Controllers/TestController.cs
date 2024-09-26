@@ -11,9 +11,9 @@ namespace Dashdoc.API.Server.Controllers;
 [Authorize]
 public class TestController: ControllerBase
 {
-    private readonly IAgencyRepository _agencyRepository;
-    
-    public TestController(IAgencyRepository agencyRepository)
+    private readonly ITestRepository _repo;
+    private readonly ILogger _logger;
+    public TestController(ITestRepository repo)
     {
         _agencyRepository = agencyRepository;
     }

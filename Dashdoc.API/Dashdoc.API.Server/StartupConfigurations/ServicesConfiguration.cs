@@ -1,6 +1,8 @@
+using Dashdoc.API.Data;
 using Dashdoc.API.Data.Repositories;
 using Dashdoc.API.Domain.Abstract;
 using Dashdoc.API.Infrastructure.AppServices;
+using Dashdoc.API.Domain.Abstract.Services;
 
 namespace Dashdoc.API.Server.StartupConfigurations;
 
@@ -17,7 +19,7 @@ public static class ServicesConfiguration
         services.AddScoped<ITestRepository, TestRepository>();
 
         services.AddScoped<IProviderRepository, ProviderRepository>();
-
+        
         services.AddScoped<IAgencyRepository, AgencyRepository>();
 
     }

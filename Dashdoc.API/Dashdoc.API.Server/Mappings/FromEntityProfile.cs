@@ -13,7 +13,6 @@ public class FromEntityProfile: Profile
     public FromEntityProfile()
     {
         // Insert all entity mappers below
-        
         CreateMap<Provider, ProviderModel>()
             .ReverseMap(); // ReverseMap means we can map from entity to model and vice versa.
         
