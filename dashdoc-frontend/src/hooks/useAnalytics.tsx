@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { userAnalytics } from '@api/analytics';
+import { getUserAnalytics } from '@api/analytics';
 
 export const useAnalytics = () => {
-  const [user_analytics, setUserAnalytics] = useState();
+  const [userAnalytics, setUserAnalytics] = useState();
   const [error, setError] = useState<string>('');
 
   const analyticsHandler = async () => {
     try {
-      const analytics = await userAnalytics();
+      const analytics = await getUserAnalytics();
       setUserAnalytics(analytics);
     } catch (error) {
       setError(error.message);
@@ -18,6 +18,6 @@ export const useAnalytics = () => {
     analyticsHandler,
     error,
     setError,
-    user_analytics
+    userAnalytics
   }
 };
