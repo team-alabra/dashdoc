@@ -9,7 +9,7 @@ import { mockClientResponse } from "@tests/mocks/mockData";
 const axiosMock = new MockAdapter(axios);
 
 afterAll(() => {
-  axiosMock.restore();
+  axiosMock.reset();
 });
 
 describe("AllClients Page", () => {  

@@ -10,10 +10,6 @@ import { mockUserAnalytics } from '@utils/mocks/analyticsMocks';
 import MockAdapter from 'axios-mock-adapter';
 const mockAxios = new MockAdapter(axios);
 
-beforeEach(() => {
-  jest.clearAllMocks();
-});
-
 afterEach(() => {
   cleanup();
   mockAxios.reset();

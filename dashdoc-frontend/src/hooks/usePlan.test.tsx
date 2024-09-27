@@ -1,23 +1,21 @@
 import 'jest-styled-components';
-import { act, renderHook } from '@testing-library/react';
+import { act, renderHook, cleanup } from '@testing-library/react';
 import { wrapper } from '@tests/renderWithProps';
 import { usePlan } from './usePlan';
 import MockAdapter from 'axios-mock-adapter';
 import axios from 'axios';
 import { mockPlansResponse } from '@tests/mocks/mockData';
+const mockAxios = new MockAdapter(axios);
 
-jest.mock('axios');
-
-beforeEach(() => {
-  jest.clearAllMocks();
+afterEach(() => {
+  cleanup();
+  mockAxios.reset();
 });
 
 describe('usePlam hook', () => {
-  const axiosMock = new MockAdapter(axios);
-
   it('allows us to update current term', () => {
     // Arrange
-    axiosMock.onGet('/api/plan/all-plans').reply(200, mockPlansResponse);
+    mockAxios.onGet('/api/plan/all-plans').reply(200, mockPlansResponse);
     let term = 'monthly';
     
     // Act
@@ -31,7 +29,7 @@ describe('usePlam hook', () => {
 
   it('returns allPlans object', () => {
     // Arrange
-    axiosMock.onGet('/api/plan/all-plans').reply(200, mockPlansResponse);
+    mockAxios.onGet('/api/plan/all-plans').reply(200, mockPlansResponse);
     let allPlans = {};
 
     // Act
