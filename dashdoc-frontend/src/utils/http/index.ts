@@ -11,13 +11,10 @@ axios.interceptors.request.use(injectToken, (error) => Promise.reject(error));
 axios.interceptors.response.use(
   (response) => response.data,
   (error) => {
-    if (error?.response?.status >= 500) {
-      throw new Error(
-        'Internal Server Error. Please contact customer service.'
-      );
-    }
-
-    return Promise.reject(error);
+    if (error?.response?.status >= 500)
+      console.error('Internal Server Error. Please contact customer service.', error);
+    else
+      console.error(error);
   }
 );
 
