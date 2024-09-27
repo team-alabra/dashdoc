@@ -6,10 +6,13 @@ import AllClients from "./AllClients";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { mockClientResponse } from "@tests/mocks/mockData";
+const axiosMock = new MockAdapter(axios);
 
-describe("AllClients Page", () => {
-  const axiosMock = new MockAdapter(axios);
+afterAll(() => {
+  axiosMock.restore();
+});
 
+describe("AllClients Page", () => {  
   it("Should render page", async () => {
     // Arrange
     axiosMock.onGet("/api/user/clients").reply(200, [mockClientResponse]);

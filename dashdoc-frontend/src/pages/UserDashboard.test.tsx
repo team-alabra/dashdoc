@@ -7,10 +7,6 @@ import axios from 'axios';
 import UserDashboard from './UserDashboard';
 import { SOLE_PROVIDER_RESPONSE } from '@utils/mocks/signupMocks';
 
-beforeEach(() => {
-  jest.clearAllMocks();
-});
-
 describe('User Dashboard Page', () => {
   it('should render the page', () => {
     act(() => {
