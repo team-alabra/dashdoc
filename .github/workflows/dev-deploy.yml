@@ -2,7 +2,7 @@ name: Dev Deployment
 
 on:
   push:
-    branches: [ "test-eb" ]
+    branches: [ "develop" ]
 
 env:
   DOTNET_VERSION: '8.x'
