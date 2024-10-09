@@ -4,12 +4,6 @@ import { fireEvent, waitFor } from '@testing-library/dom';
 import { screen, act } from '@testing-library/react';
 import { SignUp } from './SignUp';
 import { renderWithProvider } from '@tests/renderWithProps';
-import axios from 'axios';
-
-
-beforeEach(() => {
-  jest.clearAllMocks();
-});
 
 describe('Sign Up Page', () => {
   it('should render the page', () => {

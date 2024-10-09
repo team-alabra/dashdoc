@@ -11,6 +11,6 @@ describe('Styled Button', () => {
   it('renders the element and displays appropriate text', async () => {
     render(<Button>Click Me</Button>);
     const button = await screen.findByText('Click Me');
-    expect(button).toBeDefined();
+    expect(button).toBeInTheDocument();
   });
 });

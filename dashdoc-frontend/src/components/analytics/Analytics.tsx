@@ -8,7 +8,7 @@ import { useAnalytics } from '@hooks/useAnalytics';
 
 const Analytics = ({ userType }: any) => {
   // this will be used once server is hooked up and will replace mockUserAnalytics
-  const { user_analytics } = useAnalytics();
+  const { userAnalytics } = useAnalytics();
   return (
     <div>
       <S.StyledHeader fontSize='18' fontColor='black' fontWeight='bold'>

@@ -1,25 +1,20 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <InvariantGlobalization>true</InvariantGlobalization>
-        <SpaRoot>..\..\dashdoc-frontend</SpaRoot>
-        <SpaProxyLaunchCommand>npm run start:dev</SpaProxyLaunchCommand>
-        <SpaProxyServerUrl>https://localhost:3000</SpaProxyServerUrl>
         <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
     </PropertyGroup>
-
+    
     <ItemGroup>
         <PackageReference Include="Amazon.AspNetCore.Identity.Cognito" Version="3.0.2" />
         <PackageReference Include="Amazon.Extensions.CognitoAuthentication" Version="2.5.4" />
         <PackageReference Include="AutoMapper" Version="13.0.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
         <PackageReference Include="Stripe.net" Version="45.1.0" />
         <PackageReference Include="Twilio" Version="7.2.1" />
-        <ProjectReference Include="..\..\dashdoc-frontend\dashdoc-frontend.esproj">
-            <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-        </ProjectReference>
         <PackageReference Include="AWSSDK.RDS" Version="3.7.313.20" />
         <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="8.0.6" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.6">
@@ -27,9 +22,147 @@
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
         <ProjectReference Include="..\Dashdoc.API.Data\Dashdoc.API.Data.csproj" />
         <ProjectReference Include="..\Dashdoc.API.Domain\Dashdoc.API.Domain.csproj" />
         <ProjectReference Include="..\Dashdoc.API.Infrastructure\Dashdoc.API.Infrastructure.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\api\analytics.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\api\auth.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\api\client.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\api\plan.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\api\user.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\App.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\AppRoutes.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\bundle.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\bundle.js.LICENSE.txt" />
+      <_ContentIncludedByDefault Remove="wwwroot\bundle.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\analytics\Analytics.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\analytics\Metric.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\analytics\Stat.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\forms\LoginForm.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\forms\SignupForm.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\layout\Footer.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\layout\Footer.test.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\layout\Footer\Footer.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\layout\Footer\Footer.test.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\layout\Header.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\layout\Header\Header.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\layout\Layout.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\layout\navigation\Logo.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\layout\navigation\Navbar.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\layout\navigation\Navbar.test.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\layout\navigation\NavLinks.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\layout\navigation\Sidebar.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\layout\SocialList.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\layout\Success.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\PrivateRoute.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\shared\buttons\Button.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\shared\buttons\Button.test.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\shared\buttons\SwitchSlider.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\shared\containers\PricingCard.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\shared\forms\TherapySessionForm\TherapySession.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\shared\input\Input.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\shared\input\Label.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\shared\loaders\Loader.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\shared\modals\SampleModal.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\shared\tables\ClientTable.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\shared\tables\ClientTable.test.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\shared\tables\CustomToolbars.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\shared\tables\DataTable.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\shared\tables\DataTable.test.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\shared\tables\SampleTable.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\ui\clients\ClientSearch.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\ui\clients\ClientSearch.test.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\ui\CustomToolbars.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\ui\CustomToolbars.test.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\components\ui\index.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\hooks\hooks.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\hooks\index.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\hooks\useAnalytics.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\hooks\useAnalytics.test.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\hooks\useAuth.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\hooks\useAuth.test.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\hooks\useClient.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\hooks\useClient.test.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\hooks\useClients.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\hooks\useClients.test.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\hooks\useLogin.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\hooks\useLogin.test.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\hooks\usePlan.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\hooks\usePlan.test.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\hooks\useSignup.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\hooks\useSignup.test.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\index.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\index.html" />
+      <_ContentIncludedByDefault Remove="wwwroot\pages\AboutUs.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\pages\AllClients.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\pages\AllClients.test.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\pages\AllDocuments.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\pages\ClientContactInfo.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\pages\ContactUs.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\pages\EmailVerify.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\pages\FreeTrial.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\pages\LandingPage.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\pages\Login.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\pages\Login.test.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\pages\MyAccount.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\pages\NotFound.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\pages\payment\Billing.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\pages\payment\PricingCheckout.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\pages\Redirect.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\pages\SignUp.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\pages\SignUp.test.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\pages\SingleAppointment.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\pages\SingleClient.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\pages\SingleDocument.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\pages\SubscriptionPlans.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\pages\SubscriptionPlans.test.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\pages\UserAppointments.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\pages\UserCalendar.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\pages\UserDashboard.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\pages\UserDashboard.test.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\pages\UserProfile.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\services\actions\auth.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\services\actions\client.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\services\actions\plan.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\services\actions\user.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\services\slices\authSlice.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\services\slices\clientSlice.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\services\slices\planSlice.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\services\slices\userSlice.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\services\store.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\styles\dataTable.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\styles\index.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\styles\logo.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\styles\muiThemeStyles.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\styles\navbar.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\styles\pricing.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\styles\shared.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\styles\signup.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\tests\login.test.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\tests\mocks\mockData.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\tests\renderWithProps.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\typings\analytics.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\typings\auth.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\typings\client.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\typings\document.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\typings\input.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\typings\navbarData.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\typings\plan.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\typings\pricing.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\typings\user.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\utils\constants.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\utils\formatter.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\utils\helpers\helpers.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\utils\http\index.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\utils\mocks\analyticsMocks.d.ts" />
+      <_ContentIncludedByDefault Remove="wwwroot\utils\mocks\signupMocks.d.ts" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Update="appsettings.*.json" CopyToPublishDirectory="Never" />
     </ItemGroup>
 </Project>

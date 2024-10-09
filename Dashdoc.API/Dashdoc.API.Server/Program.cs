@@ -12,7 +12,7 @@ builder.Services.AddControllers().AddJsonOptions(x =>
     x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 
     // ignore omitted parameters on models to enable optional params (e.g. User update)
-    x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+    // x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
 });
 
 // Automapper
@@ -24,25 +24,33 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // DB Config
-builder.Services.RegisterDashdocDatabase();
+builder.Services.RegisterDashdocDatabase(builder.Configuration);
 
 // Local Services Configuration
 builder.Services.RegisterAppServices();
+
+// Auth
+builder.Services.ConfigureDashdocAuthorization(builder.Configuration);
 
 #endregion
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsProduction())
+if (app.Environment.IsEnvironment("Local"))
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.MapControllers().AllowAnonymous();
+}
+else
+{
+    app.MapControllers();
 }
 
-app.MapControllers();
-app.UseHttpsRedirection();
+app.UseAuthentication();
 app.UseAuthorization();
+app.UseStaticFiles();
 
 // Defers app routing to the React App
 app.MapFallbackToFile("/index.html");

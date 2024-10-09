@@ -7,12 +7,6 @@ import {
   MOCK_SOLE_PROVIDER_REQUEST,
 } from '@utils/mocks/signupMocks';
 
-jest.mock('axios');
-
-beforeEach(() => {
-  jest.clearAllMocks();
-});
-
 describe('useSignUp hook', () => {
   it('makes a successful API request and returns the newly signed up customer', async () => {
     // Arrange

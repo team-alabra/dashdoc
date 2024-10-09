@@ -1,12 +1,12 @@
 const webpack = require('webpack');
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   mode: 'production',
   entry: path.resolve(__dirname, 'src', 'index.tsx'),
   output: {
-    path: path.resolve(__dirname, '../dashdoc-api/src/main/resources/static/built/'),
     filename: 'bundle.js',
   },
   resolve: {
@@ -30,6 +30,10 @@ module.exports = {
     // fix "process is not defined" error:
     new webpack.ProvidePlugin({
       process: 'process/browser',
+    }),
+    new HtmlWebpackPlugin({
+      title: "Dashdoc",
+      template: "public/index.html",
     }),
     new Dotenv()
   ],

@@ -1,8 +1,7 @@
-import { Analytics } from '@typings/analytics';
 import { get } from '@utils/http';
 
 // gather user analytics from token
-export const userAnalytics = async (): Promise<any> => {
+export const getUserAnalytics = async (): Promise<any> => {
   try {
     return await get(`/api/user/analytics`);
   } catch (error) {

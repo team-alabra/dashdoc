@@ -10,10 +10,6 @@ import { wrapper } from '@tests/renderWithProps';
 
 jest.mock('axios');
 
-beforeEach(() => {
-  jest.clearAllMocks();
-});
-
 describe('Login Page', () => {
   it('Should render the page', async () => {
     // Act

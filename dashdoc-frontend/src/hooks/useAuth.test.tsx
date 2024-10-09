@@ -1,59 +1,52 @@
-/**
- * @jest-environment jsdom
- */
-import 'jest-styled-components';
-import { act, renderHook } from '@testing-library/react';
+import { act, renderHook, cleanup, waitFor } from '@testing-library/react';
 import { wrapper } from '@tests/renderWithProps';
 import { useAuth } from './useAuth';
 import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
+const mockAxios = new MockAdapter(axios);
 
-jest.mock('axios');
-
-beforeEach(() => {
-  jest.clearAllMocks();
+afterEach(() => {
+  cleanup();
+  mockAxios.reset();
 });
 
 describe('useAuth hook', () => {
+  
+
   it('should return isAuthenticated function', () => {
     const { result } = renderHook(() => useAuth(), { wrapper });
     expect(result.current.isAuthenticated).toBeDefined();
   });
 
   it('should validate an authenticated user', async () => {
-    const axiosSpy = jest
-      .spyOn(axios, 'get')
-      .mockResolvedValue({ email: 'test@email.com', valid: true });
+    mockAxios.onGet('/api/auth/validateUser').reply(200, { email: 'test@email.com', valid: true });
+
     const { result } = renderHook(() => useAuth(), { wrapper });
 
     await act(() => result.current.isAuthenticated());
 
-    expect(axiosSpy).toBeCalled();
-
-    expect(result.current.isValidUser).toBe(true);
+    await waitFor(() => 
+      expect(result.current.isValidUser).toBe(true)
+    );
   });
 
   it('should invalidate a user with invalid/expired credentials', async () => {
-    const axiosSpy = jest.spyOn(axios, 'get').mockRejectedValue({
-      status: 404,
-      data: { email: 'test@email.com', valid: false },
-    });
-
+    // TODO - Verify in the future backend if we should return a 200 with a valid: false.
+    mockAxios.onGet('/api/auth/validateUser').reply(404, { email: 'test@email.com', valid: false });
     const { result } = renderHook(() => useAuth(), { wrapper });
     await act(() => result.current.isAuthenticated());
 
-    expect(axiosSpy).toBeCalled();
     expect(result.current.isValidUser).toBe(false);
   });
 
   it('should invalidate a user who has not signed in', async () => {
-    const axiosSpy = jest
-      .spyOn(axios, 'get')
-      .mockRejectedValue({ status: 400, data: { email: null, valid: null } });
+    mockAxios.onGet('/api/auth/validateUser').reply(400, null);
 
     const { result } = renderHook(() => useAuth(), { wrapper });
     await act(() => result.current.isAuthenticated());
 
-    expect(axiosSpy).toBeCalled();
-    expect(result.current.isValidUser).toBe(false);
+    await waitFor(() => 
+      expect(result.current.isValidUser).toBe(false)
+    );
   });
 });

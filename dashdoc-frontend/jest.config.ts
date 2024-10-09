@@ -15,7 +15,8 @@ moduleNameMapper: {
   "^@tests(.*)$": "<rootDir>/src/tests$1",
   "^@api(.*)$": "<rootDir>/src/api$1",
   "^@utils(.*)$": "<rootDir>/src/utils$1"
-}
+},
+setupFilesAfterEnv: ['<rootDir>/src/tests/setupTests.tsx']
 };
 
 export default config;

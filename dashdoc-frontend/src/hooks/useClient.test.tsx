@@ -7,10 +7,6 @@ import MockAdapter from "axios-mock-adapter";
 import { Client } from "@typings/client";
 const axiosMock = new MockAdapter(axios);
 
-beforeEach(() => {
-  jest.clearAllMocks();
-});
-
 afterEach(() => {
   cleanup();
   axiosMock.reset();
