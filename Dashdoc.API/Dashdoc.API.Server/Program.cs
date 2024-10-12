@@ -27,7 +27,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.RegisterDashdocDatabase(builder.Configuration);
 
 // Local Services Configuration
-builder.Services.RegisterAppServices();
+builder.Services.RegisterAppServices(builder.Configuration);
 
 // Auth
 builder.Services.ConfigureDashdocAuthorization(builder.Configuration);
