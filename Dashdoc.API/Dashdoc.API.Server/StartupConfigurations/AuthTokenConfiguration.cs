@@ -1,3 +1,4 @@
+using Dashdoc.API.Domain.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
@@ -10,15 +11,19 @@ public static class AuthTokenConfiguration
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
-                options.Authority = configuration.GetSection("JwtBearer").GetValue<string>("Authority") ?? throw new Exception("Fake exception");
-                options.MetadataAddress = configuration.GetSection("JwtBearer").GetValue<string>("MetadataAddress") ?? throw new InvalidOperationException();
+                // Get JwtSettings from appsettings and then bind the values to the 'settings' object below.
+                var settings = new JwtSettings();
+                configuration.GetSection("JwtSettings").Bind(settings);
+                
+                options.Authority = settings.Authority;
+                options.MetadataAddress = settings.MetadataAddress!;
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidateIssuer = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidateAudience = false,
-                    ValidIssuer = configuration.GetSection("JwtBearer").GetValue<string>("Authority"),
-                    RoleClaimType = configuration.GetSection("JwtBearer").GetValue<string>("AuthClaim")
+                    ValidateIssuer = settings.ValidateIssuer,
+                    ValidateIssuerSigningKey = settings.ValidateIssuerSigningKey,
+                    ValidateAudience = settings.ValidateAudience,
+                    ValidIssuer = settings.Authority,
+                    RoleClaimType = settings.AuthClaim
                 };
             });
     }

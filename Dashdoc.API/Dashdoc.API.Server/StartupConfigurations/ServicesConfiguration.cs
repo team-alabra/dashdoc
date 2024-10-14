@@ -1,4 +1,3 @@
-using Dashdoc.API.Data;
 using Dashdoc.API.Data.Repositories;
 using Dashdoc.API.Domain.Abstract;
 using Dashdoc.API.Infrastructure.AppServices;
@@ -18,7 +17,9 @@ public static class ServicesConfiguration
 
     private static void AddEnvironmentSettings(IServiceCollection services, IConfiguration config)
     {
-        services.Configure<EnvironmentSettings>(config);
+        services.Configure<EmailSettings>(config.GetSection("EmailSettings"));
+        services.Configure<JwtSettings>(config.GetSection("JwtSettings"));
+        services.Configure<AwsSettings>(config.GetSection("AwsSettings"));
     }
     
     private static void RegisterDataRepositories(IServiceCollection services)
@@ -32,6 +33,4 @@ public static class ServicesConfiguration
     {
         services.AddScoped<IProviderService, ProviderService>();
     }
-    
-    
 }

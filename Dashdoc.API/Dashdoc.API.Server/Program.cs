@@ -23,11 +23,11 @@ builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// DB Config
-builder.Services.RegisterDashdocDatabase(builder.Configuration);
-
 // Local Services Configuration
 builder.Services.RegisterAppServices(builder.Configuration);
+
+// DB Config
+builder.Services.RegisterDashdocDatabase(builder.Configuration);
 
 // Auth
 builder.Services.ConfigureDashdocAuthorization(builder.Configuration);
