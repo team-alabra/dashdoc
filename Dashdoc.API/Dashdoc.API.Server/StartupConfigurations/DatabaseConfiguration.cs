@@ -10,7 +10,7 @@ public static class DatabaseConfiguration
 {
     public static void RegisterDashdocDatabase(this IServiceCollection services, IConfiguration configuration)
     {
-        var dbConnectionString = configuration["Database:DB_CONNECTION_STRING"];
+        var dbConnectionString = configuration.GetSection("Database").GetValue<string>("DB_CONNECTION_STRING");
         
         services.AddDbContext<DashdocDbContext>(options =>
         {
