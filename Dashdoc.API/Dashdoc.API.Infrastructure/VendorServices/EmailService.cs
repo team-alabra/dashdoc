@@ -8,6 +8,7 @@ using MimeKit.Text;
 
 namespace Dashdoc.API.Infrastructure.VendorServices;
 
+// Mailkit and Mimekit reference: https://jasonwatmore.com/post/2022/03/11/net-6-send-an-email-via-smtp-with-mailkit 
 public class EmailService: IEmailService
 {
     private readonly EmailSettings _emailSettings;
