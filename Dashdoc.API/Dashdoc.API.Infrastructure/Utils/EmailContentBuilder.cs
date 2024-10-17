@@ -1,10 +1,11 @@
 namespace Dashdoc.API.Infrastructure.Utils;
 
+// TODO - fix styling and add templates to DB
+// class is no longer needed once EmailTemplateRepository is created.
 public static class EmailContentBuilder
 {
-    public static string Build()
+    public static string Build(string name)
     {
-      var name = "Alan";
       var messageContent = $@"
         <html>
           <head>

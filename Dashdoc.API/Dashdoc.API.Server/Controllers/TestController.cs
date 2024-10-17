@@ -1,7 +1,8 @@
-using System.Security.Claims;
-using Dashdoc.API.Domain.Abstract;
+using Dashdoc.API.Domain.Abstract.Services;
 using Dashdoc.API.Domain.Models;
+using Dashdoc.API.Infrastructure.Utils;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dashdoc.API.Server.Controllers;
@@ -12,8 +13,15 @@ namespace Dashdoc.API.Server.Controllers;
 public class TestController: ControllerBase
 {
     // TODO - replace with real Provider routes
+    private readonly IEmailService _emailService;
+
+    public TestController(IEmailService emailService)
+    {
+        _emailService = emailService;
+    }
+
     [HttpGet]
-    public ActionResult GetV1()
+    public ActionResult Get()
     {
         try
         {
@@ -28,11 +36,31 @@ public class TestController: ControllerBase
     
     [HttpGet("admin")]
     [Authorize(Roles = UserRoles.Admin)]
-    public ActionResult GetV2([FromHeader(Name = "x-user-id")] long userId)
+    public ActionResult GetWithPermissions([FromHeader(Name = "x-user-id")] long userId)
     {
         try
         {
             return Ok($"UserId is {userId}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+            return Problem("Problem retrieving Data");
+        }
+    }
+    
+    [HttpPost("email/{recipient}")]
+    public ActionResult SendTestEmail([FromRoute] string recipient)
+    {
+        try
+        {
+            _emailService.Send(
+                recipient,
+                "Dashdoc Test Message",
+                EmailContentBuilder.Build("TestUser")
+            );
+            
+            return Ok("Email Sent Successfully!");
         }
         catch (Exception ex)
         {
