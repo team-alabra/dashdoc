@@ -7,6 +7,7 @@ using Dashdoc.API.Infrastructure.AppServices;
 using Dashdoc.API.Domain.Abstract.Services;
 using Dashdoc.API.Infrastructure.VendorServices;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Dashdoc.API.Domain.Settings;
 
 namespace Dashdoc.API.Server.StartupConfigurations;
 
@@ -17,8 +18,16 @@ public static class ServicesConfiguration
         RegisterDataRepositories(services);
         RegisterLocalServices(services);
         RegisterEmailService(services, config);
+        AddEnvironmentSettings(services, config);
     }
 
+    private static void AddEnvironmentSettings(IServiceCollection services, IConfiguration config)
+    {
+        services.Configure<EmailSettings>(config.GetSection("EmailSettings"));
+        services.Configure<JwtSettings>(config.GetSection("JwtSettings"));
+        services.Configure<AwsSettings>(config.GetSection("AwsSettings"));
+    }
+    
     private static void RegisterDataRepositories(IServiceCollection services)
     {
         services.AddScoped<ITestRepository, TestRepository>();
