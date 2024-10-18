@@ -22,8 +22,9 @@ public class EmailService: IEmailService
     {
         // create message
         var email = new MimeMessage();
-        email.From.Add(MailboxAddress.Parse(_emailSettings.FromEmail));
-        email.To.Add(MailboxAddress.Parse(recipient));
+        email.From.Add(new MailboxAddress("Dashdoc", _emailSettings.FromEmail));
+        
+        email.To.Add(new MailboxAddress("User Userson", recipient));
         email.Subject = subject;
         email.Body = new TextPart(TextFormat.Html) { Text = htmlBody };
 
